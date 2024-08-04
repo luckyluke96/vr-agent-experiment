@@ -54,6 +54,7 @@ public class ChatExample : MonoBehaviour
 
     public void StartChatExample(string username, bool german = true, int exerciseNo = 1)
     {
+        Debug.Log("Start Chat Example");
         this.username = username;
         this.german = german;
         this.exerciseNo = exerciseNo;

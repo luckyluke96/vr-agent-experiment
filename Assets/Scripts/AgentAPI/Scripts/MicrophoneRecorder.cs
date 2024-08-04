@@ -13,7 +13,7 @@ public class MicrophoneRecorder : MonoBehaviour
     public delegate void TranscriptionDelegate(AudioAPI.TranscriptionResult transcriptionResult);
     public TranscriptionDelegate transcriptionDelegate;
     public string SelectedMicrophoneDevice = "";
-    public bool SelectedMicrophone = false;
+    public bool SelectedMicrophone = true;
 
     public GameObject MicOn;
     public GameObject MicOff;

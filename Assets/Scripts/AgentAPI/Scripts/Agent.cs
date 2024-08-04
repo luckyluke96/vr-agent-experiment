@@ -52,7 +52,7 @@ public class Agent : MonoBehaviour
 
     public TMP_InputField UsernameInputField;
     public string Username = "Peter";
-    private bool Username_Confirmed = false;
+    private bool Username_Confirmed = true;
 
     private string currentPrompt = "";
 
@@ -62,6 +62,21 @@ public class Agent : MonoBehaviour
         // PHQ9_Script = new PHQ9();
         currentPrompt = startingPromp;
         UsernameInputField.onValueChanged.AddListener(delegate { Username = UsernameInputField.text; });
+
+        // Assume all necessary conditions are met
+        StartCoroutine(waiter());
+        //ChatExample_Script.StartChatExample(Username, true);
+    }
+
+    IEnumerator waiter()
+    {
+        Debug.Log("Wait for 2 seconds");
+        //Wait for 2 seconds
+        yield return new WaitForSeconds(2);
+
+        Debug.Log("Waiting over");
+        ChatExample_Script.StartChatExample(Username, true);
+
     }
 
     void Update() {
@@ -179,12 +194,13 @@ public class Agent : MonoBehaviour
 
         if (State == AgentState.Start)
         {
+            
             GUI.color = Color.blue;
             if (GUI.Button(new Rect(10, 60 * y++, 350, 40), "* Start ChatExample"))
             {
                 AgentSettings.LanguageString = "de-DE";
                 State = AgentState.Initializing;
-
+                Debug.Log("Start chat from gui");
                 ChatExample_Script.StartChatExample(Username, true);
             }
         }
