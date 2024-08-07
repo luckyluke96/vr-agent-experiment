@@ -64,7 +64,7 @@ public class Agent : MonoBehaviour
         UsernameInputField.onValueChanged.AddListener(delegate { Username = UsernameInputField.text; });
 
         // Assume all necessary conditions are met
-        StartCoroutine(waiter());
+        //StartCoroutine(waiter());
         //ChatExample_Script.StartChatExample(Username, true);
     }
 
