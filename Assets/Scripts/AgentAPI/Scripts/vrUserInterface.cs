@@ -9,8 +9,21 @@ public class vrUserInterface : MonoBehaviour
 
     public TMP_Text logText;
 
+    public Button switchAgentButton; 
+    public GameObject robot; 
+    public GameObject hannah;
+    public bool hannahActive = true;
+
     void Start()
     {
+        // Ensure the button and targetObject are assigned
+        if (switchAgentButton != null && robot != null)
+        {
+            // Add a listener to the button to call the MoveObject method when clicked
+            switchAgentButton.onClick.AddListener(SwapAgents);
+            logText.text = "Switch agent button pressed.";
+        }
+
         logText.text = "hallo";
         if (vrStartButton != null)
         {
@@ -20,6 +33,23 @@ public class vrUserInterface : MonoBehaviour
         {
             logText.text = "VR Start Button not assigned in the Inspector";
         }
+
+
+    }
+
+    void SwapAgents()
+    {
+        if (hannahActive)
+        { 
+            robot.transform.position = Vector3.zero;
+            hannah.transform.position = new Vector3(-10, 0, 0);
+        }
+        else
+        {
+            hannah.transform.position = Vector3.zero;
+            robot.transform.position = new Vector3(-10, 0, 0);
+        }
+        hannahActive = !hannahActive;
     }
 
     private void ChangeButtonColor(Button button, Color color)
