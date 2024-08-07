@@ -1353,7 +1353,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 67803d44f85bc1a42bafcb7febc3f80d, type: 3}
   m_Controller: {fileID: 9100000, guid: 7df7f87b7bf20fb4995ce45434e1e8e5, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
@@ -2179,7 +2179,7 @@ Transform:
   m_GameObject: {fileID: 885818937}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2249,7 +2249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourceLipSync: {fileID: 1146959483}
-  genderVoice: 0
+  genderVoice: 2
   AddDelayToAudio: 0
   delayForSyncing: 0
 --- !u!82 &885818943
@@ -2273,9 +2273,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 30
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -2292,8 +2292,8 @@ AudioSource:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 0
+      time: 0.98291016
+      value: 0.94467163
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2816,7 +2816,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 67803d44f85bc1a42bafcb7febc3f80d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.71
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 67803d44f85bc1a42bafcb7febc3f80d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2824,7 +2824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 67803d44f85bc1a42bafcb7febc3f80d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 67803d44f85bc1a42bafcb7febc3f80d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2882,6 +2882,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 7df7f87b7bf20fb4995ce45434e1e8e5, type: 2}
+    - target: {fileID: 8426666125166821847, guid: 67803d44f85bc1a42bafcb7febc3f80d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2967,7 +2971,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -2984,8 +2988,8 @@ AudioSource:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 0
+      time: 0.91452026
+      value: 0.96984863
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -4848,6 +4852,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5615815007780928290, guid: 7ae956b4f54394e80818898d8f4d30c6, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5012,7 +5020,7 @@ Transform:
   m_GameObject: {fileID: 1736080111}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.26, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
