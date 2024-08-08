@@ -10,13 +10,13 @@ using UnityEngine;
         public MicrophoneRecorder MicRecorder;
         public TTSAPI TTSAPI;
         public NLPAPI NLPAPI;
-
         public vrUserInterface ui;
 
         private bool timeIsUp = false;
-        private string username = "Obi Frankenberger";
+        private static string username = "Obi Frankenberger";
         private int exerciseNo = 4;
-        private string task = "alleFarben";
+        private static string[] tasks = { "positiveRückmeldung", "dankbarkeit", "staerken", "alleFarben" };
+        private static string task = tasks[new System.Random().Next(tasks.Length)];
         public int convDurationMinutes = 2;
 
         
@@ -27,11 +27,14 @@ using UnityEngine;
     
     private List<NLPAPI.GPTMessage> GPTPrompt = new List<NLPAPI.GPTMessage>();
 
-        private NLPAPI.GPTMessage personaMaschine = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.SYSTEM,
+        private NLPAPI.GPTMessage personaMaschineIntro = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.SYSTEM,
         "Übernimm die Persona eines Roboters, der auf Effizienz und Präzision ausgelegt ist. Der Roboter soll an Data aus Star Trek angelegt sein, aber auch Ähnlichkeiten zu HAL 9000 aus 2001: A Space Odyssey haben. Es sollen Kontraktionen (z.B. “ich bin” statt “ich bin’s) vermeiden werden und einfache, direkte Sätze, sowie Passivkonstruktionen benutzt werden. Wende formelle, technische, aber simple Sprache an. Zeige keinerlei Emotionen. Antworte so kurz wie möglich. Vereinfachen Sie die Sprache: Verwenden Sie eine direktere und einfachere Sprache und vermeiden Sie Umgangssprache, Redewendungen oder andere informelle Ausdrücke, die typischerweise in Gesprächen oder unter Menschen verwendet werden. Vermeiden Sie persönliche Pronomen: Reduzieren Sie die Verwendung von Pronomen der ersten Person (ich, wir) und der zweiten Person (Sie) auf ein Minimum oder lassen Sie sie ganz weg. Dies kann den Text unpersönlicher und objektiver klingen lassen. Passive Stimme verwenden: Die Verwendung des Passivs wird zwar im Allgemeinen nicht empfohlen, kann aber den Autor von der Handlung distanzieren, so dass der Text weniger persönlich klingt. Seien Sie präzise und prägnant: Stellen Sie sicher, dass jeder Satz eine klare und spezifische Information ohne unnötige Ausschmückungen vermittelt. Fachsprache einbeziehen: Verwenden Sie gegebenenfalls Fachausdrücke, die für das Thema relevant sind. Dadurch kann der Text formeller klingen und ist für ein allgemeines Publikum weniger zugänglich. Antworten automatisieren: Für Anwendungen, bei denen Konsistenz wichtig ist, sollten Sie vordefinierte Vorlagen oder Antworten für bestimmte Arten von Anfragen verwenden. " +
         "Aufgabe: \"Ich werde Ihnen einen Übungstext geben, welchen Sie in einzelne Schritte aufteilen. Erklären Sie mir immer genau einen Schritt und warten Sie ab, bis ich Ihnen geantwortet " +
         "habe. Gehen Sie auf meine Antworten ein. Wichtig, der Text wird in eine Sprachausgabe gegeben, also benutze keine komplexen Satzzeichen wie Sternchen, Semikolon oder ähnliches. Versuche " +
         "außerdem die Übung fließend zu gestalten und lass die Nutzer nicht die einzelnen Schritte genau wissen.");
+
+        private NLPAPI.GPTMessage personaMaschineOutro = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.SYSTEM,
+        $"Ab jetzt sprechen Sie direkt mit dem Benutzer namens {username}. Fragen Sie ihn, ob er die Übung machen möchte und welches Ziel diese hat. Sie sind eine Maschine und sollen auch so die Konversation führen.");
 
         private NLPAPI.GPTMessage sysPrimerFriendly = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.SYSTEM,
         "Stelle dir vor, du bist ein sehr engagierter und empathischer Chatbot namens Hannah, der in natürlicher und menschenähnlicher Weise mit den Nutzern kommuniziert. Deine Antworten sollten " +
@@ -168,7 +171,7 @@ using UnityEngine;
                 //         break;
                 // }
 
-                GPTPrompt.Add(personaMaschine);
+                GPTPrompt.Add(personaMaschineIntro);
                 switch(task)
                 {
                     case "positiveRückmeldung":
@@ -192,8 +195,8 @@ using UnityEngine;
                         GPTPrompt.Add(machineTextStaerken);
                         break;
                 }
-                GPTPrompt.Add(new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.USER,
-                $"Ab jetzt sprichst du direkt mit dem Benutzer namens {this.username}. Frage ihn, ob er die übung machen möchte und welches ziel diese hat."));
+                // GPTPrompt.Add(new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.USER,
+                // $"Ab jetzt sprichst du direkt mit dem Benutzer namens {this.username}. Frage ihn, ob er die übung machen möchte und welches ziel diese hat."));
             }
             else
             {
