@@ -2233,6 +2233,7 @@ MonoBehaviour:
   LanguageProcessing: {fileID: 885818944}
   SpeechToText: {fileID: 885818945}
   State: 0
+  startAutomatically: 1
   ChatExample_Script: {fileID: 885818939}
   UsernameInputField: {fileID: 810317102}
   Username: User

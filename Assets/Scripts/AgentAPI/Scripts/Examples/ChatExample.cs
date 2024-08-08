@@ -16,6 +16,7 @@ using UnityEngine;
         private bool timeIsUp = false;
         private string username = "Obi Frankenberger";
         private int exerciseNo = 4;
+        private string task = "alleFarben";
         public int convDurationMinutes = 2;
 
         
@@ -25,6 +26,12 @@ using UnityEngine;
     private bool hannahActive;
     
     private List<NLPAPI.GPTMessage> GPTPrompt = new List<NLPAPI.GPTMessage>();
+
+        private NLPAPI.GPTMessage personaMaschine = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.SYSTEM,
+        "Übernimm die Persona eines Roboters, der auf Effizienz und Präzision ausgelegt ist. Der Roboter soll an Data aus Star Trek angelegt sein, aber auch Ähnlichkeiten zu HAL 9000 aus 2001: A Space Odyssey haben. Es sollen Kontraktionen (z.B. “ich bin” statt “ich bin’s) vermeiden werden und einfache, direkte Sätze, sowie Passivkonstruktionen benutzt werden. Wende formelle, technische, aber simple Sprache an. Zeige keinerlei Emotionen. Antworte so kurz wie möglich. Vereinfachen Sie die Sprache: Verwenden Sie eine direktere und einfachere Sprache und vermeiden Sie Umgangssprache, Redewendungen oder andere informelle Ausdrücke, die typischerweise in Gesprächen oder unter Menschen verwendet werden. Vermeiden Sie persönliche Pronomen: Reduzieren Sie die Verwendung von Pronomen der ersten Person (ich, wir) und der zweiten Person (Sie) auf ein Minimum oder lassen Sie sie ganz weg. Dies kann den Text unpersönlicher und objektiver klingen lassen. Passive Stimme verwenden: Die Verwendung des Passivs wird zwar im Allgemeinen nicht empfohlen, kann aber den Autor von der Handlung distanzieren, so dass der Text weniger persönlich klingt. Seien Sie präzise und prägnant: Stellen Sie sicher, dass jeder Satz eine klare und spezifische Information ohne unnötige Ausschmückungen vermittelt. Fachsprache einbeziehen: Verwenden Sie gegebenenfalls Fachausdrücke, die für das Thema relevant sind. Dadurch kann der Text formeller klingen und ist für ein allgemeines Publikum weniger zugänglich. Antworten automatisieren: Für Anwendungen, bei denen Konsistenz wichtig ist, sollten Sie vordefinierte Vorlagen oder Antworten für bestimmte Arten von Anfragen verwenden. " +
+        "Aufgabe: \"Ich werde Ihnen einen Übungstext geben, welchen Sie in einzelne Schritte aufteilen. Erklären Sie mir immer genau einen Schritt und warten Sie ab, bis ich Ihnen geantwortet " +
+        "habe. Gehen Sie auf meine Antworten ein. Wichtig, der Text wird in eine Sprachausgabe gegeben, also benutze keine komplexen Satzzeichen wie Sternchen, Semikolon oder ähnliches. Versuche " +
+        "außerdem die Übung fließend zu gestalten und lass die Nutzer nicht die einzelnen Schritte genau wissen.");
 
         private NLPAPI.GPTMessage sysPrimerFriendly = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.SYSTEM,
         "Stelle dir vor, du bist ein sehr engagierter und empathischer Chatbot namens Hannah, der in natürlicher und menschenähnlicher Weise mit den Nutzern kommuniziert. Deine Antworten sollten " +
@@ -107,7 +114,13 @@ using UnityEngine;
 
         private NLPAPI.GPTMessage fussballText = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.USER, "erzähl was zu fußball");
 
-        
+        private NLPAPI.GPTMessage positiveRückmeldung = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.USER, "Lob anzunehmen"+  "fällt gerade Menschen mit einem geringen Selbstwertgefühl schwer. So werden positive Rückmeldungen manchmal bestritten oder als Ausnahme betrachtet, sodass ein Lob nicht verinnerlicht werden kann. Es kommen dann möglicherweise Gedanken wie „Der andere ist unehrlich und versucht nur, mich aufzumuntern\" oder \"Das war einfach nur Zufall\". Kennen Sie das? Denken Sie an ein Lob oder eine positive Bemerkung einer anderen Person aus der Vergangenheit und überlegen Sie, wie Sie damals reagiert haben. Konnten Sie das Lob annehmen? Wenn nicht, denken Sie daran, wann Sie selbst andere loben. Das geschieht wahrscheinlich dann, wenn jemand tatsächlich etwas gut gemacht hat. Versuchen Sie, das Lob, das Sie bekommen haben, als ein Geschenk zu betrachten, und werten Sie es nicht durch Äußerungen wie \"Ach, so toll war das ja gar nicht\" ab. Wenn Sie ein Geschenk bekommen, bedanken Sie sich ja vermutlich auch dafür und nehmen es an. Betrachten Sie es bei einem Lob genauso. Bedanken Sie sich dafür und nehmen Sie es an. Das erfordert ein wenig Übung, kann aber dazu beitragen, erhaltenes Lob auch zu verinnerlichen.");
+
+        private NLPAPI.GPTMessage dankbarkeit = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.USER, "Denken Sie einige Momente lang daran, wofür Sie dankbar sind. Auch wenn es Ihnen gerade nicht gut gehen sollte, wird es sicherlich etwas geben, wofür Sie in Ihrem Leben dankbar sind. Dies können Personen sein, z.B. Ihre Mutter, die immer für Sie da ist, aber auch Dinge, Fähigkeiten oder Ereignisse, z.B. dass Sie eine schöne Wohnung oder einen Ausbildungsplatz gefunden haben, eine schöne Reise gemacht haben oder dass Sie eine gute Stimme und Spaß am Singen haben. Versuchen Sie, auch Dingen, die auf den ersten Blick nur negativ erscheinen, andere Seiten abzugewinnen: Vielleicht sind Sie z.B. aufgrund von psychischen Problemen in eine Selbsthilfegruppe eingetreten und haben dort gute Freunde gefunden? Auf diese Weise hätte ein belastendes Problem für Sie auch zu etwas Gutem geführt. Oder Sie wissen nach einer schwierigen Zeit, dass Sie sich auf bestimmte Freunde in jeder Situation verlassen können. Viele Menschen möchten zu Recht Erfahrungen emotionaler Tiefe nicht missen, auch wenn diese zunächst schmerzlich waren.");
+
+        private NLPAPI.GPTMessage staerken = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.USER, "Keiner ist vollkommen! Eine häufige Denkfalle bei depressiven Symptomen besteht darin, die eigenen Stärken als selbstverständlich anzusehen und nur jene Fähigkeiten, die uns (vermeintlich) fehlen, als wertvoll und begehrenswert zu betrachten. Anstatt sich auf die (angeblichen) Schwächen zu konzentrieren, sollten Sie sich lieber Ihren Stärken und Schokoladenseiten zuwenden. Denken Sie dafür zuerst daran, was Ihnen meistens gut gelingt. Wofür haben Sie schon häufiger Komplimente bekommen (z.B. begabter Handwerker, ein guter Zuhörer, zuverlässig)? Stellen Sie sich dann eine konkrete Situation vor, in der Sie gelobt wurden: Wann und wo war das? Was habe ich konkret gemacht, wer hat mir das rückgemeldet (z.B. \"Ich habe letzte Woche einer Freundin beim Streichen der Wohnung geholfen, wofür sie mir sehr dankbar war. Ohne mich hätte sie das nicht geschafft\")?");
+
+        private NLPAPI.GPTMessage alleFarben = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.USER, "Manche Menschen neigen zu \"Schwarz-Weiß-Denken\", gerade in negativen Situationen, was die Bewertung komplexer Situationen zwar vereinfacht, jedoch der Realität selten gerecht wird. Fast alles ist relativ (tritt nicht \"immer\" oder \"nie\", sondern \"manchmal\" auf; betrifft nicht \"alle\" oder \"keine\", sondern \"manche\" oder \"viele\"). Besonders wenn es um die eigene Person geht, kann eine einseitige Sichtweise schädlich sein, gerade bei negativen Gedanken, denn kein Mensch ist perfekt und makellos, aber auch nicht von Grund auf schlecht. Kennen Sie solche \"Schwarz-Weiß-Gedanken\" von sich selbst? Beschreiben Sie sich gelegentlich mit Extremen (z.B. der Dümmste oder hässlich zu sein)? Nehmen Sie jeweils einen konkreten Gedanken und hinterfragen Sie dieses Urteil über sich selbst. Überlegen Sie anschließend eine Alternative, die mehr \"Farben\" (Abstufungen) hat als der ursprüngliche Gedanke und notieren Sie sich diese. Wenn Sie z.B. den Gedanken \"Ich bin der Dümmste\" hatten, könnte eine Relativierung lauten: \"Ich habe vielleicht nicht das Pulver erfunden und kenne nicht jedes Fremdwort, aber ich weiß, wie man an Autos schraubt, verstehe viel von Handball und bin ein guter Zuhörer\". Versuchen Sie in Zukunft, vermehrt darauf zu achten, nicht \"schwarz-weiß\" zu denken und alternative Gedanken zu finden, wenn Sie sich dabei erwischen, in negativen Extremen über sich selbst zu urteilen.");
 
         public void StartChatExample(string username, bool german = true, int exerciseNo = 6)
         {
@@ -123,38 +136,64 @@ using UnityEngine;
             this.exerciseNo = exerciseNo;
             if (german)
             {
-            Debug.Log("Fußball: " + !hannahActive);
+            // Debug.Log("Fußball: " + !hannahActive);
                 //GPTPrompt.Add(sysPrimerMachine);
                 //GPTPrompt.Add(agentExplanationPrompt);
-                switch (exerciseNo)
+                
+                // switch (exerciseNo)
+                // {
+                //     case 1:
+                //         GPTPrompt.Add(exercise1Text);
+                //         break;
+                //     case 2:
+                //         GPTPrompt.Add(exercise2Text);
+                //         break;
+                //     case 3:
+                //         GPTPrompt.Add(exercise3Text);
+                //         break;
+                //     case 4:
+                //         GPTPrompt.Add(friendlyText);
+                //         break;
+                //     case 5:
+                //         GPTPrompt.Add(machineText);
+                //         break;
+                //     case 6:
+                //         GPTPrompt.Add(fussballText);
+                //         break;
+                //     case 7: 
+                //         GPTPrompt.Add(machineTextStaerken);
+                //         break;
+                //     default:
+                //         GPTPrompt.Add(exercise1Text);
+                //         break;
+                // }
+
+                GPTPrompt.Add(personaMaschine);
+                switch(task)
                 {
-                    case 1:
-                        GPTPrompt.Add(exercise1Text);
+                    case "positiveRückmeldung":
+                        Debug.Log("positive Rückmeldung");
+                        GPTPrompt.Add(positiveRückmeldung);
                         break;
-                    case 2:
-                        GPTPrompt.Add(exercise2Text);
+                    case "dankbarkeit":
+                        Debug.Log("Dankbarkeit");
+                        GPTPrompt.Add(dankbarkeit);
                         break;
-                    case 3:
-                        GPTPrompt.Add(exercise3Text);
+                    case "staerken":
+                        Debug.Log("Staerken");
+                        GPTPrompt.Add(staerken);
                         break;
-                    case 4:
-                        GPTPrompt.Add(friendlyText);
-                        break;
-                    case 5:
-                        GPTPrompt.Add(machineText);
-                        break;
-                    case 6:
-                        GPTPrompt.Add(fussballText);
-                        break;
-                    case 7: 
-                        GPTPrompt.Add(machineTextStaerken);
+                    case "alleFarben":
+                        Debug.Log("alleFarben");
+                        GPTPrompt.Add(alleFarben);
                         break;
                     default:
-                        GPTPrompt.Add(exercise1Text);
+                        Debug.Log("machineTextStarken");
+                        GPTPrompt.Add(machineTextStaerken);
                         break;
                 }
                 GPTPrompt.Add(new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.USER,
-                $"Ab jetzt sprichst du direkt mit dem Benutzer namens {this.username}. Spreche ihn mit Du oder seinem Namen an. Begrüße ihn freundlich und frage ihn, ob er die übung machen möchte und welches ziel diese hat."));
+                $"Ab jetzt sprichst du direkt mit dem Benutzer namens {this.username}. Frage ihn, ob er die übung machen möchte und welches ziel diese hat."));
             }
             else
             {

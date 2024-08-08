@@ -13,6 +13,7 @@ public class Agent : MonoBehaviour
     public MicrophoneRecorder SpeechToText;
 
     public AgentState State = AgentState.Start;
+    public bool startAutomatically = false;
 
     private int NumberOfAPICalls = 0;
 
@@ -64,7 +65,9 @@ public class Agent : MonoBehaviour
         UsernameInputField.onValueChanged.AddListener(delegate { Username = UsernameInputField.text; });
 
         // Assume all necessary conditions are met
-        //StartCoroutine(waiter());
+        if(startAutomatically) {
+            StartCoroutine(waiter());
+        } 
         //ChatExample_Script.StartChatExample(Username, true);
     }
 
