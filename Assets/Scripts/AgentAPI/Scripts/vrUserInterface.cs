@@ -34,6 +34,12 @@ public class vrUserInterface : MonoBehaviour
             logText.text = "VR Start Button not assigned in the Inspector";
         }
 
+        // if hannah is active at start, move robot away
+        if (hannahActive)
+        { 
+            robot.transform.position = new Vector3(1000, 1000, 1000);
+        }
+
 
     }
 
@@ -42,12 +48,12 @@ public class vrUserInterface : MonoBehaviour
         if (hannahActive)
         { 
             robot.transform.position = Vector3.zero;
-            hannah.transform.position = new Vector3(-10, 0, 0);
+            hannah.transform.position = new Vector3(1000, 1000, 1000);
         }
         else
         {
             hannah.transform.position = Vector3.zero;
-            robot.transform.position = new Vector3(-10, 0, 0);
+            robot.transform.position = new Vector3(1000, 1000, 1000);
         }
         hannahActive = !hannahActive;
     }
@@ -73,7 +79,11 @@ public class vrUserInterface : MonoBehaviour
             ChangeButtonColor(vrStartButton, Color.green);
             logText.text = "VR Start Button clicked, starting chat example";
             agentScript.ChatExample_Script.StartChatExample(agentScript.Username, true);
+            
+
+            //disable start and switch button
             vrStartButton.gameObject.SetActive(false);
+            switchAgentButton.gameObject.SetActive(false);
         }
         else
         {

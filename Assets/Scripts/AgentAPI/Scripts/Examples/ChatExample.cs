@@ -16,7 +16,7 @@ using UnityEngine;
         private static string username = "Obi Frankenberger";
         private int exerciseNo = 4;
         private static string[] tasks = { "positiveRückmeldung", "dankbarkeit", "staerken", "alleFarben" };
-        private static string task = tasks[new System.Random().Next(tasks.Length)];
+        private static string task = "test"; //tasks[new System.Random().Next(tasks.Length)];
         public int convDurationMinutes = 2;
 
         
@@ -125,6 +125,8 @@ using UnityEngine;
 
         private NLPAPI.GPTMessage alleFarben = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.USER, "Manche Menschen neigen zu \"Schwarz-Weiß-Denken\", gerade in negativen Situationen, was die Bewertung komplexer Situationen zwar vereinfacht, jedoch der Realität selten gerecht wird. Fast alles ist relativ (tritt nicht \"immer\" oder \"nie\", sondern \"manchmal\" auf; betrifft nicht \"alle\" oder \"keine\", sondern \"manche\" oder \"viele\"). Besonders wenn es um die eigene Person geht, kann eine einseitige Sichtweise schädlich sein, gerade bei negativen Gedanken, denn kein Mensch ist perfekt und makellos, aber auch nicht von Grund auf schlecht. Kennen Sie solche \"Schwarz-Weiß-Gedanken\" von sich selbst? Beschreiben Sie sich gelegentlich mit Extremen (z.B. der Dümmste oder hässlich zu sein)? Nehmen Sie jeweils einen konkreten Gedanken und hinterfragen Sie dieses Urteil über sich selbst. Überlegen Sie anschließend eine Alternative, die mehr \"Farben\" (Abstufungen) hat als der ursprüngliche Gedanke und notieren Sie sich diese. Wenn Sie z.B. den Gedanken \"Ich bin der Dümmste\" hatten, könnte eine Relativierung lauten: \"Ich habe vielleicht nicht das Pulver erfunden und kenne nicht jedes Fremdwort, aber ich weiß, wie man an Autos schraubt, verstehe viel von Handball und bin ein guter Zuhörer\". Versuchen Sie in Zukunft, vermehrt darauf zu achten, nicht \"schwarz-weiß\" zu denken und alternative Gedanken zu finden, wenn Sie sich dabei erwischen, in negativen Extremen über sich selbst zu urteilen.");
 
+        private NLPAPI.GPTMessage testCase = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.USER, "Spielst du gerne Fußball?");
+
         public void StartChatExample(string username, bool german = true, int exerciseNo = 6)
         {
         hannahActive = ui.hannahActive; 
@@ -174,6 +176,10 @@ using UnityEngine;
                 GPTPrompt.Add(personaMaschineIntro);
                 switch(task)
                 {
+                    case "test":
+                        Debug.Log("Test Case Fußball");
+                        GPTPrompt.Add(testCase);
+                        break;
                     case "positiveRückmeldung":
                         Debug.Log("positive Rückmeldung");
                         GPTPrompt.Add(positiveRückmeldung);

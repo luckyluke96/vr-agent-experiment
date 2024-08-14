@@ -60,6 +60,7 @@ public class MicrophoneRecorder : MonoBehaviour
         if (AutoselectMicrophone)
         {
             SelectedMicrophoneDevice = Microphone.devices[0];
+            Debug.Log("Mic: " + SelectedMicrophoneDevice);
             SelectedMicrophone = true;
         }
     }
@@ -138,6 +139,9 @@ public class MicrophoneRecorder : MonoBehaviour
                 }
                 else
                 {
+                    // Log final result
+                    Debug.Log("Final transcription: " + result.alternatives[0].transcript);
+                
                     final_result(result.alternatives[0].transcript);
                     final = true;
                 }
