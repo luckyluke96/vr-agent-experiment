@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(AudioAPI))]
 public class MicrophoneRecorder : MonoBehaviour
@@ -47,6 +48,7 @@ public class MicrophoneRecorder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         api = GetComponent<AudioAPI>();
         api.StartSpeechToTextAPI(() =>
         {
@@ -129,6 +131,8 @@ public class MicrophoneRecorder : MonoBehaviour
             yield return new WaitUntil(() => enable_audio_task.IsCompleted);
         }
 
+        String res = "result";
+
         bool final = false;
         if (intermediate_result != null || final_result != null)
         {
@@ -141,8 +145,10 @@ public class MicrophoneRecorder : MonoBehaviour
                 else
                 {
                     // Log final result
-                    Debug.Log("Final transcription: " + result.alternatives[0].transcript);
-                
+                    res = result.alternatives[0].transcript;
+                    Debug.Log("Final transcription: " + res);
+                    
+                    Debug.Log("logged");
                     final_result(result.alternatives[0].transcript);
                     final = true;
                 }
@@ -154,6 +160,8 @@ public class MicrophoneRecorder : MonoBehaviour
             transcriptionDelegate -= test;
             Debug.Log("Stopped   SST");
         }
+
+        logText.text = res;
     }
 
     /// <summary>
