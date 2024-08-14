@@ -8,7 +8,8 @@ public class AgentSettings : MonoBehaviour
     public static readonly string sst_server = $"ws://{ip}:8140/";
     public static readonly string nlp_server = $"http://{ip}:8150/";
     
-    public static string LanguageString = "en-US";
+    public static string LanguageString = "de-DE";
+
 
     public static readonly string englishPrompt = "" +
             "The folowing is a conversation with an AI assistant for a psychotherapist. " +
