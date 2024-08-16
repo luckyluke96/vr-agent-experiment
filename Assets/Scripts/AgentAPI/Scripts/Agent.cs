@@ -52,7 +52,7 @@ public class Agent : MonoBehaviour
     };
 
     public TMP_InputField UsernameInputField;
-    public string Username = "Peter";
+    public string Username = "";
     private bool Username_Confirmed = true;
 
     private string currentPrompt = "";

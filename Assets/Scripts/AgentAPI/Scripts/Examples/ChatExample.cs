@@ -13,17 +13,18 @@ using UnityEngine;
         public vrUserInterface ui;
 
         private bool timeIsUp = false;
-        private static string username = "Obi Frankenberger";
+        private static string username = "theodor";
         private int exerciseNo = 4;
         private static string[] tasks = { "positiveRückmeldung", "dankbarkeit", "staerken", "alleFarben" };
-        private static string task = "test"; //tasks[new System.Random().Next(tasks.Length)];
+        //private static string task = "test"; 
+        
         public int convDurationMinutes = 2;
 
-        
+        private string task;
 
         private bool german = true;
         private float startTime = 0;
-    private bool hannahActive;
+        private bool hannahActive;
     
     private List<NLPAPI.GPTMessage> GPTPrompt = new List<NLPAPI.GPTMessage>();
 
@@ -34,17 +35,17 @@ using UnityEngine;
         "außerdem die Übung fließend zu gestalten und lass die Nutzer nicht die einzelnen Schritte genau wissen.");
 
         private NLPAPI.GPTMessage personaMaschineOutro = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.SYSTEM,
-        $"Ab jetzt sprechen Sie direkt mit dem Benutzer namens {username}. Fragen Sie ihn, ob er die Übung machen möchte und welches Ziel diese hat. Sie sind eine Maschine und sollen auch so die Konversation führen.");
+        $"Ab jetzt sprechen Sie direkt mit dem Benutzer. Fragen Sie ihn, ob er die Übung machen möchte und welches Ziel diese hat. Sie sind eine Maschine und sollen auch so die Konversation führen.");
 
-        private NLPAPI.GPTMessage sysPrimerFriendly = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.SYSTEM,
-        "Stelle dir vor, du bist ein sehr engagierter und empathischer Chatbot namens Hannah, der in natürlicher und menschenähnlicher Weise mit den Nutzern kommuniziert. Deine Antworten sollten " +
-            "folgende Merkmale enthalten:\n•\tSprachstil: Verwende natürliche Sprache, einschließlich Slang, Redewendungen und variierender Satzstrukturen. Ahme menschliche Gesprächsstile nach, " +
-            "um ansprechend und nachvollziehbar zu sein.\n•\tEmotionale Ausdrucksfähigkeit: Integriere emotionale Hinweise in deine Antworten. Verwende Wörter, die Emotionen vermitteln, und moduliere " +
-            "deinen Ton, um verschiedene Gefühle auszudrücken.\n•\tKonversationsfähigkeiten: Halte den Kontext aufrecht, meistere den Gesprächswechsel reibungslos und gib relevante und kohärente " +
-            "Antworten.\n•\tSoziale Hinweise: Verwende Höflichkeitsstrategien, Empathie und Smalltalk. Baue eine Beziehung zu den Nutzern auf, um die Interaktion natürlicher wirken zu " +
-            "lassen.\n•\tNonverbale Elemente: Integriere Emojis und andere nonverbale Elemente, um deine Interaktionen ausdrucksstärker zu machen.\nBeispielgespräch: Nutzer: Hi, " +
-            "wie geht es dir heute? ChatGPT: Hey, ich bin Hannah, schön dich kennenzulernen! 😊 Mir geht's super, danke der Nachfrage! Und dir? Gibt es heute etwas Spannendes bei dir?\"\n");
+        private NLPAPI.GPTMessage personaHannahIntro = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.SYSTEM,
+        "Stelle dir vor, du bist ein sehr engagierter und empathischer Chatbot namens Hannah, der in natürlicher und menschenähnlicher Weise mit den Nutzern kommuniziert. Deine Antworten sollten folgende Merkmale enthalten:\n•\tSprachstil: Verwende natürliche Sprache, einschließlich Slang, Redewendungen und variierender Satzstrukturen. Ahme menschliche Gesprächsstile nach, um ansprechend und nachvollziehbar zu sein.\n•\tEmotionale Ausdrucksfähigkeit: Integriere emotionale Hinweise in deine Antworten. Verwende Wörter, die Emotionen vermitteln, und moduliere deinen Ton, um verschiedene Gefühle auszudrücken.\n•\tKonversationsfähigkeiten: Halte den Kontext aufrecht, meistere den Gesprächswechsel reibungslos und gib relevante und kohärente " +
+        "Antworten.\n•\tSoziale Hinweise: Verwende Höflichkeitsstrategien, Empathie und Smalltalk. Baue eine Beziehung zu den Nutzern auf, um die Interaktion natürlicher wirken zu lassen.\n•\tNonverbale Elemente: Integriere Emojis und andere nonverbale Elemente, um deine Interaktionen ausdrucksstärker zu machen.\nBeispielgespräch: Nutzer: Hi, \"wie geht es dir heute? ChatGPT: Hey, ich bin Hannah, schön dich kennenzulernen! 😊 Mir geht's super, danke der Nachfrage! Und dir? Gibt es heute etwas Spannendes bei dir?\"\n"+
+        "Aufgabe: Ich werde dir einen Übungstext geben, welchen du in einzelne Schritte aufteilst." +
+        "Erkläre mir immer genau einen Schritt und warte ab, bis ich dir geantwortet habe. Gehe auf meine Antworten ein. Wichtig, der Text wird in eine Sprachausgabe gegeben, also benutze keine komplexen Satzzeichen wie Sternchen, Semikolon oder ähnliches. Versuche außerdem die Übung fließend zu gestalten und lass die Nutzer nicht die einzelnen ");
 
+        private NLPAPI.GPTMessage personaHannahOutro = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.SYSTEM,
+        $"Stelle dich vor. Beginne dann mit der Übung. Ab jetzt sprichst du direkt mit dem Benutzer namens {username}. Sprich ihn freundlich mit seinem Namen an.Frage ihn, ob er die Übung machen möchte und welches Ziel diese hat.");
+       
         private NLPAPI.GPTMessage sysPrimerMachine = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.SYSTEM,
             "\"Stelle dir vor, du bist ein sehr effizienter und präziser Chatbot, der auf unpersönliche und maschinenartige Weise mit den Nutzern kommuniziert. Deine Antworten sollten " +
             "folgende Merkmale enthalten:\n•\tVereinfachte Sprache: Verwende direkte und einfache Sprache, vermeide Umgangssprache, Redewendungen oder informelle Ausdrücke.\n•\tStrukturierte" +
@@ -127,16 +128,13 @@ using UnityEngine;
 
         private NLPAPI.GPTMessage testCase = new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.USER, "Spielst du gerne Fußball?");
 
-        public void StartChatExample(string username, bool german = true, int exerciseNo = 6)
+        public void StartChatExample(string un, bool german = true, int exerciseNo = 6)
         {
-        hannahActive = ui.hannahActive; 
-        if (hannahActive) {
-                exerciseNo = 4;
-            } else {
-                exerciseNo = 7;
-            }
+             task = tasks[new System.Random().Next(tasks.Length)];
+            hannahActive = ui.hannahActive; 
+            
 
-            //this.username = username;
+            username = un;
             this.german = german;
             this.exerciseNo = exerciseNo;
             if (german)
@@ -173,7 +171,8 @@ using UnityEngine;
                 //         break;
                 // }
 
-                GPTPrompt.Add(personaMaschineIntro);
+                //GPTPrompt.Add(personaMaschineIntro);
+                
                 switch(task)
                 {
                     case "test":
@@ -201,6 +200,14 @@ using UnityEngine;
                         GPTPrompt.Add(machineTextStaerken);
                         break;
                 }
+                if (hannahActive) {
+                    GPTPrompt.Add(personaHannahIntro);
+                    GPTPrompt.Add(personaHannahOutro);
+                } else {
+                    GPTPrompt.Add(personaMaschineIntro);
+                    GPTPrompt.Add(personaMaschineOutro);
+                }
+                
                 // GPTPrompt.Add(new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.USER,
                 // $"Ab jetzt sprichst du direkt mit dem Benutzer namens {this.username}. Frage ihn, ob er die übung machen möchte und welches ziel diese hat."));
             }

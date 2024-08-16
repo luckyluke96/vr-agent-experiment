@@ -2094,7 +2094,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.5579997, y: -0.219}
+  m_AnchoredPosition: {x: 0, y: -0.067}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &863181265
@@ -2369,10 +2369,10 @@ MonoBehaviour:
   LanguageProcessing: {fileID: 885818944}
   SpeechToText: {fileID: 885818945}
   State: 0
-  startAutomatically: 1
+  startAutomatically: 0
   ChatExample_Script: {fileID: 885818939}
-  UsernameInputField: {fileID: 810317102}
-  Username: User
+  UsernameInputField: {fileID: 863181265}
+  Username: hans
 --- !u!114 &885818942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2514,7 +2514,7 @@ MonoBehaviour:
   SelectedMicrophone: 0
   MicOn: {fileID: 1641970849}
   MicOff: {fileID: 1404561092}
-  logText: {fileID: 2093609302}
+  logText: {fileID: 59893122}
   AutoselectMicrophone: 1
 --- !u!114 &885818946
 MonoBehaviour:
