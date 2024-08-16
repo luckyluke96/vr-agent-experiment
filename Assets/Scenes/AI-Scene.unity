@@ -2299,6 +2299,7 @@ GameObject:
   - component: {fileID: 885818940}
   - component: {fileID: 885818939}
   - component: {fileID: 885818947}
+  - component: {fileID: 885818948}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -2372,7 +2373,7 @@ MonoBehaviour:
   startAutomatically: 0
   ChatExample_Script: {fileID: 885818939}
   UsernameInputField: {fileID: 863181265}
-  Username: hans
+  Username: user
 --- !u!114 &885818942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2386,7 +2387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourceLipSync: {fileID: 1146959483}
-  genderVoice: 0
+  genderVoice: 2
   AddDelayToAudio: 0
   delayForSyncing: 0
 --- !u!82 &885818943
@@ -2544,6 +2545,18 @@ MonoBehaviour:
   MicRecorder: {fileID: 885818945}
   TTSAPI: {fileID: 885818942}
   NLPAPI: {fileID: 885818944}
+--- !u!114 &885818948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885818937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63b0811aeae474c3bb1f6b4c76450b0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &943370611
 GameObject:
   m_ObjectHideFlags: 0
@@ -4319,8 +4332,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.671, y: -0.142}
-  m_SizeDelta: {x: 0.2, y: 0.2}
+  m_AnchoredPosition: {x: -0.6, y: 0.059}
+  m_SizeDelta: {x: 0.4, y: 0.4}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1404561094
 MonoBehaviour:
@@ -4539,7 +4552,7 @@ Transform:
   m_GameObject: {fileID: 1546479461}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.157, z: -1.263}
+  m_LocalPosition: {x: 0, y: 0.157, z: -1.743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4982,17 +4995,17 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641970849}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.421}
-  m_LocalScale: {x: 1.38625, y: 1.38625, z: 1.38625}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 490957612}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 70.3125, y: 68.7355}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.6, y: 0.059}
+  m_SizeDelta: {x: 0.39999998, y: 0.39999998}
+  m_Pivot: {x: 1, y: 1}
 --- !u!1001 &1660027615
 PrefabInstance:
   m_ObjectHideFlags: 0

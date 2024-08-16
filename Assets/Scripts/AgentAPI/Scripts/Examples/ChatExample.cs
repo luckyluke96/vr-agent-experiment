@@ -13,7 +13,7 @@ using UnityEngine;
         public vrUserInterface ui;
 
         private bool timeIsUp = false;
-        private static string username = "theodor";
+        private static string username = "";
         private int exerciseNo = 4;
         private static string[] tasks = { "positiveRückmeldung", "dankbarkeit", "staerken", "alleFarben" };
         //private static string task = "test"; 
@@ -132,6 +132,7 @@ using UnityEngine;
         {
              task = tasks[new System.Random().Next(tasks.Length)];
             hannahActive = ui.hannahActive; 
+            Debug.Log("un:  " + un);
             
 
             username = un;
@@ -172,7 +173,7 @@ using UnityEngine;
                 // }
 
                 //GPTPrompt.Add(personaMaschineIntro);
-                
+                Debug.Log("Username: " + username);
                 switch(task)
                 {
                     case "test":
@@ -202,7 +203,8 @@ using UnityEngine;
                 }
                 if (hannahActive) {
                     GPTPrompt.Add(personaHannahIntro);
-                    GPTPrompt.Add(personaHannahOutro);
+                    GPTPrompt.Add(new NLPAPI.GPTMessage(NLPAPI.GPTMessageRoles.USER,
+                    $"Stelle dich vor. Beginne dann mit der Übung. Ab jetzt sprichst du direkt mit dem Benutzer namens {username}. Sprich ihn freundlich mit seinem Namen an.Frage ihn, ob er die Übung machen möchte und welches Ziel diese hat."));
                 } else {
                     GPTPrompt.Add(personaMaschineIntro);
                     GPTPrompt.Add(personaMaschineOutro);
