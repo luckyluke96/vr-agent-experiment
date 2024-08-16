@@ -276,7 +276,7 @@ QualitySettings:
     vSyncCount: 1
     realtimeGICPUUsage: 100
     lodBias: 2
-    maximumLODLevel: 0
+    maximumLODLevel: 2
     enableLODCrossFade: 1
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
@@ -302,7 +302,7 @@ QualitySettings:
     excludedTargetPlatforms: []
   m_TextureMipmapLimitGroupNames: []
   m_PerPlatformDefaultQuality:
-    Android: 2
+    Android: 5
     GameCoreScarlett: 5
     GameCoreXboxOne: 5
     Lumin: 5

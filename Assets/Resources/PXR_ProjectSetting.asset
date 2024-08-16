@@ -24,7 +24,7 @@ MonoBehaviour:
   latelatchingDebug: 0
   enableSubsampled: 0
   bodyTracking: 0
-  adaptiveResolution: 0
+  adaptiveResolution: 1
   stageMode: 0
   videoSeeThrough: 0
   spatialAnchor: 0
