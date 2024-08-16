@@ -1865,9 +1865,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8324176961755436409, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5563995317714038364, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
+      propertyPath: m_Quality
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -5563995317714038364, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5563995317714038364, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
       propertyPath: m_Name
       value: hannah_hyper_realistic
+      objectReference: {fileID: 0}
+    - target: {fileID: 5197118176682910397, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
