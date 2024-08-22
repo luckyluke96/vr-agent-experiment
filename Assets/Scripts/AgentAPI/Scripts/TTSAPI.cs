@@ -71,6 +71,8 @@ public class TTSAPI : MonoBehaviour
         text = string.Join("\n", t);
 
         Debug.LogFormat("StartAudioStream: {0}", text);
+        DataCollection.conversationTranscription = DataCollection.conversationTranscription + 
+                                    "AI (" + DateTime.Now.ToString() + "): " + text + ". ";
 
         // Prepare Gender and Localization Audio String
 

@@ -269,6 +269,8 @@ using UnityEngine;
                         toPlayString += toPlay[i];
                     }
                     Debug.Log($"Playing: {toPlayString}");
+                    // DataCollection.conversationTranscription = DataCollection.conversationTranscription + 
+                    // "AI (" + DateTime.Now.ToString() + "): " + toPlayString + ".\n";
                     yield return TTSAPI.TextToSpeechAndPlay(toPlayString, null, -1f);
                 }
                 else

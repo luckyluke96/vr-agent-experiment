@@ -150,6 +150,7 @@ public class MicrophoneRecorder : MonoBehaviour
                     
                     Debug.Log("logged");
                     final_result(result.alternatives[0].transcript);
+                    
                     final = true;
                 }
             }
@@ -162,6 +163,8 @@ public class MicrophoneRecorder : MonoBehaviour
         }
 
         logText.text = res;
+        DataCollection.conversationTranscription = DataCollection.conversationTranscription + 
+                "User (" + DateTime.Now.ToString() + "): " + res + ". ";
     }
 
     /// <summary>
