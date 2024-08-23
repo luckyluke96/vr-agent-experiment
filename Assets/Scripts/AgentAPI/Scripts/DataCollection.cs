@@ -1,27 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
-using System;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
+using UnityEngine;
 
 public class DataCollection : MonoBehaviour
 {
-    public static string conversationTranscription = "DateTime: " + DateTime.Now.ToString() + ". Conversation: ";
+    public static string conversationTranscription =
+        "DateTime: " + DateTime.Now.ToString() + ". Conversation: ";
     private string content;
     private string fileName;
     private bool columnNames;
     private static string path;
-
-    
-
-    private static int testInt = 44;
+    private static string condition;
 
     void Start()
     {
-       SetUpPaths();
-       
-        
+        SetUpPaths();
     }
 
     void OnApplicationQuit()
@@ -35,25 +32,33 @@ public class DataCollection : MonoBehaviour
         path = @"" + Application.persistentDataPath + "/logs/";
         Debug.Log(path);
         Directory.CreateDirectory(path);
-        
-        path = Path.Combine(path, "conversation_"+ "test" + ".csv");
-    }
 
+        path = Path.Combine(path, "conversation_" + "test" + ".csv");
+    }
 
     public static void LogGameData()
     {
-        
-        if(true)
+        checkCondition();
+
+        if (true)
         {
-            
-            string columnString = "ID;"+ "DateTime;" + "Test;"+"Conversation;" + "\n"; 
-            string logString = "******;" + DateTime.Now.ToString() + ";" + testInt.ToString()+ ";" + conversationTranscription + ";";
+            string columnString =
+                "ID;" + "DateTime;" + "Condition;" + "Task;" + "Conversation;" + "\n";
+            string logString =
+                "******;"
+                + DateTime.Now.ToString()
+                + ";"
+                + condition
+                + ";"
+                + ChatExample.task
+                + ";"
+                + conversationTranscription
+                + ";";
 
             // add column names only when file is created
             if (!File.Exists(path))
             {
                 File.WriteAllText(path, columnString);
-                
             }
             // always save data recorded during one run
             using (StreamWriter sw = File.AppendText(path))
@@ -63,9 +68,20 @@ public class DataCollection : MonoBehaviour
         }
     }
 
+    public static void checkCondition()
+    {
+        if (vrUserInterface.hannahActive)
+        {
+            condition = "visualHuman-verbalHuman";
+        }
+        else
+        {
+            condition = "visualRobot-verbalRobot";
+        }
+    }
+
     public void AddContent(string newContent)
     {
         content += newContent;
     }
 }
-

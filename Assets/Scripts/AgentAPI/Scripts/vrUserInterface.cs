@@ -1,6 +1,6 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class vrUserInterface : MonoBehaviour
 {
@@ -9,11 +9,11 @@ public class vrUserInterface : MonoBehaviour
 
     public TMP_Text logText;
 
-    public Button switchAgentButton; 
+    public Button switchAgentButton;
     public Button quitButton;
-    public GameObject robot; 
+    public GameObject robot;
     public GameObject hannah;
-    public bool hannahActive = true;
+    public static bool hannahActive = true;
 
     void Start()
     {
@@ -42,17 +42,15 @@ public class vrUserInterface : MonoBehaviour
 
         // if hannah is active at start, move robot away
         if (hannahActive)
-        { 
+        {
             robot.transform.position = new Vector3(1000, 1000, 1000);
         }
-
-
     }
 
     void SwapAgents()
     {
         if (hannahActive)
-        { 
+        {
             robot.transform.position = Vector3.zero;
             hannah.transform.position = new Vector3(1000, 1000, 1000);
         }
@@ -77,15 +75,12 @@ public class vrUserInterface : MonoBehaviour
 
     void OnVRStartButtonClicked()
     {
-        
-
         if (agentScript != null)
         {
             logText.text = "VR Start Button clicked, starting chat example";
             ChangeButtonColor(vrStartButton, Color.green);
             logText.text = "VR Start Button clicked, starting chat example";
             agentScript.ChatExample_Script.StartChatExample(agentScript.Username, true);
-            
 
             //disable start and switch button
             vrStartButton.gameObject.SetActive(false);
@@ -97,6 +92,4 @@ public class vrUserInterface : MonoBehaviour
             logText.text = "Agent script not found in the scene";
         }
     }
-
-    
 }
