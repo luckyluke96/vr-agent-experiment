@@ -7,13 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class Agent : MonoBehaviour
 {
-
     public TTSAPI TextToSpeech;
     public NLPAPI LanguageProcessing;
     public MicrophoneRecorder SpeechToText;
 
     public AgentState State = AgentState.Start;
     public bool startAutomatically = false;
+    public int sessionDuration = 60;
 
     private int NumberOfAPICalls = 0;
 
@@ -22,7 +22,6 @@ public class Agent : MonoBehaviour
 
     // Current Script
     public ChatExample ChatExample_Script;
-
 
     public enum AgentState
     {
@@ -33,22 +32,23 @@ public class Agent : MonoBehaviour
         Talking,
     }
 
-    private string startingPromp = "" +
-            "The folowing is a conversation with an AI assistant for a psychotherapist" +
-            "The assistant is helpful, creative, clever, and very friendly. " +
-            "They can give known hints about psychiatric issues.\n\n" +
-            "Human: Hi.\n\n" +
-            "The doctor's AI assistant introduces itself and asks for the patient's name:\n\n" +
-            "AI:";
+    private string startingPromp =
+        ""
+        + "The folowing is a conversation with an AI assistant for a psychotherapist"
+        + "The assistant is helpful, creative, clever, and very friendly. "
+        + "They can give known hints about psychiatric issues.\n\n"
+        + "Human: Hi.\n\n"
+        + "The doctor's AI assistant introduces itself and asks for the patient's name:\n\n"
+        + "AI:";
 
     Func<string, string> initialPrompt = (i) =>
     {
-        return "" +
-            "The following is a conversation with the assistant Marc for doctor Gallinat. " +
-            "The assistant is helpful, creative, clever, and very friendly.\n\n" +
-            "Patient: Hello?\n\n" +
-            "The assistant introduces itself and asks for the patient's name:\n\n" +
-            "AI:";
+        return ""
+            + "The following is a conversation with the assistant Marc for doctor Gallinat. "
+            + "The assistant is helpful, creative, clever, and very friendly.\n\n"
+            + "Patient: Hello?\n\n"
+            + "The assistant introduces itself and asks for the patient's name:\n\n"
+            + "AI:";
     };
 
     public TMP_InputField UsernameInputField;
@@ -62,16 +62,33 @@ public class Agent : MonoBehaviour
     {
         // PHQ9_Script = new PHQ9();
         currentPrompt = startingPromp;
-        UsernameInputField.onValueChanged.AddListener(delegate { Username = UsernameInputField.text; });
+        UsernameInputField.onValueChanged.AddListener(
+            delegate
+            {
+                Username = UsernameInputField.text;
+            }
+        );
 
         // Assume all necessary conditions are met
-        if(startAutomatically) {
-            StartCoroutine(waiter());
-        } 
+        if (startAutomatically)
+        {
+            StartCoroutine(Waiter());
+        }
+
+        StartCoroutine(CountDown());
         //ChatExample_Script.StartChatExample(Username, true);
     }
 
-    IEnumerator waiter()
+    IEnumerator CountDown()
+    {
+        ChatExample.timeIsUp = false;
+        yield return new WaitForSeconds(sessionDuration);
+        Debug.Log("Waiting over");
+        ChatExample.endConv = true;
+        Debug.Log("End Conv is now " + ChatExample.endConv);
+    }
+
+    IEnumerator Waiter()
     {
         Debug.Log("Wait for 2 seconds");
         //Wait for 2 seconds
@@ -80,9 +97,12 @@ public class Agent : MonoBehaviour
         Debug.Log("Waiting over");
         ChatExample_Script.StartChatExample(Username, true);
 
+        //Debug.Log("finish");
+        //StartCoroutine(ChatExample_Script.FinishConversation());
     }
 
-    void Update() {
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
@@ -103,11 +123,19 @@ public class Agent : MonoBehaviour
             WaitingForFinalSTT = false;
             Debug.Log($"Final: {transcriptionResult.alternatives[0].transcript}");
             State = AgentState.Processing;
-            UnityMainThreadDispatcher.Instance().Enqueue(() =>
-            {
-                currentPrompt += transcriptionResult.alternatives[0].transcript + $"\n\n{AgentSettings.AI}:"; ;
-                LanguageProcessing.GetNLPResponse(currentPrompt, NLPAPI.GPT_Models.Davinci_Best, ProcessNLP);
-            });
+            UnityMainThreadDispatcher
+                .Instance()
+                .Enqueue(() =>
+                {
+                    currentPrompt +=
+                        transcriptionResult.alternatives[0].transcript + $"\n\n{AgentSettings.AI}:";
+                    ;
+                    LanguageProcessing.GetNLPResponse(
+                        currentPrompt,
+                        NLPAPI.GPT_Models.Davinci_Best,
+                        ProcessNLP
+                    );
+                });
         }
         else
         {
@@ -129,40 +157,42 @@ public class Agent : MonoBehaviour
 
         if (NumberOfAPICalls >= 200)
         {
-            TextToSpeech.TextToSpeechAndPlay(response, () =>
-            {
-                if (AgentSettings.LanguageString == "en-US")
+            TextToSpeech.TextToSpeechAndPlay(
+                response,
+                () =>
                 {
-                    TextToSpeech.TextToSpeechAndPlay("Thank you, if you want to make more requests, please restart.", () =>
+                    if (AgentSettings.LanguageString == "en-US")
                     {
-
-                    });
-                }
-                else
-                {
-                    TextToSpeech.TextToSpeechAndPlay("Vielen Dank, wenn sie ein neues Gespräch führen wollen, bitte neustarten.", () =>
+                        TextToSpeech.TextToSpeechAndPlay(
+                            "Thank you, if you want to make more requests, please restart.",
+                            () => { }
+                        );
+                    }
+                    else
                     {
-
-                    });
+                        TextToSpeech.TextToSpeechAndPlay(
+                            "Vielen Dank, wenn sie ein neues Gespräch führen wollen, bitte neustarten.",
+                            () => { }
+                        );
+                    }
                 }
-
-
-            });
+            );
         }
         else
         {
             currentPrompt += response + $"\n\n{AgentSettings.Human}:";
 
             State = AgentState.Talking;
-            TextToSpeech.TextToSpeechAndPlay(response, () =>
-            {
-                LastSTTTime = 0;
-                WaitingForFinalSTT = true;
-                // SpeechToText.StartRecording();
-            });
+            TextToSpeech.TextToSpeechAndPlay(
+                response,
+                () =>
+                {
+                    LastSTTTime = 0;
+                    WaitingForFinalSTT = true;
+                    // SpeechToText.StartRecording();
+                }
+            );
         }
-
-
     }
 
     public void SetName(string name)
@@ -182,7 +212,6 @@ public class Agent : MonoBehaviour
 
     private void OnGUI()
     {
-        
         GUI.color = Color.red;
         // Top right label "Escape to exit"
         GUI.Label(new Rect(Screen.width - 150, 10, 150, 20), "Escape to exit");
@@ -197,7 +226,6 @@ public class Agent : MonoBehaviour
 
         if (State == AgentState.Start)
         {
-            
             GUI.color = Color.blue;
             if (GUI.Button(new Rect(10, 60 * y++, 350, 40), "* Start ChatExample"))
             {
@@ -207,7 +235,6 @@ public class Agent : MonoBehaviour
                 ChatExample_Script.StartChatExample(Username, true);
             }
         }
-
         else
         {
             if (GUI.Button(new Rect(10, 60, 350, 40), "Restart"))

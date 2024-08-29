@@ -11,7 +11,8 @@ public class ChatExample : MonoBehaviour
     public NLPAPI NLPAPI;
     public vrUserInterface ui;
 
-    private bool timeIsUp = false;
+    public static bool timeIsUp = false;
+    public static bool endConv = false;
     private static string username = "";
     private int exerciseNo = 4;
     private static string[] tasks =
@@ -29,7 +30,7 @@ public class ChatExample : MonoBehaviour
     public static string task;
 
     private bool german = true;
-    private float startTime = 0;
+    private static float startTime = 0;
     private bool hannahActive;
 
     private List<NLPAPI.GPTMessage> GPTPrompt = new List<NLPAPI.GPTMessage>();
@@ -231,6 +232,7 @@ public class ChatExample : MonoBehaviour
         {
             //TODO: Handle English Version
         }
+
         Start_NLPandPlayTTS(
             GPTPrompt,
             (response) =>
@@ -328,8 +330,10 @@ public class ChatExample : MonoBehaviour
         if (!timeIsUp)
         {
             // yield return API_Agent.Instance.TTSAPI.TextToSpeechAndPlay(response.content);
-
+            //endConv = true;
+            Debug.Log("cogito_strict");
             GPTPrompt.Add(response);
+            Debug.Log("Response: " + response.content);
 
             string sst_res = "";
 
@@ -347,6 +351,16 @@ public class ChatExample : MonoBehaviour
             );
             GPTPrompt.Add(userPrompt);
 
+            if (endConv)
+            {
+                GPTPrompt.Add(
+                    new NLPAPI.GPTMessage(
+                        NLPAPI.GPTMessageRoles.SYSTEM,
+                        $"Gib dem User Bescheid, dass unsere Zeit jetzt vorbei ist und wir jetzt die Aufgabe nun beenden müssen."
+                    )
+                );
+            }
+
             Start_NLPandPlayTTS(
                 GPTPrompt,
                 (response) =>
@@ -359,14 +373,27 @@ public class ChatExample : MonoBehaviour
                         });
                 }
             );
+
+            if (endConv)
+            {
+                MicRecorder.StopSTT();
+                MicRecorder.StopAllCoroutines();
+                yield return new WaitForSeconds(25);
+                endApplication();
+            }
+
             yield break;
         }
         else
         {
+            MicRecorder.StopSTT();
+            MicRecorder.StopAllCoroutines();
+            Debug.Log("Time is up: " + timeIsUp);
             GPTPrompt.Add(response);
 
             if (german)
             {
+                Debug.Log("aufhören");
                 GPTPrompt.Add(
                     new NLPAPI.GPTMessage(
                         NLPAPI.GPTMessageRoles.ASSISTANT,
@@ -386,7 +413,7 @@ public class ChatExample : MonoBehaviour
 
             string goodbye = "";
             bool gptDone = false;
-            ;
+
             NLPAPI.GetChat_NLPResponse(
                 GPTPrompt.ToArray(),
                 NLPAPI.GPT_Models.Chat_GPT_35,
@@ -396,6 +423,11 @@ public class ChatExample : MonoBehaviour
                     gptDone = true;
                 }
             );
+            Debug.Log("goodbye: " + goodbye.ToString() + "gptDone: " + gptDone);
+
+            Debug.Log("nlp response");
+
+            // TODO: problem leight irgendwie am nlp response, der nicht kommt und somit nicht gptDone auf true setzt
 
             // yield return API_Agent.Instance.TTSAPI.TextToSpeechAndPlay(response.content);
             yield return new WaitUntil(() => gptDone);
@@ -424,20 +456,48 @@ public class ChatExample : MonoBehaviour
     /// Calls the CogitoExercise Methos one last time in order to let GPT output its goodbye Prompt.
     /// </summary>
     /// <returns>IEnumerator to let this function be executed as a Coroutine</returns>
-    private IEnumerator FinishConversation()
+    public IEnumerator FinishConversation()
     {
+        Debug.Log("Finishing Conversation");
         NLPAPI.GPTMessage goodbyeMessage = new NLPAPI.GPTMessage(
             NLPAPI.GPTMessageRoles.USER,
             "Wir müssen nun leider aufhören, unsere zeit ist fast vorbei und meine nächsten Patienten warten schon"
         );
 
         startTime = Time.time;
-        int secTilEnd = convDurationMinutes * 60;
+        //int secTilEnd = convDurationMinutes * 60;
+        int secTilEnd = 10;
         yield return new WaitForSecondsRealtime(secTilEnd);
+        Debug.Log("Waited for " + secTilEnd + " Seconds. Time is up!");
         timeIsUp = true;
+        string goodbyeResponse = "";
+        bool gptDone = false;
         // StopCoroutine(coroutineHandle);
-        // StopAllCoroutines();
-        // StartCoroutine(CogitoExercise(goodbyeMessage));
+        StopAllCoroutines();
+        //StartCoroutine(CogitoExercise(goodbyeMessage));
+        NLPAPI.GetChat_NLPResponse(
+            GPTPrompt.ToArray(),
+            NLPAPI.GPT_Models.Chat_GPT_35,
+            (response) =>
+            {
+                goodbyeResponse = response.content;
+                gptDone = true;
+                Debug.Log("Goodbye response received: " + goodbyeResponse);
+            }
+        );
+
+        // Wait until the response is received
+        yield return new WaitUntil(() => gptDone);
+
+        // Play the goodbye response using TTS
+        yield return API_Agent.Instance.TTSAPI.TextToSpeechAndPlay(goodbyeResponse);
+
+        // Stop the application or editor based on the environment
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     void OnGUI()
@@ -451,5 +511,16 @@ public class ChatExample : MonoBehaviour
                 "Remaining Time: " + (Mathf.Abs(convDurationMinutes * 60 - (Time.time - startTime)))
             );
         }
+    }
+
+    void endApplication()
+    {
+#if UNITY_EDITOR
+        // stop unity editor
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        // stop application
+        Application.Quit();
+#endif
     }
 }

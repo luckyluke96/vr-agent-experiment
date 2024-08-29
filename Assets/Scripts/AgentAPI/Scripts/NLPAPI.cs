@@ -1,13 +1,12 @@
-using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class NLPAPI : MonoBehaviour
 {
-
     // The AudioAPI has a websocket we are going to use for making the streamed chat requests
     // We will use the same websocket for all requests
     public AudioAPI audioAPI;
@@ -25,34 +24,75 @@ public class NLPAPI : MonoBehaviour
         StartCoroutine(GetAPIInfo());
     }
 
-    public Coroutine GetNLPResponse(string input, GPT_Models model, Action<string> callback, bool translate = false)
+    public Coroutine GetNLPResponse(
+        string input,
+        GPT_Models model,
+        Action<string> callback,
+        bool translate = false
+    )
     {
         return GetNLPResponse(input, model, callback, 100, 0.35f);
     }
 
-    public Coroutine GetNLPResponse(string input, GPT_Models model, Action<string> callback, int max_tokens, float temperature, bool translate = false)
+    public Coroutine GetNLPResponse(
+        string input,
+        GPT_Models model,
+        Action<string> callback,
+        int max_tokens,
+        float temperature,
+        bool translate = false
+    )
     {
         return GetNLPResponse(input, model, callback, max_tokens, temperature, "");
     }
 
-    public Coroutine GetNLPResponse(string input, GPT_Models model, Action<string> callback, string stopword, bool translate = false)
+    public Coroutine GetNLPResponse(
+        string input,
+        GPT_Models model,
+        Action<string> callback,
+        string stopword,
+        bool translate = false
+    )
     {
-        return StartCoroutine(GetNLPCompletion(input, model, callback, 100, 0.35f, stopword, translate));
+        return StartCoroutine(
+            GetNLPCompletion(input, model, callback, 100, 0.35f, stopword, translate)
+        );
     }
 
-    public Coroutine GetNLPResponse(string input, GPT_Models model, Action<string> callback, int max_tokens, float temperature, string stopword, bool translate = false)
+    public Coroutine GetNLPResponse(
+        string input,
+        GPT_Models model,
+        Action<string> callback,
+        int max_tokens,
+        float temperature,
+        string stopword,
+        bool translate = false
+    )
     {
-        return StartCoroutine(GetNLPCompletion(input, model, callback, max_tokens, temperature, stopword, translate));
+        return StartCoroutine(
+            GetNLPCompletion(input, model, callback, max_tokens, temperature, stopword, translate)
+        );
     }
 
-    public Coroutine GetChat_NLPResponse(GPTMessage[] input, GPT_Models model, Action<GPTMessage> callback)
+    public Coroutine GetChat_NLPResponse(
+        GPTMessage[] input,
+        GPT_Models model,
+        Action<GPTMessage> callback
+    )
     {
         return StartCoroutine(GetChatGPTCompletion(input, callback, 400, 0.35f));
     }
 
-    public Coroutine GetChat_NLPResponseStreamed(GPTMessage[] input, GPT_Models model, Action<GPTMessage> callback, Action<GPTStreamMessage> stream_callback)
+    public Coroutine GetChat_NLPResponseStreamed(
+        GPTMessage[] input,
+        GPT_Models model,
+        Action<GPTMessage> callback,
+        Action<GPTStreamMessage> stream_callback
+    )
     {
-        return StartCoroutine(GetChatGPTCompletion(input, callback, 400, 0.35f, true, stream_callback));
+        return StartCoroutine(
+            GetChatGPTCompletion(input, callback, 400, 0.35f, true, stream_callback)
+        );
     }
 
     private IEnumerator GetAPIInfo()
@@ -74,10 +114,14 @@ public class NLPAPI : MonoBehaviour
                     Debug.LogError(": HTTP Error: " + webRequest.error);
                     break;
                 case UnityWebRequest.Result.Success:
-                    var info = JsonConvert.DeserializeObject<NLP_API_INFO>(webRequest.downloadHandler.text, new JsonSerializerSettings
-                    {
-                        Error = (obj, err) => Debug.LogError(err + " " + webRequest.downloadHandler.text)
-                    });
+                    var info = JsonConvert.DeserializeObject<NLP_API_INFO>(
+                        webRequest.downloadHandler.text,
+                        new JsonSerializerSettings
+                        {
+                            Error = (obj, err) =>
+                                Debug.LogError(err + " " + webRequest.downloadHandler.text)
+                        }
+                    );
                     Debug.Log($"Online: {info.online}, Limit: {info.limit}");
                     break;
             }
@@ -86,7 +130,9 @@ public class NLPAPI : MonoBehaviour
 
     public enum GPTMessageRoles
     {
-        SYSTEM, ASSISTANT, USER
+        SYSTEM,
+        ASSISTANT,
+        USER
     }
 
     [Serializable]
@@ -120,7 +166,8 @@ public class NLPAPI : MonoBehaviour
         }
     }
 
-    public class GPTStreamMessage{
+    public class GPTStreamMessage
+    {
         public string delta { get; set; }
         public bool finished { get; set; }
 
@@ -133,24 +180,30 @@ public class NLPAPI : MonoBehaviour
 
     /// <summary>
     /// Example from OpenAI: Messages should contain system, user, assistant roles
-    /// 
+    ///
     /// https://platform.openai.com/docs/guides/chat/instructing-chat-models
-    /// 
+    ///
     /// messages=[
     ///    {"role": "system", "content": "You are a helpful assistant."},
     ///    { "role": "user", "content": "Who won the world series in 2020?"},
     ///    { "role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
     ///    { "role": "user", "content": "Where was it played?"}
     ///]
-    /// 
+    ///
     /// </summary>
     /// <param name="messages"></param>
     /// <param name="callback"></param>
     /// <param name="max_tokens"></param>
     /// <param name="temperature"></param>
     /// <returns></returns>
-    private IEnumerator GetChatGPTCompletion(GPTMessage[] messages, Action<GPTMessage> callback, int max_tokens,
-        float temperature, bool stream = false, Action<GPTStreamMessage> stream_callback = null)
+    private IEnumerator GetChatGPTCompletion(
+        GPTMessage[] messages,
+        Action<GPTMessage> callback,
+        int max_tokens,
+        float temperature,
+        bool stream = false,
+        Action<GPTStreamMessage> stream_callback = null
+    )
     {
         var data = new WWWForm();
         var dict = new Dictionary<string, string>();
@@ -173,25 +226,31 @@ public class NLPAPI : MonoBehaviour
             string accumulated = "";
 
             bool finished = false;
-            var listener = new Action<AudioAPI.ChatResult>((AudioAPI.ChatResult chatResult) =>
-            {
-                UnityMainThreadDispatcher.Instance().Enqueue(() =>
+            var listener = new Action<AudioAPI.ChatResult>(
+                (AudioAPI.ChatResult chatResult) =>
                 {
-                    if (chatResult.message_id == message_id)
-                    {
-                        accumulated += chatResult.delta;
-                        stream_callback.Invoke(new GPTStreamMessage(chatResult.delta, chatResult.done));
-                        if (chatResult.done)
+                    UnityMainThreadDispatcher
+                        .Instance()
+                        .Enqueue(() =>
                         {
-                            finished = true;
-                        }
-                    }
-                });
-            });
+                            if (chatResult.message_id == message_id)
+                            {
+                                accumulated += chatResult.delta;
+                                stream_callback.Invoke(
+                                    new GPTStreamMessage(chatResult.delta, chatResult.done)
+                                );
+                                if (chatResult.done)
+                                {
+                                    finished = true;
+                                }
+                            }
+                        });
+                }
+            );
 
             // Listener will be called every time a sendResultsOn character is found
             audioAPI.chatListeners.Add(listener);
-            
+
             var task = audioAPI.SendChatGPTRequest(dict);
 
             yield return new WaitUntil(() => finished);
@@ -218,26 +277,34 @@ public class NLPAPI : MonoBehaviour
                         break;
                     case UnityWebRequest.Result.Success:
                         //Debug.Log(webRequest.downloadHandler.text);
-                        var response = JsonConvert.DeserializeObject<ChatNLPResponse>(webRequest.downloadHandler.text, new JsonSerializerSettings
-                        {
-                            Error = (obj, err) => Debug.LogError(err + " " + webRequest.downloadHandler.text)
-                        });
+                        var response = JsonConvert.DeserializeObject<ChatNLPResponse>(
+                            webRequest.downloadHandler.text,
+                            new JsonSerializerSettings
+                            {
+                                Error = (obj, err) =>
+                                    Debug.LogError(err + " " + webRequest.downloadHandler.text)
+                            }
+                        );
                         // TODO Later more
-                        Debug.Log($"Tokens: {response.usage.total_tokens} \n Response: {response.choices[0].message.content}");
-                        callback.Invoke(response.choices[0].message);
+                        // Debug.Log($"Tokens: {response.usage.total_tokens} \n Response: {response.choices[0].message.content}");
+                        // callback.Invoke(response.choices[0].message);
                         break;
                 }
             }
         }
 
-
-
-
         yield break;
     }
 
-    private IEnumerator GetNLPCompletion(string input, GPT_Models model, Action<string> callback, int max_tokens,
-        float temperature, string stopword, bool translate)
+    private IEnumerator GetNLPCompletion(
+        string input,
+        GPT_Models model,
+        Action<string> callback,
+        int max_tokens,
+        float temperature,
+        string stopword,
+        bool translate
+    )
     {
         var data = new WWWForm();
 
@@ -249,7 +316,12 @@ public class NLPAPI : MonoBehaviour
             var m = new GPTMessage(GPTMessageRoles.USER, input);
             var ms = new GPTMessage[] { m };
 
-            yield return GetChatGPTCompletion(ms, (c) => callback(c.content), max_tokens, temperature);
+            yield return GetChatGPTCompletion(
+                ms,
+                (c) => callback(c.content),
+                max_tokens,
+                temperature
+            );
             yield break;
 
             //dict.Add("input", "");
@@ -290,10 +362,14 @@ public class NLPAPI : MonoBehaviour
                     Debug.Log(webRequest.downloadHandler.text);
                     if (model == GPT_Models.Chat_GPT_35)
                     {
-                        var response = JsonConvert.DeserializeObject<ChatNLPResponse>(webRequest.downloadHandler.text, new JsonSerializerSettings
-                        {
-                            Error = (obj, err) => Debug.LogError(err + " " + webRequest.downloadHandler.text)
-                        });
+                        var response = JsonConvert.DeserializeObject<ChatNLPResponse>(
+                            webRequest.downloadHandler.text,
+                            new JsonSerializerSettings
+                            {
+                                Error = (obj, err) =>
+                                    Debug.LogError(err + " " + webRequest.downloadHandler.text)
+                            }
+                        );
                         // TODO Later more
                         Debug.Log($"Response: {response.choices[0].message.content}");
                         callback.Invoke(response.choices[0].message.content);
@@ -301,10 +377,14 @@ public class NLPAPI : MonoBehaviour
                     }
                     else
                     {
-                        var response = JsonConvert.DeserializeObject<NLPResponse>(webRequest.downloadHandler.text, new JsonSerializerSettings
-                        {
-                            Error = (obj, err) => Debug.LogError(err + " " + webRequest.downloadHandler.text)
-                        });
+                        var response = JsonConvert.DeserializeObject<NLPResponse>(
+                            webRequest.downloadHandler.text,
+                            new JsonSerializerSettings
+                            {
+                                Error = (obj, err) =>
+                                    Debug.LogError(err + " " + webRequest.downloadHandler.text)
+                            }
+                        );
                         Debug.Log($"Response: {response.choices[0].text}");
                         callback.Invoke(response.choices[0].text);
                     }
@@ -316,22 +396,32 @@ public class NLPAPI : MonoBehaviour
 
     public enum GPT_Models
     {
-        Davinci_Best, Curie_Good, Babbage_Simple, Ada_Cheapest, Chat_GPT_35, Chat_GPT_4_NEW
+        Davinci_Best,
+        Curie_Good,
+        Babbage_Simple,
+        Ada_Cheapest,
+        Chat_GPT_35,
+        Chat_GPT_4_NEW
     }
 
     private class GPT_Models_String
     {
-
         public static string GetModelString(GPT_Models model)
         {
             switch (model)
             {
-                case GPT_Models.Chat_GPT_35: return "gpt-3.5-turbo";
-                case GPT_Models.Davinci_Best: return "text-davinci-003";
-                case GPT_Models.Curie_Good: return "text-curie-001";
-                case GPT_Models.Babbage_Simple: return "text-babbage-001";
-                case GPT_Models.Ada_Cheapest: return "text-ada-001";
-                case GPT_Models.Chat_GPT_4_NEW: return "gpt-4-1106-preview";
+                case GPT_Models.Chat_GPT_35:
+                    return "gpt-3.5-turbo";
+                case GPT_Models.Davinci_Best:
+                    return "text-davinci-003";
+                case GPT_Models.Curie_Good:
+                    return "text-curie-001";
+                case GPT_Models.Babbage_Simple:
+                    return "text-babbage-001";
+                case GPT_Models.Ada_Cheapest:
+                    return "text-ada-001";
+                case GPT_Models.Chat_GPT_4_NEW:
+                    return "gpt-4-1106-preview";
             }
             return "text-ada-001";
         }
@@ -342,7 +432,9 @@ public class NLPAPI : MonoBehaviour
         if (error)
         {
             GUI.color = Color.red;
-            GUILayout.Label("Die Verbindung konnte nicht hergestellt werden. Bitte Bescheid sagen.");
+            GUILayout.Label(
+                "Die Verbindung konnte nicht hergestellt werden. Bitte Bescheid sagen."
+            );
         }
     }
 
@@ -399,6 +491,4 @@ public class NLPAPI : MonoBehaviour
         public int completion_tokens { get; set; }
         public int total_tokens { get; set; }
     }
-
-
 }

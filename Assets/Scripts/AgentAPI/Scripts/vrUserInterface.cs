@@ -13,7 +13,7 @@ public class vrUserInterface : MonoBehaviour
     public Button quitButton;
     public GameObject robot;
     public GameObject hannah;
-    public static bool hannahActive = true;
+    public static bool hannahActive = false;
 
     void Start()
     {
