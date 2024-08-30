@@ -10,14 +10,18 @@ namespace Convai.Scripts.Runtime.PlayerStats
     [CreateAssetMenu(menuName = "Convai/Player Data", fileName = nameof(ConvaiPlayerDataSO))]
     public class ConvaiPlayerDataSO : ScriptableObject
     {
-        [field: SerializeField] public string DefaultPlayerName { get; private set; } = "Player";
-        [field: SerializeField] public string PlayerName { get; set; }
+        [field: SerializeField]
+        public string DefaultPlayerName { get; private set; } = "Player";
+
+        [field: SerializeField]
+        public string PlayerName { get; set; }
 
         [field: ReadOnly]
         [field: SerializeField]
         public string SpeakerID { get; set; }
 
-        [field: SerializeField] public bool CreateSpeakerIDIfNotFound { get; private set; } = true;
+        [field: SerializeField]
+        public bool CreateSpeakerIDIfNotFound { get; private set; } = true;
 
         /// <summary>
         ///     Returns the PlayerDataSO if found in the Resources folder
@@ -26,11 +30,14 @@ namespace Convai.Scripts.Runtime.PlayerStats
         /// <returns>Returns true if found otherwise false</returns>
         public static bool GetPlayerData(out ConvaiPlayerDataSO playerDataSO)
         {
+            Debug.Log("GetPlayerData");
             playerDataSO = Resources.Load<ConvaiPlayerDataSO>(nameof(ConvaiPlayerDataSO));
 #if UNITY_EDITOR
             if (playerDataSO == null)
             {
+                Debug.Log("playDataSO: " + playerDataSO);
                 playerDataSO = CreateInstance<ConvaiPlayerDataSO>();
+                Debug.Log("playDataSO: " + playerDataSO);
                 CreatePlayerDataSO(playerDataSO);
             }
 #endif

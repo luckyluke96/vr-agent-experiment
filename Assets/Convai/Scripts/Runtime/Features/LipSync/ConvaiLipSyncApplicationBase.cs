@@ -50,7 +50,9 @@ namespace Convai.Scripts.Runtime.Features
         /// <param name="newRotation"></param>
         protected void UpdateTongueBoneRotation(Vector3 newRotation)
         {
-            if (!HasTongueBone) return;
+            Debug.Log("udpate tongue bone rotation " + newRotation);
+            if (!HasTongueBone)
+                return;
             FacialExpressionData.TongueBone.transform.localEulerAngles = newRotation;
         }
 
@@ -60,10 +62,10 @@ namespace Convai.Scripts.Runtime.Features
         /// <param name="newRotation"></param>
         protected void UpdateJawBoneRotation(Vector3 newRotation)
         {
-            if (!HasJawBone) return;
+            if (!HasJawBone)
+                return;
             FacialExpressionData.JawBone.transform.localEulerAngles = newRotation;
         }
-
 
         /// <summary>
         ///     This removes the excess frames in the queue
@@ -85,33 +87,25 @@ namespace Convai.Scripts.Runtime.Features
         ///     Adds blendshape frames in the queue
         /// </summary>
         /// <param name="blendshapeFrames"></param>
-        public virtual void EnqueueQueue(Queue<ARKitBlendShapes> blendshapeFrames)
-        {
-        }
+        public virtual void EnqueueQueue(Queue<ARKitBlendShapes> blendshapeFrames) { }
 
         /// <summary>
         ///     Adds Visemes frames in the list
         /// </summary>
         /// <param name="visemesFrames"></param>
-        public virtual void EnqueueQueue(Queue<VisemesData> visemesFrames)
-        {
-        }
+        public virtual void EnqueueQueue(Queue<VisemesData> visemesFrames) { }
 
         /// <summary>
         ///     Adds a blendshape frame in the last queue
         /// </summary>
         /// <param name="blendshapeFrame"></param>
-        public virtual void EnqueueFrame(ARKitBlendShapes blendshapeFrame)
-        {
-        }
+        public virtual void EnqueueFrame(ARKitBlendShapes blendshapeFrame) { }
 
         /// <summary>
         ///     Adds a viseme frame to the last element of the list
         /// </summary>
         /// <param name="viseme"></param>
-        public virtual void EnqueueFrame(VisemesData viseme)
-        {
-        }
+        public virtual void EnqueueFrame(VisemesData viseme) { }
 
         #region Null States of References
 

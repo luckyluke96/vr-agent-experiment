@@ -11,18 +11,24 @@ namespace Convai.Scripts.Runtime.Features.LipSync
 {
     public class ConvaiLipSync : MonoBehaviour
     {
-        [HideInInspector] public FaceModel faceModel = FaceModel.OvrModelName;
+        [HideInInspector]
+        public FaceModel faceModel = FaceModel.OvrModelName;
 
         [field: SerializeField]
-        [field: Tooltip("Assign the skin renderers and its respective effectors, along with the bones used for Facial Expression")]
+        [field: Tooltip(
+            "Assign the skin renderers and its respective effectors, along with the bones used for Facial Expression"
+        )]
         public FacialExpressionData FacialExpressionData { get; private set; } = new();
 
         [field: SerializeField]
         [field: Range(0f, 1f)]
-        [field: Tooltip("This decides how much blending will occur between two different blendshape frames")]
+        [field: Tooltip(
+            "This decides how much blending will occur between two different blendshape frames"
+        )]
         public float WeightBlendingPower { get; private set; } = 0.5f;
 
-        [SerializeField] private List<string> characterEmotions;
+        [SerializeField]
+        private List<string> characterEmotions;
 
         private ConvaiNPC _convaiNPC;
         public ConvaiLipSyncApplicationBase ConvaiLipSyncApplicationBase { get; private set; }
@@ -37,6 +43,7 @@ namespace Convai.Scripts.Runtime.Features.LipSync
         {
             FindSkinMeshRenderer();
             _convaiNPC = GetComponent<ConvaiNPC>();
+            Debug.Log("NPC: " + _convaiNPC);
             ConvaiLipSyncApplicationBase = gameObject.GetOrAddComponent<ConvaiVisemesLipSync>();
             ConvaiLipSyncApplicationBase.Initialize(this, _convaiNPC);
             SetCharacterLipSyncing(true);
@@ -46,7 +53,6 @@ namespace Convai.Scripts.Runtime.Features.LipSync
         {
             StopLipSync();
         }
-
 
         private void OnApplicationQuit()
         {
@@ -58,11 +64,23 @@ namespace Convai.Scripts.Runtime.Features.LipSync
         private void FindSkinMeshRenderer()
         {
             if (FacialExpressionData.Head.Renderer == null)
-                FacialExpressionData.Head.Renderer = transform.GetComponentOnChildWithMatchingRegex<SkinnedMeshRenderer>("(.*_Head|CC_Base_Body)");
+                FacialExpressionData.Head.Renderer =
+                    transform.GetComponentOnChildWithMatchingRegex<SkinnedMeshRenderer>(
+                        "(.*_Head|CC_Base_Body)"
+                    );
             if (FacialExpressionData.Teeth.Renderer == null)
-                FacialExpressionData.Teeth.Renderer = transform.GetComponentOnChildWithMatchingRegex<SkinnedMeshRenderer>("(.*_Teeth|CC_Base_Teeth)");
+                FacialExpressionData.Teeth.Renderer =
+                    transform.GetComponentOnChildWithMatchingRegex<SkinnedMeshRenderer>(
+                        "(.*_Teeth|CC_Base_Teeth)"
+                    );
             if (FacialExpressionData.Tongue.Renderer == null)
-                FacialExpressionData.Tongue.Renderer = transform.GetComponentOnChildWithMatchingRegex<SkinnedMeshRenderer>("(.*_Tongue|CC_Base_Tongue)");
+                FacialExpressionData.Tongue.Renderer =
+                    transform.GetComponentOnChildWithMatchingRegex<SkinnedMeshRenderer>(
+                        "(.*_Tongue|CC_Base_Tongue)"
+                    );
+            Debug.Log("Facial Renderers: " + FacialExpressionData.Head.Renderer);
+            Debug.Log("Facial Renderers: " + FacialExpressionData.Teeth.Renderer);
+            Debug.Log("Facial Renderers: " + FacialExpressionData.Tongue.Renderer);
         }
 
         /// <summary>
@@ -83,13 +101,13 @@ namespace Convai.Scripts.Runtime.Features.LipSync
             return characterEmotions;
         }
 
-
         /// <summary>
         ///     Fires an event with update the Character Lip Syncing State
         /// </summary>
         /// <param name="value"></param>
         private void SetCharacterLipSyncing(bool value)
         {
+            Debug.Log("set lipsyncing");
             OnCharacterLipSyncing?.Invoke(value);
         }
 

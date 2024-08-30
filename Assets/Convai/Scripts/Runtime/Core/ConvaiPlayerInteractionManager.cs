@@ -14,11 +14,13 @@ namespace Convai.Scripts.Runtime.Core
         private ConvaiNPC _convaiNPC;
         private TMP_InputField _currentInputField;
 
-        private ConvaiInputManager InputManager => ConvaiInputManager.Instance ? ConvaiInputManager.Instance : null;
+        private ConvaiInputManager InputManager =>
+            ConvaiInputManager.Instance ? ConvaiInputManager.Instance : null;
 
         private void OnEnable()
         {
-            if (InputManager == null) return;
+            if (InputManager == null)
+                return;
             InputManager.enterPress += HandleEnterPress;
             InputManager.talkKeyInteract += HandleVoiceInput;
             InputManager.talkKeyInteract += HandleNPCInteraction;
@@ -26,27 +28,38 @@ namespace Convai.Scripts.Runtime.Core
 
         private void OnDisable()
         {
-            if (InputManager == null) return;
+            if (InputManager == null)
+                return;
             InputManager.enterPress -= HandleEnterPress;
             InputManager.talkKeyInteract -= HandleVoiceInput;
             InputManager.talkKeyInteract -= HandleNPCInteraction;
         }
 
-        public void Initialize(ConvaiNPC convaiNPC, ConvaiCrosshairHandler convaiCrosshairHandler, ConvaiChatUIHandler convaiChatUIHandler)
+        public void Initialize(
+            ConvaiNPC convaiNPC,
+            ConvaiCrosshairHandler convaiCrosshairHandler,
+            ConvaiChatUIHandler convaiChatUIHandler
+        )
         {
             _convaiNPC = convaiNPC ? convaiNPC : throw new ArgumentNullException(nameof(convaiNPC));
-            _convaiCrosshairHandler = convaiCrosshairHandler ? convaiCrosshairHandler : throw new ArgumentNullException(nameof(convaiCrosshairHandler));
-            _convaiChatUIHandler = convaiChatUIHandler ? convaiChatUIHandler : throw new ArgumentNullException(nameof(convaiChatUIHandler));
+            _convaiCrosshairHandler = convaiCrosshairHandler
+                ? convaiCrosshairHandler
+                : throw new ArgumentNullException(nameof(convaiCrosshairHandler));
+            _convaiChatUIHandler = convaiChatUIHandler
+                ? convaiChatUIHandler
+                : throw new ArgumentNullException(nameof(convaiChatUIHandler));
         }
 
         private void UpdateCurrentInputField(TMP_InputField inputFieldInScene)
         {
-            if (inputFieldInScene != null && _currentInputField != inputFieldInScene) _currentInputField = inputFieldInScene;
+            if (inputFieldInScene != null && _currentInputField != inputFieldInScene)
+                _currentInputField = inputFieldInScene;
         }
 
         private void HandleInputSubmission(string input)
         {
-            if (!_convaiNPC.isCharacterActive || string.IsNullOrEmpty(input.Trim())) return;
+            if (!_convaiNPC.isCharacterActive || string.IsNullOrEmpty(input.Trim()))
+                return;
             _convaiNPC.SendTextDataAsync(input);
             _convaiChatUIHandler.SendPlayerText(input);
             ClearInputField();
@@ -55,7 +68,10 @@ namespace Convai.Scripts.Runtime.Core
         public TMP_InputField FindActiveInputField()
         {
             // TODO : Implement Text Send for ChatUIBase and get input field directly instead of finding here
-            return _convaiChatUIHandler.GetCurrentUI().GetCanvasGroup().gameObject.GetComponentsInChildren<TMP_InputField>(true)
+            return _convaiChatUIHandler
+                .GetCurrentUI()
+                .GetCanvasGroup()
+                .gameObject.GetComponentsInChildren<TMP_InputField>(true)
                 .FirstOrDefault(inputField => inputField.interactable);
         }
 
@@ -78,12 +94,18 @@ namespace Convai.Scripts.Runtime.Core
             }
 
             UpdateCurrentInputField(inputFieldInScene);
-            if (_currentInputField != null && _currentInputField.isFocused && _convaiNPC.isCharacterActive) HandleInputSubmission(_currentInputField.text);
+            if (
+                _currentInputField != null
+                && _currentInputField.isFocused
+                && _convaiNPC.isCharacterActive
+            )
+                HandleInputSubmission(_currentInputField.text);
         }
 
         private void HandleVoiceInput(bool listenState)
         {
-            if (UIUtilities.IsAnyInputFieldFocused() || !_convaiNPC.isCharacterActive) return;
+            if (UIUtilities.IsAnyInputFieldFocused() || !_convaiNPC.isCharacterActive)
+                return;
             switch (listenState)
             {
                 case true:
@@ -93,7 +115,11 @@ namespace Convai.Scripts.Runtime.Core
                     break;
                 case false:
                 {
-                    if (_convaiNPC.isCharacterActive && (_currentInputField == null || !_currentInputField.isFocused)) _convaiNPC.StopListening();
+                    if (
+                        _convaiNPC.isCharacterActive
+                        && (_currentInputField == null || !_currentInputField.isFocused)
+                    )
+                        _convaiNPC.StopListening();
                     break;
                 }
             }
@@ -101,8 +127,11 @@ namespace Convai.Scripts.Runtime.Core
 
         private void HandleNPCInteraction(bool state)
         {
-            if (!IsNpcInConversation() || !state || UIUtilities.IsAnyInputFieldFocused()) return;
-            NPC2NPCConversationManager.Instance.EndConversation(_convaiNPC.GetComponent<ConvaiGroupNPCController>());
+            if (!IsNpcInConversation() || !state || UIUtilities.IsAnyInputFieldFocused())
+                return;
+            NPC2NPCConversationManager.Instance.EndConversation(
+                _convaiNPC.GetComponent<ConvaiGroupNPCController>()
+            );
             _convaiNPC.InterruptCharacterSpeech();
             _convaiNPC.StartListening();
         }
@@ -111,7 +140,9 @@ namespace Convai.Scripts.Runtime.Core
         {
             bool isNpcInConversation;
             if (TryGetComponent(out ConvaiGroupNPCController convaiGroupNPC))
-                isNpcInConversation = convaiGroupNPC.IsInConversationWithAnotherNPC && ConvaiNPCManager.Instance.nearbyNPC == _convaiNPC;
+                isNpcInConversation =
+                    convaiGroupNPC.IsInConversationWithAnotherNPC
+                    && ConvaiNPCManager.Instance.nearbyNPC == _convaiNPC;
             else
                 isNpcInConversation = false;
             return isNpcInConversation;
@@ -120,7 +151,8 @@ namespace Convai.Scripts.Runtime.Core
         public void UpdateActionConfig()
         {
             if (_convaiNPC.ActionConfig != null && _convaiCrosshairHandler != null)
-                _convaiNPC.ActionConfig.CurrentAttentionObject = _convaiCrosshairHandler.FindPlayerReferenceObject();
+                _convaiNPC.ActionConfig.CurrentAttentionObject =
+                    _convaiCrosshairHandler.FindPlayerReferenceObject();
         }
     }
 }
