@@ -13,7 +13,7 @@ public class vrUserInterface : MonoBehaviour
     public Button quitButton;
     public GameObject robot;
     public GameObject hannah;
-    public static bool hannahActive = false;
+    public static bool hannahActive = true;
 
     void Start()
     {
@@ -51,7 +51,7 @@ public class vrUserInterface : MonoBehaviour
     {
         if (hannahActive)
         {
-            robot.transform.position = Vector3.zero;
+            robot.transform.position = new Vector3(0, 1.5f, 0.5f);
             hannah.transform.position = new Vector3(1000, 1000, 1000);
         }
         else
