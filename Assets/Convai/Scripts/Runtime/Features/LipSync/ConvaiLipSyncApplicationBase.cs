@@ -50,7 +50,7 @@ namespace Convai.Scripts.Runtime.Features
         /// <param name="newRotation"></param>
         protected void UpdateTongueBoneRotation(Vector3 newRotation)
         {
-            Debug.Log("udpate tongue bone rotation " + newRotation);
+            //Debug.Log("udpate tongue bone rotation " + newRotation);
             if (!HasTongueBone)
                 return;
             FacialExpressionData.TongueBone.transform.localEulerAngles = newRotation;

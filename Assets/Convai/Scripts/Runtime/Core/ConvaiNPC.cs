@@ -283,19 +283,19 @@ namespace Convai.Scripts.Runtime.Core
 
         private void InitializeComponents()
         {
-            Debug.Log("initialize components");
+            //Debug.Log("initialize components");
             //_convaiChatUIHandler = FindObjectOfType<ConvaiChatUIHandler>();
             //_convaiCrosshairHandler = FindObjectOfType<ConvaiCrosshairHandler>();
             _characterAnimator = GetComponent<Animator>();
             AudioManager = gameObject.AddComponent<ConvaiNPCAudioManager>();
             narrativeDesignManager = GetComponent<NarrativeDesignManager>();
-            Debug.Log("init narrative");
+            //Debug.Log("init narrative");
             ConvaiPlayerDataSO.GetPlayerData(out _convaiPlayerData);
-            Debug.Log("Got Player Data");
+            //Debug.Log("Got Player Data");
             InitializePlayerInteractionManager();
-            Debug.Log("Initialized Player Interaction manager");
+            //Debug.Log("Initialized Player Interaction manager");
             InitializeLipSync();
-            Debug.Log("Initialized Lip Sync");
+            //Debug.Log("Initialized Lip Sync");
             StartCoroutine(InitializeActionsHandler());
         }
 
@@ -312,19 +312,19 @@ namespace Convai.Scripts.Runtime.Core
 
         private void InitializePlayerInteractionManager()
         {
-            Debug.Log("initalize player interaction manager");
+            //Debug.Log("initalize player interaction manager");
             playerInteractionManager = gameObject.AddComponent<ConvaiPlayerInteractionManager>();
             // playerInteractionManager.Initialize(
             //     this,
             //     _convaiCrosshairHandler,
             //     _convaiChatUIHandler
             // );
-            Debug.Log("PlayerInteractionmanager initialized");
+            //Debug.Log("PlayerInteractionmanager initialized");
         }
 
         private void InitializeLipSync()
         {
-            Debug.Log("initilize lipsync");
+            //Debug.Log("initilize lipsync");
             convaiLipSync = GetComponent<ConvaiLipSync>();
             if (convaiLipSync != null)
             {
@@ -336,7 +336,7 @@ namespace Convai.Scripts.Runtime.Core
 
         private void HandleAudioTranscriptAvailable(string transcript)
         {
-            Debug.Log("handleaudiotranscript");
+            //Debug.Log("handleaudiotranscript");
             if (isCharacterActive)
                 _convaiChatUIHandler.SendCharacterText(characterName, transcript);
         }
