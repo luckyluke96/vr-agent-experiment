@@ -25,6 +25,14 @@ public class SimpleSpectrum : MonoBehaviour
         Custom
     }
 
+    public float hueMin = 0.0f; // Minimum hue (0 = Red)
+    public float hueMax = 0.8f; // Maximum hue (around 0.8 = Purple)
+    public float saturation = 1.0f; // Keep saturation high to avoid dull colors
+    public float value = 1.0f; // Brightness
+    public float colorChangeDuration = 1000f; // How long it takes to change colors
+
+    private float colorTime;
+
     [SerializeField]
     public AudioMixerGroup muteGroup; //the AudioMixerGroup used for silent tracks (microphones). Don't change.
 
@@ -495,6 +503,30 @@ public class SimpleSpectrum : MonoBehaviour
                 else
                 {
                     audioSource.GetSpectrumData(spectrum, sampleChannel, windowUsed); //get the spectrum data
+                }
+            }
+
+            // Increment the time based on the color change duration
+            colorTime += Time.deltaTime;
+
+            // Normalize the time to create a looping effect over the duration
+            float normalizedTime = colorTime / 40 % 1.0f;
+
+            // Calculate the hue for colorMin and colorMax using normalized time
+            float hue = Mathf.Lerp(hueMin, hueMax, normalizedTime);
+
+            // Convert the HSV values to RGB colors
+            Color colorMin = Color.HSVToRGB(hue, saturation, value);
+            Color colorMax = Color.HSVToRGB((hue + 0.3f) % 1.0f, saturation, value); // Offset for variety
+
+            // Update bar colors
+            for (int i = 0; i < bars.Length; i++)
+            {
+                if (useColorGradient && materialColourCanBeUsed)
+                {
+                    float newColorVal = colorValueCurve.Evaluate(spectrumOutputData[i]);
+                    barMaterials[i].SetColor("_Color1", colorMin);
+                    barMaterials[i].SetColor("_Color2", colorMax);
                 }
             }
 

@@ -51,7 +51,7 @@ public class vrUserInterface : MonoBehaviour
     {
         if (hannahActive)
         {
-            robot.transform.position = new Vector3(0, 1.5f, 0.4f);
+            robot.transform.position = new Vector3(0, 1.5f, 0.3f);
             hannah.transform.position = new Vector3(1000, 1000, 1000);
         }
         else
