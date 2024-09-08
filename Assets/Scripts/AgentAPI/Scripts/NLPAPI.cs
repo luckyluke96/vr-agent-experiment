@@ -207,7 +207,8 @@ public class NLPAPI : MonoBehaviour
     {
         var data = new WWWForm();
         var dict = new Dictionary<string, string>();
-        dict.Add("model", GPT_Models_String.GetModelString(GPT_Models.Chat_GPT_35));
+        // dict.Add("model", GPT_Models_String.GetModelString(GPT_Models.Chat_GPT_35));
+        dict.Add("model", GPT_Models_String.GetModelString(GPT_Models.Chat_GPT_4o_mini));
         dict.Add("input", "");
         dict.Add("chat", "true");
         dict.Add("messages", Newtonsoft.Json.JsonConvert.SerializeObject(messages));
@@ -311,7 +312,12 @@ public class NLPAPI : MonoBehaviour
         var dict = new Dictionary<string, string>();
 
         dict.Add("model", GPT_Models_String.GetModelString(model));
-        if (model == GPT_Models.Chat_GPT_35 || model == GPT_Models.Chat_GPT_35)
+
+        if (
+            model == GPT_Models.Chat_GPT_4_NEW
+            || model == GPT_Models.Chat_GPT_35
+            || model == GPT_Models.Chat_GPT_4o_mini
+        )
         {
             var m = new GPTMessage(GPTMessageRoles.USER, input);
             var ms = new GPTMessage[] { m };
@@ -401,7 +407,8 @@ public class NLPAPI : MonoBehaviour
         Babbage_Simple,
         Ada_Cheapest,
         Chat_GPT_35,
-        Chat_GPT_4_NEW
+        Chat_GPT_4_NEW,
+        Chat_GPT_4o_mini
     }
 
     private class GPT_Models_String
@@ -422,6 +429,8 @@ public class NLPAPI : MonoBehaviour
                     return "text-ada-001";
                 case GPT_Models.Chat_GPT_4_NEW:
                     return "gpt-4-1106-preview";
+                case GPT_Models.Chat_GPT_4o_mini:
+                    return "gpt-4o-mini";
             }
             return "text-ada-001";
         }

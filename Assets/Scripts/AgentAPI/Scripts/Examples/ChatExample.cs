@@ -270,7 +270,7 @@ public class ChatExample : MonoBehaviour
 
         NLPAPI.GetChat_NLPResponseStreamed(
             GPTPrompt.ToArray(),
-            NLPAPI.GPT_Models.Chat_GPT_35,
+            NLPAPI.GPT_Models.Chat_GPT_4o_mini,
             (response) =>
             {
                 isDone = true;
@@ -416,7 +416,7 @@ public class ChatExample : MonoBehaviour
 
             NLPAPI.GetChat_NLPResponse(
                 GPTPrompt.ToArray(),
-                NLPAPI.GPT_Models.Chat_GPT_35,
+                NLPAPI.GPT_Models.Chat_GPT_4o_mini,
                 (response) =>
                 {
                     goodbye = response.content;
@@ -477,7 +477,7 @@ public class ChatExample : MonoBehaviour
         //StartCoroutine(CogitoExercise(goodbyeMessage));
         NLPAPI.GetChat_NLPResponse(
             GPTPrompt.ToArray(),
-            NLPAPI.GPT_Models.Chat_GPT_35,
+            NLPAPI.GPT_Models.Chat_GPT_4o_mini,
             (response) =>
             {
                 goodbyeResponse = response.content;

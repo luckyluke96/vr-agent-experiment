@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class AIHelpers : MonoBehaviour
 {
-
     public MicrophoneRecorder MicRecorder;
     public TTSAPI TTSAPI;
     public NLPAPI NLPAPI;
@@ -18,8 +17,11 @@ public class AIHelpers : MonoBehaviour
         NLPAPI = FindObjectOfType<NLPAPI>();
     }
 
-
-    public IEnumerator NLPandPlayTTS(List<NLPAPI.GPTMessage> input, Action<NLPAPI.GPTMessage> callback, List<NLPAPI.GPTMessage> GPTPrompt)
+    public IEnumerator NLPandPlayTTS(
+        List<NLPAPI.GPTMessage> input,
+        Action<NLPAPI.GPTMessage> callback,
+        List<NLPAPI.GPTMessage> GPTPrompt
+    )
     {
         string responseText = "";
         if (GPTPrompt[GPTPrompt.Count - 1].role == "assistant")
@@ -29,20 +31,26 @@ public class AIHelpers : MonoBehaviour
         bool isDone = false;
         NLPAPI.GPTMessage result = null;
 
-        NLPAPI.GetChat_NLPResponseStreamed(GPTPrompt.ToArray(), NLPAPI.GPT_Models.Chat_GPT_35, (response) =>
-        {
-            isDone = true;
-            result = response;
-        }, (stream_response) =>
-        {
-            if (!stream_response.finished)
+        NLPAPI.GetChat_NLPResponseStreamed(
+            GPTPrompt.ToArray(),
+            // NLPAPI.GPT_Models.Chat_GPT_35,
+            NLPAPI.GPT_Models.Chat_GPT_4o_mini,
+            (response) =>
             {
-                // MobileSpecificSettings.Instance.InfoText.SetText("Ich bin fast fertig.");
-                responseText += " " + stream_response.delta;
-                toPlay.Add(responseText);
-                responseText = "";
+                isDone = true;
+                result = response;
+            },
+            (stream_response) =>
+            {
+                if (!stream_response.finished)
+                {
+                    // MobileSpecificSettings.Instance.InfoText.SetText("Ich bin fast fertig.");
+                    responseText += " " + stream_response.delta;
+                    toPlay.Add(responseText);
+                    responseText = "";
+                }
             }
-        });
+        );
 
         int i = 0;
         // Wait until the response is finished or if there are strings to play
