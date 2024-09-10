@@ -5902,7 +5902,7 @@ MonoBehaviour:
   sessionDuration: 60
   ChatExample_Script: {fileID: 885818939}
   UsernameInputField: {fileID: 863181265}
-  Username: user
+  Username: torsten
 --- !u!114 &885818942
 MonoBehaviour:
   m_ObjectHideFlags: 0
