@@ -497,6 +497,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59893120}
   m_CullTransparentMesh: 1
+--- !u!4 &74670847 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3230203076670083041, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
+  m_PrefabInstance: {fileID: 779266117}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &107790537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1610,6 +1615,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: f985bab5de0258e4a981ea7b116d8a6d, type: 3}
   m_PrefabInstance: {fileID: 259384607}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &275993406 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3949828037150060628, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
+  m_PrefabInstance: {fileID: 779266117}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &277143509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2226,11 +2236,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 438580397}
   m_Mesh: {fileID: 3156789233897332337, guid: cd0bf29c9c9af6f4098b74076d25f0cd, type: 3}
---- !u!137 &470175012 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 8443775884153234311, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
-  m_PrefabInstance: {fileID: 779266117}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &470691215
 GameObject:
   m_ObjectHideFlags: 0
@@ -3365,6 +3370,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 509252580}
   m_Mesh: {fileID: 6394856780621864852, guid: cd0bf29c9c9af6f4098b74076d25f0cd, type: 3}
+--- !u!4 &518678717 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 248074432326912181, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
+  m_PrefabInstance: {fileID: 779266117}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &532936178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3852,63 +3862,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
   m_PrefabInstance: {fileID: 779266117}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &613373295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613373291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88bce56f6985ef84f8835a0152628fa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  faceModel: 3
-  <FacialExpressionData>k__BackingField:
-    Head:
-      Renderer: {fileID: 1793733138}
-      VisemeEffectorsList: {fileID: 0}
-      WeightBounds: {x: 0, y: 1}
-    Teeth:
-      Renderer: {fileID: 1793633495}
-      VisemeEffectorsList: {fileID: 0}
-      WeightBounds: {x: 0, y: 1}
-    Tongue:
-      Renderer: {fileID: 470175012}
-      VisemeEffectorsList: {fileID: 0}
-      WeightBounds: {x: 0, y: 1}
-    JawBoneEffector: {fileID: 0}
-    TongueBoneEffector: {fileID: 0}
-    JawBone: {fileID: 1559113761}
-    TongueBone: {fileID: 1367945944}
-  <WeightBlendingPower>k__BackingField: 0.5
-  characterEmotions: []
---- !u!114 &613373296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613373291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b38e4bc919e1f040ba78aea7472893e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterName: Hannah
-  characterID: 
-  sessionID: -1
-  isCharacterActive: 0
-  actionsHandler: {fileID: 0}
-  convaiLipSync: {fileID: 0}
-  isCharacterTalking: 0
-  initializeSessionID: 0
-  playerInteractionManager: {fileID: 0}
-  narrativeDesignManager: {fileID: 0}
-  onTriggerSent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!82 &613373297
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4005,6 +3958,356 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &613373298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613373291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0359b2b84d8484d2281221cfda5470e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainWeight: 1
+  headChangeToNewTargetSpeed: 1
+  headTrackTargetSpeed: 1
+  headSpeedModifier: 0
+  headWeight: 0.75
+  bodyWeight: 0.1
+  neckHorizWeight: 0.5
+  neckVertWeight: 0.5
+  headPitchAngle: 0
+  headRollAngle: 0
+  headYawAngle: 0
+  neckPitchAngle: 0
+  neckRollAngle: 0
+  neckYawAngle: 0
+  resetHeadAtFrameStart: 0
+  headBoneNonMecanim: {fileID: 74670847}
+  headTarget: {fileID: 0}
+  neckBoneNonMecanim: {fileID: 518678717}
+  spineBoneNonMecanim: {fileID: 275993406}
+  headComponent:
+    headControl: 1
+    headAnimationType: 0
+  eyesWeight: 1
+  useMicroSaccades: 1
+  useMacroSaccades: 1
+  saccadeSpeed: 0.5
+  macroSaccadesPerMinute: 10
+  microSaccadesPerMinuteLookingIdle: 45
+  microSaccadesPerMinuteLookingAtPOI: 80
+  useHeadJitter: 1
+  headJitterFrequency: 0.2
+  headJitterAmplitude: 1
+  kDrawSightlinesInEditor: 0
+  areUpdatedControlledExternally: 0
+  updateType: 0
+  controlData:
+    eyeControl: 0
+    leftEye: {fileID: 0}
+    rightEye: {fileID: 0}
+    maxEyeUpBoneAngle: 20
+    maxEyeDownBoneAngle: 20
+    maxEyeUpEyeballAngle: 20
+    maxEyeDownEyeballAngle: 20
+    isEyeBallDefaultSet: 0
+    isEyeBoneDefaultSet: 0
+    isEyeBallLookUpSet: 0
+    isEyeBoneLookUpSet: 0
+    isEyeBallLookDownSet: 0
+    isEyeBoneLookDownSet: 0
+    isEyeBallLookLeftSet: 0
+    isEyeBoneLookLeftSet: 0
+    isEyeBallLookRightSet: 0
+    isEyeBoneLookRightSet: 0
+    leftBoneEyeRotationLimiter:
+      transform: {fileID: 0}
+      defaultQ: {x: 0, y: 0, z: 0, w: 0}
+      lookUpQ: {x: 0, y: 0, z: 0, w: 0}
+      lookDownQ: {x: 0, y: 0, z: 0, w: 0}
+      lookLeftQ: {x: 0, y: 0, z: 0, w: 0}
+      lookRightQ: {x: 0, y: 0, z: 0, w: 0}
+      maxDownAngle: 20
+      maxLeftAngle: 30
+      maxRightAngle: 30
+      maxUpAngle: 8
+      isLookUpSet: 0
+      isLookDownSet: 0
+      isLookLeftSet: 0
+      isLookRightSet: 0
+    rightBoneEyeRotationLimiter:
+      transform: {fileID: 0}
+      defaultQ: {x: 0, y: 0, z: 0, w: 0}
+      lookUpQ: {x: 0, y: 0, z: 0, w: 0}
+      lookDownQ: {x: 0, y: 0, z: 0, w: 0}
+      lookLeftQ: {x: 0, y: 0, z: 0, w: 0}
+      lookRightQ: {x: 0, y: 0, z: 0, w: 0}
+      maxDownAngle: 20
+      maxLeftAngle: 30
+      maxRightAngle: 30
+      maxUpAngle: 8
+      isLookUpSet: 0
+      isLookDownSet: 0
+      isLookLeftSet: 0
+      isLookRightSet: 0
+    leftEyeballEyeRotationLimiter:
+      transform: {fileID: 0}
+      defaultQ: {x: 0, y: 0, z: 0, w: 0}
+      lookUpQ: {x: 0, y: 0, z: 0, w: 0}
+      lookDownQ: {x: 0, y: 0, z: 0, w: 0}
+      lookLeftQ: {x: 0, y: 0, z: 0, w: 0}
+      lookRightQ: {x: 0, y: 0, z: 0, w: 0}
+      maxDownAngle: 20
+      maxLeftAngle: 30
+      maxRightAngle: 30
+      maxUpAngle: 8
+      isLookUpSet: 0
+      isLookDownSet: 0
+      isLookLeftSet: 0
+      isLookRightSet: 0
+    rightEyeballEyeRotationLimiter:
+      transform: {fileID: 0}
+      defaultQ: {x: 0, y: 0, z: 0, w: 0}
+      lookUpQ: {x: 0, y: 0, z: 0, w: 0}
+      lookDownQ: {x: 0, y: 0, z: 0, w: 0}
+      lookLeftQ: {x: 0, y: 0, z: 0, w: 0}
+      lookRightQ: {x: 0, y: 0, z: 0, w: 0}
+      maxDownAngle: 20
+      maxLeftAngle: 30
+      maxRightAngle: 30
+      maxUpAngle: 8
+      isLookUpSet: 0
+      isLookDownSet: 0
+      isLookLeftSet: 0
+      isLookRightSet: 0
+    eyelidControl: 0
+    eyelidBoneMode: 0
+    upperEyeLidLeft: {fileID: 0}
+    upperEyeLidRight: {fileID: 0}
+    lowerEyeLidLeft: {fileID: 0}
+    lowerEyeLidRight: {fileID: 0}
+    upperLeftEyelidBones: []
+    upperRightEyelidBones: []
+    lowerLeftEyelidBones: []
+    lowerRightEyelidBones: []
+    isEyelidBonesDefaultSet: 0
+    isEyelidBonesClosedSet: 0
+    isEyelidBonesLookUpSet: 0
+    isEyelidBonesLookDownSet: 0
+    upperLeftLimiter:
+      transform: {fileID: 0}
+      defaultQ: {x: 0, y: 0, z: 0, w: 0}
+      closedQ: {x: 0, y: 0, z: 0, w: 0}
+      lookUpQ: {x: 0, y: 0, z: 0, w: 0}
+      lookDownQ: {x: 0, y: 0, z: 0, w: 0}
+      eyeMaxDownAngle: 0
+      eyeMaxUpAngle: 0
+      defaultPos: {x: 0, y: 0, z: 0}
+      closedPos: {x: 0, y: 0, z: 0}
+      lookUpPos: {x: 0, y: 0, z: 0}
+      lookDownPos: {x: 0, y: 0, z: 0}
+      isLookUpSet: 0
+      isLookDownSet: 0
+      isDefaultPosSet: 0
+      isClosedPosSet: 0
+      isLookUpPosSet: 0
+      isLookDownPosSet: 0
+    upperRightLimiter:
+      transform: {fileID: 0}
+      defaultQ: {x: 0, y: 0, z: 0, w: 0}
+      closedQ: {x: 0, y: 0, z: 0, w: 0}
+      lookUpQ: {x: 0, y: 0, z: 0, w: 0}
+      lookDownQ: {x: 0, y: 0, z: 0, w: 0}
+      eyeMaxDownAngle: 0
+      eyeMaxUpAngle: 0
+      defaultPos: {x: 0, y: 0, z: 0}
+      closedPos: {x: 0, y: 0, z: 0}
+      lookUpPos: {x: 0, y: 0, z: 0}
+      lookDownPos: {x: 0, y: 0, z: 0}
+      isLookUpSet: 0
+      isLookDownSet: 0
+      isDefaultPosSet: 0
+      isClosedPosSet: 0
+      isLookUpPosSet: 0
+      isLookDownPosSet: 0
+    lowerLeftLimiter:
+      transform: {fileID: 0}
+      defaultQ: {x: 0, y: 0, z: 0, w: 0}
+      closedQ: {x: 0, y: 0, z: 0, w: 0}
+      lookUpQ: {x: 0, y: 0, z: 0, w: 0}
+      lookDownQ: {x: 0, y: 0, z: 0, w: 0}
+      eyeMaxDownAngle: 0
+      eyeMaxUpAngle: 0
+      defaultPos: {x: 0, y: 0, z: 0}
+      closedPos: {x: 0, y: 0, z: 0}
+      lookUpPos: {x: 0, y: 0, z: 0}
+      lookDownPos: {x: 0, y: 0, z: 0}
+      isLookUpSet: 0
+      isLookDownSet: 0
+      isDefaultPosSet: 0
+      isClosedPosSet: 0
+      isLookUpPosSet: 0
+      isLookDownPosSet: 0
+    lowerRightLimiter:
+      transform: {fileID: 0}
+      defaultQ: {x: 0, y: 0, z: 0, w: 0}
+      closedQ: {x: 0, y: 0, z: 0, w: 0}
+      lookUpQ: {x: 0, y: 0, z: 0, w: 0}
+      lookDownQ: {x: 0, y: 0, z: 0, w: 0}
+      eyeMaxDownAngle: 0
+      eyeMaxUpAngle: 0
+      defaultPos: {x: 0, y: 0, z: 0}
+      closedPos: {x: 0, y: 0, z: 0}
+      lookUpPos: {x: 0, y: 0, z: 0}
+      lookDownPos: {x: 0, y: 0, z: 0}
+      isLookUpSet: 0
+      isLookDownSet: 0
+      isDefaultPosSet: 0
+      isClosedPosSet: 0
+      isLookUpPosSet: 0
+      isLookDownPosSet: 0
+    upperLeftLimiters: []
+    upperRightLimiters: []
+    lowerLeftLimiters: []
+    lowerRightLimiters: []
+    eyeWidenOrSquint: 0
+    blendshapesForBlinking: []
+    blendshapesForLookingUp: []
+    blendshapesForLookingDown: []
+    blendshapesForLookingLeft: []
+    blendshapesForLookingRight: []
+    blendshapesConfigs: []
+    isEyelidBlendshapeDefaultSet: 0
+    isEyelidBlendshapeClosedSet: 0
+    isEyelidBlendshapeLookUpSet: 0
+    isEyelidBlendshapeLookDownSet: 0
+    isEyelidBlendshapeLookLeftSet: 0
+    isEyelidBlendshapeLookRightSet: 0
+  eyelidsWeight: 1
+  kMinNextBlinkTime: 3
+  kMaxNextBlinkTime: 15
+  blinkSpeed: 1
+  eyelidsFollowEyesVertically: 1
+  idleTargetHorizAngle: 10
+  crossEyeCorrection: 1
+  limitHeadAngle: 0
+--- !u!114 &613373299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613373291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42aaa0756a464f24ca40be2292bd0bcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ikWeightHead: 0
+  targetHead: {fileID: 0}
+  lookTargetController: {fileID: 0}
+  ikWeightLeftHand: 0
+  targetLeftHand: {fileID: 0}
+  ikWeightRightHand: 0
+  targetRightHand: {fileID: 0}
+--- !u!114 &613373300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613373291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5ab26285e294787a92bc8bba92c30a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsOfInterest: []
+  lookAtPlayerRatio: 0.1
+  stareBackFactor: 0
+  noticePlayerDistance: 0
+  personalSpaceDistance: 0
+  minLookTime: 3
+  maxLookTime: 10
+  thirdPersonPlayerEyeCenter: {fileID: 0}
+  keepTargetEvenWhenLost: 1
+  avoidLookingThroughPlayer: 0
+  OnStartLookingAtPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStopLookingAtPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerEntersPersonalSpace:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLookAwayFromShyness:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &613373301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613373291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f43c520a9bad8a3489109c869f454576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 613373297}
+  provider: 1
+  enableAcceleration: 0
+  enableKeyboardInput: 0
+  enableTouchInput: 0
+  audioLoopback: 1
+  loopbackKey: 108
+  showVisemes: 0
+  debugVisemesKey: 100
+  skipAudioSource: 0
+  gain: 1
+  debugLaughterKey: 104
+  showLaughter: 0
+  laughterScore: 0
+--- !u!114 &613373302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613373291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82aa5cb7a870de440baadff9083be41c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &613373303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613373291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b97b38f2f1fd24185315141a6c6a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinnedMeshRenderer: {fileID: 1793733138}
+  visemeToBlendTargets: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
+  mouthOpenBlendTarget: 186
+  mergeWithMouthOpen: 1
+  enableVisemeTestKeys: 0
+  visemeTestKeys: 600000000900000071000000770000006500000072000000740000007900000075000000690000006f000000700000005b0000005d0000005c000000
+  laughterKey: 301
+  laughterBlendTarget: 15
+  laughterThreshold: 0.5
+  laughterMultiplier: 1.5
+  smoothAmount: 70
 --- !u!1 &615539433
 GameObject:
   m_ObjectHideFlags: 0
@@ -5187,10 +5490,22 @@ PrefabInstance:
       addedObject: {fileID: 613373297}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 613373296}
+      addedObject: {fileID: 613373303}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 613373295}
+      addedObject: {fileID: 613373302}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 613373301}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 613373300}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 613373299}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 613373298}
   m_SourcePrefab: {fileID: 100100000, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
 --- !u!4 &782628378 stripped
 Transform:
@@ -9884,11 +10199,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4184880448344176, guid: 304f6e7ca956f014fbd64574bb654481, type: 3}
   m_PrefabInstance: {fileID: 1357442515}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1367945944 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -7784929731160085351, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
-  m_PrefabInstance: {fileID: 779266117}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1369363114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10900,11 +11210,6 @@ Transform:
   - {fileID: 414760136}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1559113761 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8806096023134045917, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
-  m_PrefabInstance: {fileID: 779266117}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1562069061 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: f985bab5de0258e4a981ea7b116d8a6d, type: 3}
@@ -12519,11 +12824,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4184880448344176, guid: 304f6e7ca956f014fbd64574bb654481, type: 3}
   m_PrefabInstance: {fileID: 121758076}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &1793633495 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7634479467738841525, guid: b971588348cbc4c429bcaff65ca5adaf, type: 3}
-  m_PrefabInstance: {fileID: 779266117}
   m_PrefabAsset: {fileID: 0}
 --- !u!137 &1793733138 stripped
 SkinnedMeshRenderer:

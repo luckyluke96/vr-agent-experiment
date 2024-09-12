@@ -7,9 +7,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(AudioSource))]
 public class TTSAPI : MonoBehaviour
 {
-
     public AudioSource sourceLipSync;
-
 
     public enum GenderVoice
     {
@@ -21,9 +19,9 @@ public class TTSAPI : MonoBehaviour
     [SerializeField]
     public GenderVoice genderVoice;
 
-
     [Header("DelayForDeepFaceLive")]
     public bool AddDelayToAudio;
+
     [Range(0f, 5f)]
     public float delayForSyncing;
     private AudioSource sourceAudioOut;
@@ -44,7 +42,11 @@ public class TTSAPI : MonoBehaviour
     /// <param name="text"></param>
     /// <param name="FinishedPlayingAudio_CB"></param>
     /// <returns></returns>
-    public Coroutine TextToSpeechAndPlay(string text, Action FinishedPlayingAudio_CB = null, float yield_delta = 0.0f)
+    public Coroutine TextToSpeechAndPlay(
+        string text,
+        Action FinishedPlayingAudio_CB = null,
+        float yield_delta = 0.0f
+    )
     {
         return StartCoroutine(StartAudioStream(text, FinishedPlayingAudio_CB, yield_delta));
     }
@@ -56,7 +58,11 @@ public class TTSAPI : MonoBehaviour
     /// <param name="FinishedPlayingAudio_CB">The callback to be invoked when the audio has finished playing</param>
     /// <param name="yield_delta">An optional delay to be added to the yield, e.g. to return 1 seconds before the playback has finished</param>
     /// <returns></returns>
-    private IEnumerator StartAudioStream(string text, Action FinishedPlayingAudio_CB, float yield_delta = 0.0f)
+    private IEnumerator StartAudioStream(
+        string text,
+        Action FinishedPlayingAudio_CB,
+        float yield_delta = 0.0f
+    )
     {
         // End all lines of text with a period
         var t = text.Split('\n');
@@ -71,8 +77,13 @@ public class TTSAPI : MonoBehaviour
         text = string.Join("\n", t);
 
         Debug.LogFormat("StartAudioStream: {0}", text);
-        DataCollection.conversationTranscription = DataCollection.conversationTranscription + 
-                                    "AI (" + DateTime.Now.ToString() + "): " + text + ". ";
+        DataCollection.conversationTranscription =
+            DataCollection.conversationTranscription
+            + "AI ("
+            + DateTime.Now.ToString()
+            + "): "
+            + text
+            + ". ";
 
         // Prepare Gender and Localization Audio String
 
@@ -85,15 +96,20 @@ public class TTSAPI : MonoBehaviour
         else if (genderVoice == GenderVoice.male)
         {
             voiceGenderLocalization = "onyx";
-        }else {
+        }
+        else
+        {
             voiceGenderLocalization = "alloy";
         }
 
-
         // Prepare stream
-        string url = $"{AgentSettings.nlp_server}tts-openai?text={UnityWebRequest.EscapeURL(text)}&key=Azxx8Lw7gkFrNeNr7Wy8pxU4&" +
-            $"voice={(voiceGenderLocalization)}";
-        DownloadHandlerAudioClip downloadHandler = new DownloadHandlerAudioClip(string.Empty, AudioType.MPEG);
+        string url =
+            $"{AgentSettings.nlp_server}tts-openai?text={UnityWebRequest.EscapeURL(text)}&key=Azxx8Lw7gkFrNeNr7Wy8pxU4&"
+            + $"voice={(voiceGenderLocalization)}";
+        DownloadHandlerAudioClip downloadHandler = new DownloadHandlerAudioClip(
+            string.Empty,
+            AudioType.MPEG
+        );
         downloadHandler.streamAudio = false;
         UnityWebRequest request = new UnityWebRequest(url, "GET", downloadHandler, null);
 
@@ -107,7 +123,7 @@ public class TTSAPI : MonoBehaviour
                 audioClip = DownloadHandlerAudioClip.GetContent(request);
             }
             catch (Exception) { }
-            //Debug.LogFormat("Waiting for AudioClip: bytes={0}", request.downloadedBytes); 
+            //Debug.LogFormat("Waiting for AudioClip: bytes={0}", request.downloadedBytes);
             yield return 1f;
         }
 
@@ -122,11 +138,10 @@ public class TTSAPI : MonoBehaviour
         //MobileSpecificSettings.Instance.InfoText.SetText("");
 
         // Play AudioClip
-        // sourceLipSync.clip = audioClip;
+        sourceLipSync.clip = audioClip;
         // var clonedCliP = CloneAudioClip(audioClip, "unmuted");
         var clip2 = CloneAudioClip(audioClip, "clip2");
         sourceLipSync.PlayOneShot(audioClip);
-
 
         // sourceAudioOut.clip = audioClip;
         // sourceAudioOut.PlayDelayed(0.5f);
@@ -135,7 +150,6 @@ public class TTSAPI : MonoBehaviour
         {
             StartCoroutine(PlayOneShotDelayed(clip2, delayForSyncing));
         }
-
 
         Debug.Log($"Waiting for {audioClip.length} seconds.");
         audioPlayingUntil = Time.time + audioClip.length;
@@ -146,12 +160,17 @@ public class TTSAPI : MonoBehaviour
         {
             FinishedPlayingAudio_CB.Invoke();
         }
-
     }
 
     public AudioClip CloneAudioClip(AudioClip audioClip, string newName)
     {
-        AudioClip newAudioClip = AudioClip.Create(newName, audioClip.samples, audioClip.channels, audioClip.frequency, false);
+        AudioClip newAudioClip = AudioClip.Create(
+            newName,
+            audioClip.samples,
+            audioClip.channels,
+            audioClip.frequency,
+            false
+        );
         float[] copyData = new float[audioClip.samples * audioClip.channels];
         audioClip.GetData(copyData, 0);
         newAudioClip.SetData(copyData, 0);
@@ -165,8 +184,5 @@ public class TTSAPI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
+    void Update() { }
 }
