@@ -74,3 +74,6 @@ crashlytics-build.properties
 # Assets
 /[As]ssets/[Tt]errainTexturesPackFree/*
 Assets/TerrainTexturesPackFree/
+
+# utmp
+/.utmp/*
