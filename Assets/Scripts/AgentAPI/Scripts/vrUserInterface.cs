@@ -53,11 +53,13 @@ public class vrUserInterface : MonoBehaviour
         {
             robot.transform.position = new Vector3(0, 1.5f, 0.3f);
             hannah.transform.position = new Vector3(1000, 1000, 1000);
+            SceneManagerScript.humanVisual = false;
         }
         else
         {
             hannah.transform.position = Vector3.zero;
             robot.transform.position = new Vector3(1000, 1000, 1000);
+            SceneManagerScript.humanVisual = true;
         }
         hannahActive = !hannahActive;
     }

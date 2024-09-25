@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AI-Scene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Welcome Scene.unity
+    guid: 15f440d3539a4443f9a04c8706418cf1
   m_configObjects:
     Unity.XR.PXR.Settings: {fileID: 11400000, guid: 3c15983b93164444089ac93f33db9e92, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: f7a5f62ebf9d34ae88238997e27c64c9, type: 2}
