@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class WelcomeUIScript : MonoBehaviour
@@ -41,6 +42,8 @@ public class WelcomeUIScript : MonoBehaviour
     void OnVRStartButtonClicked()
     {
         logText.text = "Hallo " + SceneManagerScript.username;
+
+        SceneManager.LoadScene(1);
         // if (agentScript != null)
         // {
         //     agentScript.ChatExample_Script.StartChatExample(agentScript.Username, true);

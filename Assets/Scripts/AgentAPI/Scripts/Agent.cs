@@ -62,12 +62,13 @@ public class Agent : MonoBehaviour
     {
         // PHQ9_Script = new PHQ9();
         currentPrompt = startingPromp;
-        UsernameInputField.onValueChanged.AddListener(
-            delegate
-            {
-                Username = UsernameInputField.text;
-            }
-        );
+        // UsernameInputField.onValueChanged.AddListener(
+        //     delegate
+        //     {
+        //         Username = UsernameInputField.text;
+        //     }
+        // );
+        Username = SceneManagerScript.username;
 
         // Assume all necessary conditions are met
         if (startAutomatically)

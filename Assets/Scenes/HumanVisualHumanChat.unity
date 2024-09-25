@@ -3037,8 +3037,8 @@ GameObject:
   - component: {fileID: 490957612}
   - component: {fileID: 490957611}
   - component: {fileID: 490957610}
+  - component: {fileID: 490957613}
   - component: {fileID: 490957614}
-  - component: {fileID: 490957615}
   m_Layer: 5
   m_Name: UI Canvas World Space
   m_TagString: Untagged
@@ -3119,6 +3119,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 1.077}
   m_SizeDelta: {x: 2, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &490957613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490957608}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abdfe9a487bd8410ebcb6bdc7b7184ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vrStartButton: {fileID: 1539421277}
+  agentScript: {fileID: 885818941}
+  logText: {fileID: 2093609302}
+  switchAgentButton: {fileID: 943370613}
+  quitButton: {fileID: 1258513412}
+  robot: {fileID: 1228174686}
+  hannah: {fileID: 613373291}
 --- !u!114 &490957614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3138,22 +3157,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
---- !u!114 &490957615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490957608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdc94670cb55f4de1b41dd230bec3440, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vrStartButton: {fileID: 1539421277}
-  quitButton: {fileID: 1258513412}
-  logText: {fileID: 2093609302}
-  UsernameInputField: {fileID: 863181265}
 --- !u!1 &502046088
 GameObject:
   m_ObjectHideFlags: 0
@@ -5515,6 +5518,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2200114559990214439, guid: 40399f95a6f26064ebdd3b08052bb9fc, type: 3}
   m_PrefabInstance: {fileID: 624815101}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &809591445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 809591447}
+  - component: {fileID: 809591446}
+  m_Layer: 0
+  m_Name: Task Scene Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &809591446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809591445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97606e2ecd350430c84b2c8958959f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  robot: {fileID: 1228174686}
+  hannah: {fileID: 613373291}
+--- !u!4 &809591447
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809591445}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.104690224, y: 1.0105078, z: -0.39262128}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &810317100
 GameObject:
   m_ObjectHideFlags: 0
@@ -5756,7 +5805,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &863181264
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5839,8 +5888,8 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1535779644}
-        m_TargetAssemblyTypeName: SceneManagerScript, Assembly-CSharp
+      - m_Target: {fileID: 885818941}
+        m_TargetAssemblyTypeName: Agent, Assembly-CSharp
         m_MethodName: ConfirmName
         m_Mode: 1
         m_Arguments:
@@ -5872,8 +5921,8 @@ MonoBehaviour:
   m_OnDeselect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1535779644}
-        m_TargetAssemblyTypeName: SceneManagerScript, Assembly-CSharp
+      - m_Target: {fileID: 885818941}
+        m_TargetAssemblyTypeName: Agent, Assembly-CSharp
         m_MethodName: ConfirmName
         m_Mode: 1
         m_Arguments:
@@ -6178,7 +6227,7 @@ MonoBehaviour:
   MicRecorder: {fileID: 885818945}
   TTSAPI: {fileID: 885818942}
   NLPAPI: {fileID: 885818944}
-  ui: {fileID: 0}
+  ui: {fileID: 490957613}
   convDurationMinutes: 1
 --- !u!114 &885818940
 MonoBehaviour:
@@ -6211,7 +6260,7 @@ MonoBehaviour:
   LanguageProcessing: {fileID: 885818944}
   SpeechToText: {fileID: 885818945}
   State: 0
-  startAutomatically: 0
+  startAutomatically: 1
   sessionDuration: 60
   ChatExample_Script: {fileID: 885818939}
   UsernameInputField: {fileID: 863181265}
@@ -9741,7 +9790,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.387}
+  m_AnchoredPosition: {x: 0, y: -0.541}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1258513412
@@ -10937,50 +10986,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1319834303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1535779643
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1535779645}
-  - component: {fileID: 1535779644}
-  m_Layer: 0
-  m_Name: SceneManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1535779644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1535779643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 219644f42228b4840bcd98382733a1d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1535779645
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1535779643}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7082797, y: -2.9042761, z: 82.243675}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1536032494
 GameObject:
   m_ObjectHideFlags: 0
@@ -11084,7 +11089,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1539421277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14776,4 +14781,4 @@ SceneRoots:
   - {fileID: 191394252}
   - {fileID: 160229893}
   - {fileID: 1659976945}
-  - {fileID: 1535779645}
+  - {fileID: 809591447}
