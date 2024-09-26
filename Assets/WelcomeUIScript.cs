@@ -20,6 +20,7 @@ public class WelcomeUIScript : MonoBehaviour
     {
         if (vrStartButton != null)
         {
+            vrStartButton.gameObject.SetActive(false);
             vrStartButton.onClick.AddListener(OnVRStartButtonClicked);
         }
 
@@ -32,6 +33,7 @@ public class WelcomeUIScript : MonoBehaviour
             delegate
             {
                 SceneManagerScript.username = UsernameInputField.text;
+                vrStartButton.gameObject.SetActive(!string.IsNullOrEmpty(UsernameInputField.text));
             }
         );
     }
