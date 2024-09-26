@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Female_Brow_Transparency_Pbr
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -19,11 +19,10 @@ Material:
   - _DOUBLESIDED_ON
   - _ENABLE_FOG_ON_TRANSPARENT
   - _ENUMCLIPQUALITY_ON_STANDARD
-  - _SURFACE_TYPE_TRANSPARENT
   - _TRANSPARENT_WRITES_MOTION_VEC
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2450
   stringTagMap:
     MotionVector: User
@@ -35,6 +34,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: f5e302f7a09c1784395f4c22e3dafd52, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BlendMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -72,7 +75,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f5e302f7a09c1784395f4c22e3dafd52, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
@@ -99,6 +102,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 3def8d4a50f3abc44ae3d1a44b382d9c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecularMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -121,7 +128,7 @@ Material:
     - _AOOccludeAll: 0
     - _AOStrength: 0
     - _AddPrecomputedVelocity: 0
-    - _AlphaClip: 0.75
+    - _AlphaClip: 1
     - _AlphaCutoffEnable: 1
     - _AlphaDstBlend: 10
     - _AlphaPower: 1.5
@@ -130,26 +137,34 @@ Material:
     - _AlphaToMask: 1
     - _AlphaToMaskInspectorValue: 1
     - _BaseColorStrength: 1
+    - _Blend: 0
     - _BlendMode: 0
+    - _BlendModePreserveSpecular: 1
     - _BlendStrength: 0
     - _BumpScale: 1
+    - _ClearCoatMask: 0
+    - _ClearCoatSmoothness: 0
     - _ConservativeDepthOffsetEnable: 0
+    - _Cull: 2
     - _CullMode: 0
     - _CullModeForward: 2
     - _Cutoff: 1
     - _DepthOffsetEnable: 0
     - _DepthPostpass: 0.2
     - _DepthPrepass: 0.75
+    - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DiffuseStrength: 1
     - _DoubleSidedEnable: 1
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
+    - _DstBlendAlpha: 0
     - _ENUMCLIPQUALITY_ON: 0
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _EndColorStrength: 1
+    - _EnvironmentReflections: 1
     - _FlowMapFlipGreen: 0
     - _GlobalStrength: 1
     - _GlossMapScale: 1
@@ -168,6 +183,8 @@ Material:
     - _OcclusionStrength: 1
     - _OpaqueCullMode: 2
     - _Parallax: 0.02
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
     - _RenderQueueType: 4
@@ -178,6 +195,7 @@ Material:
     - _SecondarySpecularMultiplier: 0.029375
     - _SecondarySpecularShift: 0
     - _ShadowClip: 0.15
+    - _Smoothness: 0.5
     - _SmoothnessMax: 0.8
     - _SmoothnessMin: 0.28539214
     - _SmoothnessPower: 1.5
@@ -187,6 +205,7 @@ Material:
     - _SpecularShiftMax: 0
     - _SpecularShiftMin: 0
     - _SrcBlend: 1
+    - _SrcBlendAlpha: 1
     - _StencilRef: 0
     - _StencilRefDepth: 0
     - _StencilRefDistortionVec: 4
@@ -198,6 +217,7 @@ Material:
     - _StencilWriteMaskGBuffer: 14
     - _StencilWriteMaskMV: 43
     - _SupportDecals: 1
+    - _Surface: 0
     - _SurfaceType: 1
     - _TransparentBackfaceEnable: 1
     - _TransparentCullMode: 2
@@ -209,11 +229,13 @@ Material:
     - _UVSec: 0
     - _UseShadowThreshold: 1
     - _VertexColorStrength: 0.5
+    - _WorkflowMode: 1
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 3
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffuseColor: {r: 0.99999994, g: 0.99999994, b: 0.99999994, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
@@ -225,6 +247,7 @@ Material:
     - _HighlightBColor: {r: 0.3652521, g: 0.25026038, b: 0.1318038, a: 1}
     - _HighlightBDistribution: {r: 0.5133, g: 0.67560005, b: 0.8665001, a: 0}
     - _RootColor: {r: 0.3892968, g: 0.29458886, b: 0.2186491, a: 1}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularTint: {r: 1, g: 1, b: 1, a: 1}
     - _VertexBaseColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
@@ -244,3 +267,16 @@ MonoBehaviour:
   hdPluginSubTargetMaterialVersions:
     m_Keys: []
     m_Values: 
+--- !u!114 &5876292938215798226
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
