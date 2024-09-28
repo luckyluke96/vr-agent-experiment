@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 [RequireComponent(typeof(AudioAPI))]
 public class MicrophoneRecorder : MonoBehaviour
@@ -48,17 +48,19 @@ public class MicrophoneRecorder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         api = GetComponent<AudioAPI>();
-        api.StartSpeechToTextAPI(() =>
-        {
-            Debug.Log("Connected AudioAPI");
-        }, (t) =>
-        {
-            if (t.isFinal)
-                StopRecording();
-            transcriptionDelegate(t);
-        });
+        api.StartSpeechToTextAPI(
+            () =>
+            {
+                Debug.Log("Connected AudioAPI");
+            },
+            (t) =>
+            {
+                if (t.isFinal)
+                    StopRecording();
+                transcriptionDelegate(t);
+            }
+        );
 
         if (AutoselectMicrophone)
         {
@@ -69,18 +71,18 @@ public class MicrophoneRecorder : MonoBehaviour
     }
 
 #if UNITY_WEBGL && !UNITY_EDITOR
-        void Awake()
-        {
-            Microphone.Init();
-            Microphone.QueryAudioInput();
-        }
+    void Awake()
+    {
+        Microphone.Init();
+        Microphone.QueryAudioInput();
+    }
 #endif
 
 #if UNITY_WEBGL && !UNITY_EDITOR
-        void Update()
-        {
-            Microphone.Update();
-        }
+    void Update()
+    {
+        Microphone.Update();
+    }
 #endif
 
     /// <summary>
@@ -90,12 +92,18 @@ public class MicrophoneRecorder : MonoBehaviour
     /// <param name="intermediate_result">Zwischenergebnisse kommen hier an</param>
     /// <param name="final_result">Das resultat nachdem die Sprachausgabe abgeschlossen ist</param>
     /// <returns></returns>
-    public Coroutine GetSpeechToText(Action<string> intermediate_result, Action<string> final_result)
+    public Coroutine GetSpeechToText(
+        Action<string> intermediate_result,
+        Action<string> final_result
+    )
     {
         return StartCoroutine(StartRecordingCoroutine(intermediate_result, final_result));
     }
 
-    private IEnumerator StartRecordingCoroutine(Action<string> intermediate_result = null, Action<string> final_result = null)
+    private IEnumerator StartRecordingCoroutine(
+        Action<string> intermediate_result = null,
+        Action<string> final_result = null
+    )
     {
         if (SelectedMicrophoneDevice == null)
         {
@@ -104,26 +112,40 @@ public class MicrophoneRecorder : MonoBehaviour
         }
 
         Microphone.GetDeviceCaps(SelectedMicrophoneDevice, out var minFreq, out int maxFreq);
-        var audioConfig = new AudioAPI.AudioConfiguration("LINEAR16", Mathf.Clamp(16000, minFreq, maxFreq), AgentSettings.LanguageString);
+        var audioConfig = new AudioAPI.AudioConfiguration(
+            "LINEAR16",
+            Mathf.Clamp(16000, minFreq, maxFreq),
+            AgentSettings.LanguageString
+        );
         recordingHZ = audioConfig.sampleRateHertz;
 
-        AudioClip recording = Microphone.Start(SelectedMicrophoneDevice, true, 1, audioConfig.sampleRateHertz);
+        AudioClip recording = Microphone.Start(
+            SelectedMicrophoneDevice,
+            true,
+            1,
+            audioConfig.sampleRateHertz
+        );
 
-        var enable_audio_task = api.EnableAudioWebsocket(audioConfig, (started_successfully) =>
-        {
-            if (!started_successfully)
+        var enable_audio_task = api.EnableAudioWebsocket(
+            audioConfig,
+            (started_successfully) =>
             {
-                Debug.LogError("There was an error starting Speech to Text");
-            }
-            else
-            {
-                // Has to be called on the main thread because EnableAudioWebsocket running as a Task
-                UnityMainThreadDispatcher.Instance().Enqueue(() =>
+                if (!started_successfully)
                 {
-                    StartCoroutine(RecordingHandler(recording, SelectedMicrophoneDevice));
-                });
+                    Debug.LogError("There was an error starting Speech to Text");
+                }
+                else
+                {
+                    // Has to be called on the main thread because EnableAudioWebsocket running as a Task
+                    UnityMainThreadDispatcher
+                        .Instance()
+                        .Enqueue(() =>
+                        {
+                            StartCoroutine(RecordingHandler(recording, SelectedMicrophoneDevice));
+                        });
+                }
             }
-        });
+        );
 
         // Wait for the websocket to be enabled
         if (enable_audio_task != null)
@@ -147,10 +169,10 @@ public class MicrophoneRecorder : MonoBehaviour
                     // Log final result
                     res = result.alternatives[0].transcript;
                     Debug.Log("Final transcription: " + res);
-                    
+
                     Debug.Log("logged");
                     final_result(result.alternatives[0].transcript);
-                    
+
                     final = true;
                 }
             }
@@ -163,8 +185,13 @@ public class MicrophoneRecorder : MonoBehaviour
         }
 
         logText.text = res;
-        DataCollection.conversationTranscription = DataCollection.conversationTranscription + 
-                "User (" + DateTime.Now.ToString() + "): " + res + ". ";
+        DataCollection.conversationTranscription =
+            DataCollection.conversationTranscription
+            + "User ("
+            + DateTime.Now.ToString()
+            + "): "
+            + res
+            + ". ";
     }
 
     /// <summary>
@@ -178,22 +205,23 @@ public class MicrophoneRecorder : MonoBehaviour
 
     public void StopRecording(string device = null)
     {
-        UnityMainThreadDispatcher.Instance().Enqueue(() =>
-        {
-            if (device != null)
-                Microphone.End(device);
-            else
-                foreach (var dev in Microphone.devices)
-                {
-                    if (Microphone.IsRecording(dev))
-                        Microphone.End(dev);
-                }
-        });
+        UnityMainThreadDispatcher
+            .Instance()
+            .Enqueue(() =>
+            {
+                if (device != null)
+                    Microphone.End(device);
+                else
+                    foreach (var dev in Microphone.devices)
+                    {
+                        if (Microphone.IsRecording(dev))
+                            Microphone.End(dev);
+                    }
+            });
     }
 
     private IEnumerator RecordingHandler(AudioClip _recording, string _microphoneID)
     {
-
         if (_recording == null)
         {
             Debug.Log("Stopping");
@@ -214,8 +242,7 @@ public class MicrophoneRecorder : MonoBehaviour
                 yield break;
             }
 
-            if ((bFirstBlock && writePos >= midPoint)
-              || (!bFirstBlock && writePos < midPoint))
+            if ((bFirstBlock && writePos >= midPoint) || (!bFirstBlock && writePos < midPoint))
             {
                 // front block is recorded, make a RecordClip and pass it onto our callback.
                 samples = new float[midPoint];
@@ -223,7 +250,13 @@ public class MicrophoneRecorder : MonoBehaviour
 
                 //AudioData record = new AudioData();
                 //record.MaxLevel = Mathf.Max(Mathf.Abs(Mathf.Min(samples)), Mathf.Max(samples));
-                var clip = AudioClip.Create("Recording", midPoint, _recording.channels, recordingHZ, false);
+                var clip = AudioClip.Create(
+                    "Recording",
+                    midPoint,
+                    _recording.channels,
+                    recordingHZ,
+                    false
+                );
                 clip.SetData(samples, 0);
 
                 //_service.OnListen(record);
@@ -233,9 +266,11 @@ public class MicrophoneRecorder : MonoBehaviour
             }
             else
             {
-                // calculate the number of samples remaining until we ready for a block of audio, 
+                // calculate the number of samples remaining until we ready for a block of audio,
                 // and wait that amount of time it will take to record.
-                int remaining = bFirstBlock ? (midPoint - writePos) : (_recording.samples - writePos);
+                int remaining = bFirstBlock
+                    ? (midPoint - writePos)
+                    : (_recording.samples - writePos);
                 float timeRemaining = (float)remaining / (float)recordingHZ;
 
                 yield return new WaitForSeconds(timeRemaining);
@@ -254,7 +289,13 @@ public class MicrophoneRecorder : MonoBehaviour
         //recording.GetData(data, 0);
         //var data = SavWav.ConvertAudioClipToByteArray(recording, offset, Microphone.GetPosition(device));
 
-        var clip = AudioClip.Create("Recording", recording.samples, recording.channels, recordingHZ, false);
+        var clip = AudioClip.Create(
+            "Recording",
+            recording.samples,
+            recording.channels,
+            recordingHZ,
+            false
+        );
         var samples = new float[recording.samples];
 
         recording.GetData(samples, 0);
@@ -268,7 +309,6 @@ public class MicrophoneRecorder : MonoBehaviour
         api.sendAudioData(AudioAPI.GetL16(clip));
 
         yield return new WaitForSeconds(1);
-
     }
 
     private void OnGUI()
@@ -280,14 +320,13 @@ public class MicrophoneRecorder : MonoBehaviour
         {
             var x = 10;
             GUILayout.BeginVertical(GUILayout.ExpandWidth(true));
-            
+
             GUI.color = Color.green;
             GUILayout.Label("Mikrofon auswählen:");
             GUI.color = Color.white;
 
             foreach (var device in Microphone.devices)
             {
-                
                 if (GUILayout.Button(device, GUILayout.ExpandWidth(true)))
                 {
                     //StartRecording(device);
@@ -301,7 +340,6 @@ public class MicrophoneRecorder : MonoBehaviour
 
         if (isRecording)
         {
-
             GUI.color = Color.red;
 
             GUI.Label(new Rect(10, 30, 500, 100), "Mikrofon ist an.");
@@ -315,9 +353,10 @@ public class MicrophoneRecorder : MonoBehaviour
                 StopSTT();
             }
 
-
             //MobileSpecificSettings.Instance.InfoText.SetText("Jetzt bitte sprechen.");
-        }else{
+        }
+        else
+        {
             GUI.color = Color.green;
             MicOff.SetActive(true);
             MicOn.SetActive(false);

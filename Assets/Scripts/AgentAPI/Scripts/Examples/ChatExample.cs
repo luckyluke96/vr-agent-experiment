@@ -338,19 +338,23 @@ public class ChatExample : MonoBehaviour
 
             string sst_res = "";
 
-            yield return API_Agent.Instance.STTAPI.GetSpeechToText(
-                (intermRes) => { },
-                (finalRes) =>
-                {
-                    sst_res = finalRes;
-                }
-            );
+            // Recording startet
+            if (!endConv)
+            {
+                yield return API_Agent.Instance.STTAPI.GetSpeechToText(
+                    (intermRes) => { },
+                    (finalRes) =>
+                    {
+                        sst_res = finalRes;
+                    }
+                );
 
-            NLPAPI.GPTMessage userPrompt = new NLPAPI.GPTMessage(
-                NLPAPI.GPTMessageRoles.USER,
-                sst_res
-            );
-            GPTPrompt.Add(userPrompt);
+                NLPAPI.GPTMessage userPrompt = new NLPAPI.GPTMessage(
+                    NLPAPI.GPTMessageRoles.USER,
+                    sst_res
+                );
+                GPTPrompt.Add(userPrompt);
+            }
 
             if (endConv)
             {
@@ -380,6 +384,8 @@ public class ChatExample : MonoBehaviour
                 MicRecorder.StopSTT();
                 MicRecorder.StopAllCoroutines();
                 yield return new WaitForSeconds(25);
+                endConv = false;
+                timeIsUp = false;
                 SceneManager.LoadScene(0);
                 //endApplication();
             }
