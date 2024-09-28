@@ -63,6 +63,7 @@ public class DataCollection : MonoBehaviour
             // always save data recorded during one run
             using (StreamWriter sw = File.AppendText(path))
             {
+                logString = logString.Replace(SceneManagerScript.username, "AnonymousUserName");
                 sw.WriteLine(logString);
             }
         }
@@ -70,13 +71,27 @@ public class DataCollection : MonoBehaviour
 
     public static void checkCondition()
     {
-        if (vrUserInterface.hannahActive)
+        if (SceneManagerScript.humanVisual)
         {
-            condition = "visualHuman-verbalHuman";
+            if (SceneManagerScript.humanChat)
+            {
+                condition = "humanVisual-humanChat";
+            }
+            else
+            {
+                condition = "humanVisual-machineChat";
+            }
         }
         else
         {
-            condition = "visualRobot-verbalRobot";
+            if (SceneManagerScript.humanChat)
+            {
+                condition = "machineVisual-humanChat";
+            }
+            else
+            {
+                condition = "machineVisual-machineChat";
+            }
         }
     }
 

@@ -11,7 +11,7 @@ public class SceneManagerScript : MonoBehaviour
     public static bool humanVisualHumanChatDone = false;
     public static bool machineVisualMachineChatDone = false;
 
-    public static string username = "Nutzer";
+    public static string username = "Luki";
 
     // Start is called before the first frame update
     void Start() { }

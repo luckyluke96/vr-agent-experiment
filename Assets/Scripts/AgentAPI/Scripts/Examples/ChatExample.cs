@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ChatExample : MonoBehaviour
 {
@@ -379,7 +380,8 @@ public class ChatExample : MonoBehaviour
                 MicRecorder.StopSTT();
                 MicRecorder.StopAllCoroutines();
                 yield return new WaitForSeconds(25);
-                endApplication();
+                SceneManager.LoadScene(0);
+                //endApplication();
             }
 
             yield break;
