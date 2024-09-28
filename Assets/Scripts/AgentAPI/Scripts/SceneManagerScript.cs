@@ -8,6 +8,9 @@ public class SceneManagerScript : MonoBehaviour
     public static bool humanVisual = true;
     public static bool humanChat = true;
 
+    public static bool humanVisualHumanChatDone = false;
+    public static bool machineVisualMachineChatDone = false;
+
     public static string username = "Nutzer";
 
     // Start is called before the first frame update

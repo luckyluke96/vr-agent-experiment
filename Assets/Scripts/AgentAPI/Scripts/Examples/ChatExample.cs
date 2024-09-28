@@ -172,7 +172,7 @@ public class ChatExample : MonoBehaviour
     public void StartChatExample(string un, bool german = true, int exerciseNo = 6)
     {
         task = tasks[new System.Random().Next(tasks.Length)];
-        hannahActive = vrUserInterface.hannahActive;
+        hannahActive = SceneManagerScript.humanChat;
         Debug.Log("un:  " + un);
 
         username = un;

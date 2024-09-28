@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class WelcomeUIScript : MonoBehaviour
 {
-    public Button vrStartButton;
+    public Button humanVisualHumanChatButton;
+    public Button machineVisualMachineChatButton;
 
     //public Agent agentScript;
     public Button quitButton;
@@ -18,10 +19,20 @@ public class WelcomeUIScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (vrStartButton != null)
+        if (humanVisualHumanChatButton != null)
         {
-            vrStartButton.gameObject.SetActive(false);
-            vrStartButton.onClick.AddListener(OnVRStartButtonClicked);
+            humanVisualHumanChatButton.gameObject.SetActive(false);
+            SceneManagerScript.humanVisualHumanChatDone = true;
+            humanVisualHumanChatButton.onClick.AddListener(OnHumanVisualHumanChatButtonClicked);
+        }
+
+        if (machineVisualMachineChatButton != null)
+        {
+            machineVisualMachineChatButton.gameObject.SetActive(false);
+            SceneManagerScript.machineVisualMachineChatDone = true;
+            machineVisualMachineChatButton.onClick.AddListener(
+                OnMachineVisualMachineChatButtonClicked
+            );
         }
 
         if (quitButton != null)
@@ -33,7 +44,12 @@ public class WelcomeUIScript : MonoBehaviour
             delegate
             {
                 SceneManagerScript.username = UsernameInputField.text;
-                vrStartButton.gameObject.SetActive(!string.IsNullOrEmpty(UsernameInputField.text));
+                humanVisualHumanChatButton.gameObject.SetActive(
+                    !string.IsNullOrEmpty(UsernameInputField.text)
+                );
+                machineVisualMachineChatButton.gameObject.SetActive(
+                    !string.IsNullOrEmpty(UsernameInputField.text)
+                );
             }
         );
     }
@@ -41,7 +57,7 @@ public class WelcomeUIScript : MonoBehaviour
     // Update is called once per frame
     void Update() { }
 
-    void OnVRStartButtonClicked()
+    void OnHumanVisualHumanChatButtonClicked()
     {
         logText.text = "Hallo " + SceneManagerScript.username;
 
@@ -53,5 +69,10 @@ public class WelcomeUIScript : MonoBehaviour
         //     //disable start and switch button
         //     vrStartButton.gameObject.SetActive(false);
         // }
+    }
+
+    void OnMachineVisualMachineChatButtonClicked()
+    {
+        SceneManager.LoadScene(2);
     }
 }

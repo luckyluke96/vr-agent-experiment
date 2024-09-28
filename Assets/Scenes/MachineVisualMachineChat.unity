@@ -12304,6 +12304,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2358992018961790295, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2952370555546428773, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
       propertyPath: robot
       value: 
@@ -12394,6 +12398,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6641300916453017797, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8120807468765303253, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8182490371109336807, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
