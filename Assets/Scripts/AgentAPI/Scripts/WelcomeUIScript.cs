@@ -40,18 +40,26 @@ public class WelcomeUIScript : MonoBehaviour
             quitButton.onClick.AddListener(Application.Quit);
         }
 
-        UsernameInputField.onValueChanged.AddListener(
-            delegate
-            {
-                SceneManagerScript.username = UsernameInputField.text;
-                humanVisualHumanChatButton.gameObject.SetActive(
-                    !string.IsNullOrEmpty(UsernameInputField.text)
-                );
-                machineVisualMachineChatButton.gameObject.SetActive(
-                    !string.IsNullOrEmpty(UsernameInputField.text)
-                );
-            }
-        );
+        if (SceneManagerScript.startingScene)
+        {
+            UsernameInputField.onEndEdit.AddListener(
+                delegate(string text)
+                {
+                    SceneManagerScript.username = text;
+                    humanVisualHumanChatButton.gameObject.SetActive(!string.IsNullOrEmpty(text));
+                    machineVisualMachineChatButton.gameObject.SetActive(
+                        !string.IsNullOrEmpty(text)
+                    );
+                    SceneManagerScript.startingScene = false;
+                }
+            );
+        }
+        else
+        {
+            humanVisualHumanChatButton.gameObject.SetActive(true);
+            machineVisualMachineChatButton.gameObject.SetActive(true);
+            UsernameInputField.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
