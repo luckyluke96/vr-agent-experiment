@@ -22,6 +22,14 @@ public class TaskSceneManagerScript : MonoBehaviour
                 SceneManagerScript.humanVisual = false;
                 SceneManagerScript.humanChat = false;
                 break;
+            case "HumanVisualMachineChat":
+                SceneManagerScript.humanVisual = true;
+                SceneManagerScript.humanChat = false;
+                break;
+            case "MachineVisualHumanChat":
+                SceneManagerScript.humanVisual = false;
+                SceneManagerScript.humanChat = true;
+                break;
         }
 
         // position agents

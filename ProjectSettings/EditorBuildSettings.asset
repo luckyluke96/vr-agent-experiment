@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MachineVisualMachineChat.unity
     guid: 81f9b3396ed4e44cab7c064d63541ef9
+  - enabled: 1
+    path: Assets/Scenes/MachineVisualHumanChat.unity
+    guid: cdeb67c20732c4340b503d9a01a4a9ae
+  - enabled: 1
+    path: Assets/Scenes/HumanVisualMachineChat.unity
+    guid: 3b2ae021e1d674850b4142ced51392e7
   m_configObjects:
     Unity.XR.PXR.Settings: {fileID: 11400000, guid: 3c15983b93164444089ac93f33db9e92, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: f7a5f62ebf9d34ae88238997e27c64c9, type: 2}

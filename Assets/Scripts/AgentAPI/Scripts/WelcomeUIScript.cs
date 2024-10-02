@@ -9,6 +9,8 @@ public class WelcomeUIScript : MonoBehaviour
 {
     public Button humanVisualHumanChatButton;
     public Button machineVisualMachineChatButton;
+    public Button machineVisualHumanChatButton;
+    public Button humanVisualMachineChatButton;
 
     //public Agent agentScript;
     public Button quitButton;
@@ -26,6 +28,13 @@ public class WelcomeUIScript : MonoBehaviour
             humanVisualHumanChatButton.onClick.AddListener(OnHumanVisualHumanChatButtonClicked);
         }
 
+        if (humanVisualMachineChatButton != null)
+        {
+            humanVisualMachineChatButton.gameObject.SetActive(false);
+            SceneManagerScript.humanVisualMachineChatDone = true;
+            humanVisualMachineChatButton.onClick.AddListener(OnHumanVisualMachineChatButtonClicked);
+        }
+
         if (machineVisualMachineChatButton != null)
         {
             machineVisualMachineChatButton.gameObject.SetActive(false);
@@ -33,6 +42,13 @@ public class WelcomeUIScript : MonoBehaviour
             machineVisualMachineChatButton.onClick.AddListener(
                 OnMachineVisualMachineChatButtonClicked
             );
+        }
+
+        if (machineVisualHumanChatButton != null)
+        {
+            machineVisualHumanChatButton.gameObject.SetActive(false);
+            SceneManagerScript.machineVisualHumanChatDone = true;
+            machineVisualHumanChatButton.onClick.AddListener(OnMachineVisualHumanChatButtonClicked);
         }
 
         if (quitButton != null)
@@ -50,6 +66,8 @@ public class WelcomeUIScript : MonoBehaviour
                     machineVisualMachineChatButton.gameObject.SetActive(
                         !string.IsNullOrEmpty(text)
                     );
+                    machineVisualHumanChatButton.gameObject.SetActive(!string.IsNullOrEmpty(text));
+                    humanVisualMachineChatButton.gameObject.SetActive(!string.IsNullOrEmpty(text));
                     SceneManagerScript.startingScene = false;
                 }
             );
@@ -58,6 +76,8 @@ public class WelcomeUIScript : MonoBehaviour
         {
             humanVisualHumanChatButton.gameObject.SetActive(true);
             machineVisualMachineChatButton.gameObject.SetActive(true);
+            machineVisualHumanChatButton.gameObject.SetActive(true);
+            humanVisualMachineChatButton.gameObject.SetActive(true);
             UsernameInputField.gameObject.SetActive(false);
         }
     }
@@ -82,5 +102,15 @@ public class WelcomeUIScript : MonoBehaviour
     void OnMachineVisualMachineChatButtonClicked()
     {
         SceneManager.LoadScene(2);
+    }
+
+    void OnMachineVisualHumanChatButtonClicked()
+    {
+        SceneManager.LoadScene(3);
+    }
+
+    void OnHumanVisualMachineChatButtonClicked()
+    {
+        SceneManager.LoadScene(4);
     }
 }

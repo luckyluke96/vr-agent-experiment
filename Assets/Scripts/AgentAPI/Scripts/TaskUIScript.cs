@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class TaskUIScript : MonoBehaviour
 {
     public Button quitButton;
+    public Button restartButton;
 
     // Start is called before the first frame update
     void Start()
@@ -25,5 +26,10 @@ public class TaskUIScript : MonoBehaviour
     void quitButtonPressed()
     {
         SceneManager.LoadScene(0);
+    }
+
+    void restartButtonPressed()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

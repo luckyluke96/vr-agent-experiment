@@ -8,7 +8,9 @@ public class SceneManagerScript : MonoBehaviour
     public static bool humanVisual = true;
     public static bool humanChat = true;
     public static bool humanVisualHumanChatDone = false;
+    public static bool humanVisualMachineChatDone = false;
     public static bool machineVisualMachineChatDone = false;
+    public static bool machineVisualHumanChatDone = false;
     public static bool startingScene = true;
 
     public static string username = "Nutzer";
