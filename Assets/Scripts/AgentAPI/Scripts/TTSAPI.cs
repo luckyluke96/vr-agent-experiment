@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(AudioSource))]
 public class TTSAPI : MonoBehaviour
 {
+    public float endWaitTime;
     public AudioSource sourceLipSync;
 
     public enum GenderVoice
@@ -153,6 +154,8 @@ public class TTSAPI : MonoBehaviour
 
         Debug.Log($"Waiting for {audioClip.length} seconds.");
         audioPlayingUntil = Time.time + audioClip.length;
+
+        endWaitTime = Mathf.Max(audioClip.length + yield_delta, 0.0f);
 
         yield return new WaitForSeconds(Mathf.Max(audioClip.length + yield_delta, 0.0f));
 

@@ -5888,6 +5888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1863bdbfcd973458e3131d19686a69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endWaitTime: 0
   sourceLipSync: {fileID: 1146959483}
   genderVoice: 2
   AddDelayToAudio: 0

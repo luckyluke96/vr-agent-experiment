@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -383,7 +384,11 @@ public class ChatExample : MonoBehaviour
             {
                 MicRecorder.StopSTT();
                 MicRecorder.StopAllCoroutines();
-                yield return new WaitForSeconds(25);
+
+                float waitTime = GetComponent<TTSAPI>().endWaitTime;
+                Debug.Log("Wait for " + waitTime + "Seconds until Welcome Scene is loaded.");
+
+                yield return new WaitForSeconds(waitTime);
                 endConv = false;
                 timeIsUp = false;
                 SceneManager.LoadScene(0);
