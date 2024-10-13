@@ -33,7 +33,7 @@ public class DataCollection : MonoBehaviour
         Debug.Log(path);
         Directory.CreateDirectory(path);
 
-        path = Path.Combine(path, "conversation_" + "test" + ".csv");
+        path = Path.Combine(path, "conversation_" + "logs" + ".csv");
     }
 
     public static void LogGameData()
@@ -75,22 +75,22 @@ public class DataCollection : MonoBehaviour
         {
             if (SceneManagerScript.humanChat)
             {
-                condition = "humanVisual-humanChat";
+                condition = "gelb-humanVisual-humanChat";
             }
             else
             {
-                condition = "humanVisual-machineChat";
+                condition = "blau-humanVisual-machineChat";
             }
         }
         else
         {
             if (SceneManagerScript.humanChat)
             {
-                condition = "machineVisual-humanChat";
+                condition = "gruen-machineVisual-humanChat";
             }
             else
             {
-                condition = "machineVisual-machineChat";
+                condition = "rot-machineVisual-machineChat";
             }
         }
     }
