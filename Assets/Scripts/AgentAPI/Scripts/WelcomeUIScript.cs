@@ -24,21 +24,21 @@ public class WelcomeUIScript : MonoBehaviour
         if (humanVisualHumanChatButton != null)
         {
             humanVisualHumanChatButton.gameObject.SetActive(false);
-            SceneManagerScript.humanVisualHumanChatDone = true;
+            //SceneManagerScript.humanVisualHumanChatDone = false;
             humanVisualHumanChatButton.onClick.AddListener(OnHumanVisualHumanChatButtonClicked);
         }
 
         if (humanVisualMachineChatButton != null)
         {
             humanVisualMachineChatButton.gameObject.SetActive(false);
-            SceneManagerScript.humanVisualMachineChatDone = true;
+            //SceneManagerScript.humanVisualMachineChatDone = false;
             humanVisualMachineChatButton.onClick.AddListener(OnHumanVisualMachineChatButtonClicked);
         }
 
         if (machineVisualMachineChatButton != null)
         {
             machineVisualMachineChatButton.gameObject.SetActive(false);
-            SceneManagerScript.machineVisualMachineChatDone = true;
+            //SceneManagerScript.machineVisualMachineChatDone = false;
             machineVisualMachineChatButton.onClick.AddListener(
                 OnMachineVisualMachineChatButtonClicked
             );
@@ -47,7 +47,7 @@ public class WelcomeUIScript : MonoBehaviour
         if (machineVisualHumanChatButton != null)
         {
             machineVisualHumanChatButton.gameObject.SetActive(false);
-            SceneManagerScript.machineVisualHumanChatDone = true;
+            //SceneManagerScript.machineVisualHumanChatDone = false;
             machineVisualHumanChatButton.onClick.AddListener(OnMachineVisualHumanChatButtonClicked);
         }
 
@@ -74,10 +74,28 @@ public class WelcomeUIScript : MonoBehaviour
         }
         else
         {
-            humanVisualHumanChatButton.gameObject.SetActive(true);
-            machineVisualMachineChatButton.gameObject.SetActive(true);
-            machineVisualHumanChatButton.gameObject.SetActive(true);
-            humanVisualMachineChatButton.gameObject.SetActive(true);
+            Debug.Log(
+                "conditions done: hh: "
+                    + SceneManagerScript.humanVisualHumanChatDone
+                    + "mm: "
+                    + SceneManagerScript.machineVisualMachineChatDone
+                    + "mh"
+                    + SceneManagerScript.machineVisualHumanChatDone
+                    + "hm"
+                    + SceneManagerScript.humanVisualMachineChatDone
+            );
+            humanVisualHumanChatButton.gameObject.SetActive(
+                !SceneManagerScript.humanVisualHumanChatDone
+            );
+            machineVisualMachineChatButton.gameObject.SetActive(
+                !SceneManagerScript.machineVisualMachineChatDone
+            );
+            machineVisualHumanChatButton.gameObject.SetActive(
+                !SceneManagerScript.machineVisualHumanChatDone
+            );
+            humanVisualMachineChatButton.gameObject.SetActive(
+                !SceneManagerScript.humanVisualMachineChatDone
+            );
             UsernameInputField.gameObject.SetActive(false);
         }
     }

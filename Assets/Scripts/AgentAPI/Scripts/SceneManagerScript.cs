@@ -14,6 +14,13 @@ public class SceneManagerScript : MonoBehaviour
     public static bool startingScene = true;
 
     public static string username = "Nutzer";
+    public static List<string> exercises = new List<string>
+    {
+        "positiveRückmeldung",
+        "dankbarkeit",
+        "staerken",
+        "alleFarben"
+    };
 
     // Start is called before the first frame update
     void Start() { }

@@ -17,13 +17,6 @@ public class ChatExample : MonoBehaviour
     public static bool endConv = false;
     private static string username = "";
     private int exerciseNo = 4;
-    private static string[] tasks =
-    {
-        "positiveRückmeldung",
-        "dankbarkeit",
-        "staerken",
-        "alleFarben"
-    };
 
     //private static string task = "test";
 
@@ -33,7 +26,8 @@ public class ChatExample : MonoBehaviour
 
     private bool german = true;
     private static float startTime = 0;
-    private bool hannahActive;
+    private bool humanChat;
+    private bool humanVisual;
 
     private List<NLPAPI.GPTMessage> GPTPrompt = new List<NLPAPI.GPTMessage>();
 
@@ -173,8 +167,9 @@ public class ChatExample : MonoBehaviour
 
     public void StartChatExample(string un, bool german = true, int exerciseNo = 6)
     {
-        task = tasks[new System.Random().Next(tasks.Length)];
-        hannahActive = SceneManagerScript.humanChat;
+        task = PickAndRemoveExercise();
+        humanChat = SceneManagerScript.humanChat;
+        humanVisual = SceneManagerScript.humanVisual;
         Debug.Log("un:  " + un);
 
         username = un;
@@ -211,7 +206,7 @@ public class ChatExample : MonoBehaviour
                     GPTPrompt.Add(machineTextStaerken);
                     break;
             }
-            if (hannahActive)
+            if (humanChat)
             {
                 GPTPrompt.Add(personaHannahIntro);
                 GPTPrompt.Add(
@@ -247,6 +242,21 @@ public class ChatExample : MonoBehaviour
                     });
             }
         );
+    }
+
+    private string PickAndRemoveExercise()
+    {
+        if (SceneManagerScript.exercises.Count == 0)
+        {
+            Console.WriteLine("No more exercises available.");
+            return "";
+        }
+        int index = new System.Random().Next(SceneManagerScript.exercises.Count);
+        task = SceneManagerScript.exercises[index];
+
+        SceneManagerScript.exercises.RemoveAt(index);
+
+        return task;
     }
 
     private Coroutine Start_NLPandPlayTTS(
@@ -391,6 +401,8 @@ public class ChatExample : MonoBehaviour
                 yield return new WaitForSeconds(waitTime);
                 endConv = false;
                 timeIsUp = false;
+
+                setConditionDone();
                 SceneManager.LoadScene(0);
                 //endApplication();
             }
@@ -459,6 +471,38 @@ public class ChatExample : MonoBehaviour
 #endif
 
             yield break;
+        }
+    }
+
+    private void setConditionDone()
+    {
+        SceneManagerScript.startingScene = false;
+        Debug.Log("setCOndition: humanChat" + humanChat + "humanVisual" + humanVisual);
+        if (humanChat && humanVisual)
+        {
+            SceneManagerScript.humanVisualHumanChatDone = true;
+            Debug.Log("humanVisualHumanChatDone=" + SceneManagerScript.humanVisualHumanChatDone);
+        }
+        else if (humanChat && !humanVisual)
+        {
+            SceneManagerScript.machineVisualHumanChatDone = true;
+            Debug.Log(
+                "machineVisualHumanChatDone=" + SceneManagerScript.machineVisualHumanChatDone
+            );
+        }
+        else if (!humanChat && humanVisual)
+        {
+            SceneManagerScript.humanVisualMachineChatDone = true;
+            Debug.Log(
+                "humanVisualMachineChatDone=" + SceneManagerScript.humanVisualMachineChatDone
+            );
+        }
+        else if (!humanChat && !humanVisual)
+        {
+            SceneManagerScript.machineVisualMachineChatDone = true;
+            Debug.Log(
+                "machineVisualMachineChatDone=" + SceneManagerScript.machineVisualMachineChatDone
+            );
         }
     }
 
