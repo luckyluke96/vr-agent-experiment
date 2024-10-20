@@ -18,6 +18,10 @@ public class WelcomeUIScript : MonoBehaviour
 
     public TMP_InputField UsernameInputField;
 
+    public GameObject NameInputDescription;
+    public GameObject TaskDescription;
+    public GameObject TakeOffHMDDescription;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +62,10 @@ public class WelcomeUIScript : MonoBehaviour
 
         if (SceneManagerScript.startingScene)
         {
+            NameInputDescription.gameObject.SetActive(true);
+            TaskDescription.gameObject.SetActive(false);
+            TakeOffHMDDescription.gameObject.SetActive(false);
+
             UsernameInputField.onEndEdit.AddListener(
                 delegate(string text)
                 {
@@ -68,12 +76,18 @@ public class WelcomeUIScript : MonoBehaviour
                     );
                     machineVisualHumanChatButton.gameObject.SetActive(!string.IsNullOrEmpty(text));
                     humanVisualMachineChatButton.gameObject.SetActive(!string.IsNullOrEmpty(text));
+                    NameInputDescription.gameObject.SetActive(string.IsNullOrEmpty(text));
+                    TaskDescription.gameObject.SetActive(!string.IsNullOrEmpty(text));
                     SceneManagerScript.startingScene = false;
                 }
             );
         }
         else
         {
+            NameInputDescription.gameObject.SetActive(false);
+            TaskDescription.gameObject.SetActive(true);
+            TakeOffHMDDescription.SetActive(true);
+
             Debug.Log(
                 "conditions done: hh: "
                     + SceneManagerScript.humanVisualHumanChatDone
@@ -97,7 +111,15 @@ public class WelcomeUIScript : MonoBehaviour
                 !SceneManagerScript.humanVisualMachineChatDone
             );
             UsernameInputField.gameObject.SetActive(false);
+
+            StartCoroutine(HideTakeOffHMDDescription());
         }
+    }
+
+    private IEnumerator HideTakeOffHMDDescription()
+    {
+        yield return new WaitForSeconds(10);
+        TakeOffHMDDescription.SetActive(false);
     }
 
     // Update is called once per frame
