@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class TTSAPI : MonoBehaviour
 {
     public float endWaitTime;
     public AudioSource sourceLipSync;
+    public bool stopTTS = false;
 
     public enum GenderVoice
     {
@@ -77,7 +79,7 @@ public class TTSAPI : MonoBehaviour
         }
         text = string.Join("\n", t);
 
-        Debug.LogFormat("StartAudioStream: {0}", text);
+        //Debug.LogFormat("StartAudioStream: {0}", text);
         DataCollection.conversationTranscription =
             DataCollection.conversationTranscription
             + "AI ("
@@ -105,7 +107,7 @@ public class TTSAPI : MonoBehaviour
 
         // Prepare stream
         string url =
-            $"{AgentSettings.nlp_server}tts-openai?text={UnityWebRequest.EscapeURL(text)}&key=Azxx8Lw7gkFrNeNr7Wy8pxU4&"
+            $"{AgentSettings.nlp_server}agent/tts-openai?text={UnityWebRequest.EscapeURL(text)}&key=Azxx8Lw7gkFrNeNr7Wy8pxU4&"
             + $"voice={(voiceGenderLocalization)}";
         DownloadHandlerAudioClip downloadHandler = new DownloadHandlerAudioClip(
             string.Empty,
@@ -158,6 +160,11 @@ public class TTSAPI : MonoBehaviour
         endWaitTime = Mathf.Max(audioClip.length + yield_delta, 0.0f);
 
         yield return new WaitForSeconds(Mathf.Max(audioClip.length + yield_delta, 0.0f));
+
+        if (stopTTS)
+        {
+            SceneManager.LoadScene(0);
+        }
 
         if (FinishedPlayingAudio_CB != null)
         {

@@ -403,7 +403,8 @@ public class ChatExample : MonoBehaviour
                 timeIsUp = false;
 
                 setConditionDone();
-                SceneManager.LoadScene(0);
+                //SceneManager.LoadScene(0);
+                TTSAPI.stopTTS = true;
                 //endApplication();
             }
 

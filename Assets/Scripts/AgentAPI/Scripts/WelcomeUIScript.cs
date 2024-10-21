@@ -88,16 +88,16 @@ public class WelcomeUIScript : MonoBehaviour
             TaskDescription.gameObject.SetActive(true);
             TakeOffHMDDescription.SetActive(true);
 
-            Debug.Log(
-                "conditions done: hh: "
-                    + SceneManagerScript.humanVisualHumanChatDone
-                    + "mm: "
-                    + SceneManagerScript.machineVisualMachineChatDone
-                    + "mh"
-                    + SceneManagerScript.machineVisualHumanChatDone
-                    + "hm"
-                    + SceneManagerScript.humanVisualMachineChatDone
-            );
+            // Debug.Log(
+            //     "conditions done: hh: "
+            //         + SceneManagerScript.humanVisualHumanChatDone
+            //         + "mm: "
+            //         + SceneManagerScript.machineVisualMachineChatDone
+            //         + "mh"
+            //         + SceneManagerScript.machineVisualHumanChatDone
+            //         + "hm"
+            //         + SceneManagerScript.humanVisualMachineChatDone
+            // );
             humanVisualHumanChatButton.gameObject.SetActive(
                 !SceneManagerScript.humanVisualHumanChatDone
             );
