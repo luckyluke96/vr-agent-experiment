@@ -248,7 +248,7 @@ public class ChatExample : MonoBehaviour
     {
         if (SceneManagerScript.exercises.Count == 0)
         {
-            Console.WriteLine("No more exercises available.");
+            Console.WriteLine("End of task. No more exercises available.");
             return "";
         }
         int index = new System.Random().Next(SceneManagerScript.exercises.Count);
