@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioAPI))]
 public class MicrophoneRecorder : MonoBehaviour
@@ -22,6 +23,8 @@ public class MicrophoneRecorder : MonoBehaviour
 
     [Header("For Mobile")]
     public bool AutoselectMicrophone;
+
+    public bool endOfConversation;
 
     // https://github.com/oshoham/UnityGoogleStreamingSpeechToText/blob/master/Runtime/StreamingRecognizer.cs
 
@@ -179,6 +182,11 @@ public class MicrophoneRecorder : MonoBehaviour
             transcriptionDelegate += test;
 
             Debug.Log("Listening SST");
+            Debug.Log("EndConv: " + endOfConversation);
+            if (endOfConversation)
+            {
+                final = true;
+            }
             yield return new WaitUntil(() => final);
             transcriptionDelegate -= test;
             Debug.Log("Stopped   SST");

@@ -5872,7 +5872,7 @@ MonoBehaviour:
   SpeechToText: {fileID: 885818945}
   State: 0
   startAutomatically: 1
-  sessionDuration: 30
+  sessionDuration: 10
   ChatExample_Script: {fileID: 885818939}
   UsernameInputField: {fileID: 863181265}
   Username: torsten

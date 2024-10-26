@@ -392,6 +392,7 @@ public class ChatExample : MonoBehaviour
 
             if (endConv)
             {
+                MicRecorder.endOfConversation = true;
                 MicRecorder.StopSTT();
                 MicRecorder.StopAllCoroutines();
 
