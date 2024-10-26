@@ -159,12 +159,12 @@ public class TTSAPI : MonoBehaviour
 
         endWaitTime = Mathf.Max(audioClip.length + yield_delta, 0.0f);
 
-        // yield return new WaitForSeconds(Mathf.Max(audioClip.length + yield_delta, 0.0f));
-
         if (stopTTS)
         {
             SceneManager.LoadScene(0);
         }
+
+        yield return new WaitForSeconds(Mathf.Max(audioClip.length + yield_delta, 0.0f));
 
         if (FinishedPlayingAudio_CB != null)
         {
