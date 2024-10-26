@@ -5872,7 +5872,7 @@ MonoBehaviour:
   SpeechToText: {fileID: 885818945}
   State: 0
   startAutomatically: 1
-  sessionDuration: 10
+  sessionDuration: 30
   ChatExample_Script: {fileID: 885818939}
   UsernameInputField: {fileID: 863181265}
   Username: torsten
@@ -5890,6 +5890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endWaitTime: 0
   sourceLipSync: {fileID: 1146959483}
+  stopTTS: 0
   genderVoice: 2
   AddDelayToAudio: 0
   delayForSyncing: 0

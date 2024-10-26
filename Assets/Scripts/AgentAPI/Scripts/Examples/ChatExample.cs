@@ -398,7 +398,7 @@ public class ChatExample : MonoBehaviour
                 float waitTime = GetComponent<TTSAPI>().endWaitTime;
                 Debug.Log("Wait for " + waitTime + "Seconds until Welcome Scene is loaded.");
 
-                yield return new WaitForSeconds(waitTime);
+                yield return new WaitForSeconds(waitTime + 0.5f);
                 endConv = false;
                 timeIsUp = false;
 
