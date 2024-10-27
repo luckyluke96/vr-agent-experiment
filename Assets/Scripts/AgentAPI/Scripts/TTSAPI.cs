@@ -161,6 +161,7 @@ public class TTSAPI : MonoBehaviour
 
         if (stopTTS)
         {
+            DataCollection.LogGameData();
             SceneManager.LoadScene(0);
         }
 

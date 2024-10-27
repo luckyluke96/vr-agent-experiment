@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MobileSpecificSettings : UnitySingleton<MobileSpecificSettings>
 {
-
     public AnimatedText InfoText;
     public AnimatedText ModalText;
     public Agent agent;
@@ -24,34 +23,41 @@ public class MobileSpecificSettings : UnitySingleton<MobileSpecificSettings>
         continuationState = ContinuationState.CONTINUE_THREAD; // First Input
     }
 
-    void Update(){
+    void Update()
+    {
         // Check if audio is on
-        if(AudioSettings.Mobile.muteState){
-            ModalText.SetText("Der Ton vom Handy ist nicht eingeschaltet, bitte schalten Sie den Ton ein.");
-        }else{
+        if (AudioSettings.Mobile.muteState)
+        {
+            ModalText.SetText(
+                "Der Ton vom Handy ist nicht eingeschaltet, bitte schalten Sie den Ton ein."
+            );
+        }
+        else
+        {
             ModalText.SetText("");
         }
     }
 
-
     public void QuiApp()
     {
-        Application.Quit(); 
+        Application.Quit();
     }
 
     public void RestartApp()
     {
+        DataCollection.LogGameData();
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
-    public void StopSTT(){
+    public void StopSTT()
+    {
         API_Agent.Instance.STTAPI.StopSTT();
     }
 
     public void StartAskingQuestion()
     {
         AgentSettings.LanguageString = "de-DE";
-        
+
         agent.State = Agent.AgentState.Initializing;
 
         seniorenChat.StartSeniorChat(agent.Username, true);

@@ -5872,7 +5872,7 @@ MonoBehaviour:
   SpeechToText: {fileID: 885818945}
   State: 0
   startAutomatically: 1
-  sessionDuration: 10
+  sessionDuration: 30
   ChatExample_Script: {fileID: 885818939}
   UsernameInputField: {fileID: 863181265}
   Username: torsten
@@ -6021,6 +6021,7 @@ MonoBehaviour:
   MicOff: {fileID: 1404561092}
   logText: {fileID: 59893122}
   AutoselectMicrophone: 1
+  endOfConversation: 0
 --- !u!114 &885818946
 MonoBehaviour:
   m_ObjectHideFlags: 0

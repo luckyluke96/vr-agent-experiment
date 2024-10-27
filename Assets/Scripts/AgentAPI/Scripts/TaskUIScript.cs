@@ -25,6 +25,7 @@ public class TaskUIScript : MonoBehaviour
 
     void quitButtonPressed()
     {
+        DataCollection.LogGameData();
         SceneManager.LoadScene(0);
     }
 

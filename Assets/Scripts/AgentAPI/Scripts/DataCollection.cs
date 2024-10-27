@@ -40,32 +40,31 @@ public class DataCollection : MonoBehaviour
     {
         checkCondition();
 
-        if (true)
-        {
-            string columnString =
-                "ID;" + "DateTime;" + "Condition;" + "Task;" + "Conversation;" + "\n";
-            string logString =
-                "******;"
-                + DateTime.Now.ToString()
-                + ";"
-                + condition
-                + ";"
-                + ChatExample.task
-                + ";"
-                + conversationTranscription
-                + ";";
+        string columnString = "ID;" + "DateTime;" + "Condition;" + "Task;" + "Conversation;" + "\n";
+        string logString =
+            "******;"
+            + DateTime.Now.ToString()
+            + ";"
+            + condition
+            + ";"
+            + ChatExample.task
+            + ";"
+            + conversationTranscription
+            + ";";
 
-            // add column names only when file is created
-            if (!File.Exists(path))
-            {
-                File.WriteAllText(path, columnString);
-            }
-            // always save data recorded during one run
-            using (StreamWriter sw = File.AppendText(path))
-            {
-                logString = logString.Replace(SceneManagerScript.username, "AnonymousUserName");
-                sw.WriteLine(logString);
-            }
+        // Add column names only when the file is created
+        if (!File.Exists(path))
+        {
+            File.WriteAllText(path, columnString);
+        }
+
+        // Replace the username with "AnonymousUserName" and append the data as a new line
+        logString = logString.Replace(SceneManagerScript.username, "AnonymousUserName");
+
+        // Append the log string as a new line in the file
+        using (StreamWriter sw = File.AppendText(path))
+        {
+            sw.WriteLine(logString);
         }
     }
 
