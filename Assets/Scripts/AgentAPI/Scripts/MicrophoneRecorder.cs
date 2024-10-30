@@ -26,8 +26,8 @@ public class MicrophoneRecorder : MonoBehaviour
 
     public bool endOfConversation;
 
-    // https://github.com/oshoham/UnityGoogleStreamingSpeechToText/blob/master/Runtime/StreamingRecognizer.cs
-
+    private DateTime recordingStartTime; // Store recording start time
+    private TimeSpan recordingDuration;
 
     public bool isRecording
     {
@@ -114,6 +114,7 @@ public class MicrophoneRecorder : MonoBehaviour
             yield break;
         }
 
+        recordingStartTime = DateTime.Now;
         Microphone.GetDeviceCaps(SelectedMicrophoneDevice, out var minFreq, out int maxFreq);
         var audioConfig = new AudioAPI.AudioConfiguration(
             "LINEAR16",
@@ -156,7 +157,7 @@ public class MicrophoneRecorder : MonoBehaviour
             yield return new WaitUntil(() => enable_audio_task.IsCompleted);
         }
 
-        String res = "result";
+        String res = "EndOfConversation";
 
         bool final = false;
         if (intermediate_result != null || final_result != null)
@@ -191,6 +192,11 @@ public class MicrophoneRecorder : MonoBehaviour
             transcriptionDelegate -= test;
             Debug.Log("Stopped   SST");
         }
+
+        recordingDuration += DateTime.Now - recordingStartTime;
+
+        Debug.Log("User speaking duration: " + recordingDuration.TotalSeconds + " seconds");
+        DataCollection.speakingDuration = recordingDuration;
 
         logText.text = res;
         DataCollection.conversationTranscription =

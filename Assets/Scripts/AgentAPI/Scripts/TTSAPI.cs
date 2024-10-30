@@ -106,9 +106,11 @@ public class TTSAPI : MonoBehaviour
         }
 
         // Prepare stream
+
         string url =
             $"{AgentSettings.nlp_server}agent/tts-openai?text={UnityWebRequest.EscapeURL(text)}&key=Azxx8Lw7gkFrNeNr7Wy8pxU4&"
-            + $"voice={(voiceGenderLocalization)}";
+            + $"voice={(voiceGenderLocalization)}&study_id={UnityWebRequest.EscapeURL(AgentSettings.STUDY_ID)}";
+
         DownloadHandlerAudioClip downloadHandler = new DownloadHandlerAudioClip(
             string.Empty,
             AudioType.MPEG

@@ -7,35 +7,41 @@ public class AgentSettings : MonoBehaviour
     public static readonly string ip = "134.100.14.194";
     public static readonly string sst_server = $"ws://{ip}:8140/";
     public static readonly string nlp_server = $"http://{ip}:8150/";
-    
+
+    public static readonly string STUDY_ID = $"22020612";
+
     public static string LanguageString = "de-DE";
 
+    public static readonly string englishPrompt =
+        ""
+        + "The folowing is a conversation with an AI assistant for a psychotherapist. "
+        + "The assistant is helpful, creative, clever, and very friendly. "
+        + "They can give known hints about psychiatric issues.\n\n"
+        + "Human: Hi.\n\n"
+        + "The doctor's artificial intelligence assistant introduces itself and asks for the patient's name:\n\n"
+        + "AI:";
 
-    public static readonly string englishPrompt = "" +
-            "The folowing is a conversation with an AI assistant for a psychotherapist. " +
-            "The assistant is helpful, creative, clever, and very friendly. " +
-            "They can give known hints about psychiatric issues.\n\n" +
-            "Human: Hi.\n\n" +
-            "The doctor's artificial intelligence assistant introduces itself and asks for the patient's name:\n\n" +
-            "AI:";
-
-    public static readonly string germanPrompt = "" +
-            "Das Folgende ist eine Unterhaltung mit einem KI Assistent in der Psychotherapie." +
-            "Der Assistent ist freundlich, klever, kreativ und hilft gerne. " +
-            "Er kann Tips in Bezug zu psychotherapeutischen Themen geben.\n\n" +
-            "Mensch: Hi.\n\n" +
-            "Die ünstliche Intelligenz stellt sich vor und fragt nach dem Namen der Person:\n\n" +
-            "KI:";
+    public static readonly string germanPrompt =
+        ""
+        + "Das Folgende ist eine Unterhaltung mit einem KI Assistent in der Psychotherapie."
+        + "Der Assistent ist freundlich, klever, kreativ und hilft gerne. "
+        + "Er kann Tips in Bezug zu psychotherapeutischen Themen geben.\n\n"
+        + "Mensch: Hi.\n\n"
+        + "Die ünstliche Intelligenz stellt sich vor und fragt nach dem Namen der Person:\n\n"
+        + "KI:";
 
     public static readonly string germanAI = "KI";
     public static readonly string germanHuman = "Mensch";
     public static readonly string englishAI = "Assistant";
     public static readonly string englishHuman = "Patient";
 
-    public static string AI { get {
+    public static string AI
+    {
+        get
+        {
             switch (LanguageString)
             {
-                case "en-US": 
+                case "en-US":
                     return englishAI;
                 case "de-DE":
                     return germanAI;
@@ -59,4 +65,3 @@ public class AgentSettings : MonoBehaviour
         }
     }
 }
-

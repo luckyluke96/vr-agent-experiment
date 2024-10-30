@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class DataCollection : MonoBehaviour
 {
     public static string conversationTranscription =
         "DateTime: " + DateTime.Now.ToString() + ". Conversation: ";
+
+    public static TimeSpan speakingDuration;
     private string content;
     private string fileName;
     private bool columnNames;
@@ -40,7 +43,14 @@ public class DataCollection : MonoBehaviour
     {
         checkCondition();
 
-        string columnString = "ID;" + "DateTime;" + "Condition;" + "Task;" + "Conversation;" + "\n";
+        string columnString =
+            "ID;"
+            + "DateTime;"
+            + "Condition;"
+            + "Task;"
+            + "Conversation;"
+            + "User_Speaking_Duration;"
+            + "\n";
         string logString =
             "******;"
             + DateTime.Now.ToString()
@@ -50,19 +60,25 @@ public class DataCollection : MonoBehaviour
             + ChatExample.task
             + ";"
             + conversationTranscription
+            + ";"
+            + speakingDuration
             + ";";
 
         // Add column names only when the file is created
         if (!File.Exists(path))
         {
-            File.WriteAllText(path, columnString);
+            // Write with BOM for UTF-8 encoding
+            using (var sw = new StreamWriter(path, false, new UTF8Encoding(true)))
+            {
+                sw.Write(columnString);
+            }
         }
 
         // Replace the username with "AnonymousUserName" and append the data as a new line
         logString = logString.Replace(SceneManagerScript.username, "AnonymousUserName");
 
-        // Append the log string as a new line in the file
-        using (StreamWriter sw = File.AppendText(path))
+        // Append the log string as a new line in the file using UTF-8 encoding
+        using (StreamWriter sw = new StreamWriter(path, true, new UTF8Encoding(true)))
         {
             sw.WriteLine(logString);
         }
