@@ -5872,7 +5872,6 @@ MonoBehaviour:
   SpeechToText: {fileID: 885818945}
   State: 0
   startAutomatically: 1
-  sessionDuration: 30
   ChatExample_Script: {fileID: 885818939}
   UsernameInputField: {fileID: 863181265}
   Username: torsten
@@ -12311,6 +12310,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2358992018961790295, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2952370555546428773, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
       propertyPath: robot
       value: 
@@ -12405,6 +12408,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6641300916453017797, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8120807468765303253, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8182490371109336807, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
