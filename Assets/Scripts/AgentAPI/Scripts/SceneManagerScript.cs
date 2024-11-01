@@ -13,6 +13,8 @@ public class SceneManagerScript : MonoBehaviour
     public static bool machineVisualHumanChatDone = false;
     public static bool startingScene = true;
 
+    // public static int taskDuration = 30;
+
     public static string username = "Nutzer";
     public static List<string> exercises = new List<string>
     {

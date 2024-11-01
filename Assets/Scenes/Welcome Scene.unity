@@ -6761,7 +6761,6 @@ MonoBehaviour:
   SpeechToText: {fileID: 885818945}
   State: 0
   startAutomatically: 0
-  sessionDuration: 60
   ChatExample_Script: {fileID: 885818939}
   UsernameInputField: {fileID: 863181265}
   Username: torsten
@@ -6910,6 +6909,7 @@ MonoBehaviour:
   MicOff: {fileID: 1404561092}
   logText: {fileID: 59893122}
   AutoselectMicrophone: 1
+  endOfConversation: 0
 --- !u!114 &885818946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9084,6 +9084,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 67803d44f85bc1a42bafcb7febc3f80d, type: 3}
       propertyPath: m_Name
       value: camila
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 67803d44f85bc1a42bafcb7febc3f80d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5197118176682910397, guid: 67803d44f85bc1a42bafcb7febc3f80d, type: 3}
       propertyPath: m_BlendShapeWeights.Array.size
@@ -14142,7 +14146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1736080112
 Transform:
   m_ObjectHideFlags: 0

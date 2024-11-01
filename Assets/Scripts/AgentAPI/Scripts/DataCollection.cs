@@ -19,6 +19,8 @@ public class DataCollection : MonoBehaviour
     private static string path;
     private static string condition;
 
+    public static TimeSpan sessionDuration;
+
     void Start()
     {
         SetUpPaths();
@@ -50,6 +52,7 @@ public class DataCollection : MonoBehaviour
             + "Task;"
             + "Conversation;"
             + "User_Speaking_Duration;"
+            + "Duration_Of_Session;"
             + "\n";
         string logString =
             "******;"
@@ -62,6 +65,8 @@ public class DataCollection : MonoBehaviour
             + conversationTranscription
             + ";"
             + speakingDuration
+            + ";"
+            + sessionDuration
             + ";";
 
         // Add column names only when the file is created

@@ -12,6 +12,9 @@ public class TTSAPI : MonoBehaviour
     public AudioSource sourceLipSync;
     public bool stopTTS = false;
 
+    private static DateTime startTime;
+    private TimeSpan elapsedTime;
+
     public enum GenderVoice
     {
         female,
@@ -37,6 +40,7 @@ public class TTSAPI : MonoBehaviour
         if (sourceAudioOut == null)
             sourceAudioOut = GetComponent<AudioSource>();
         //TextToSpeechAndPlay("Hello");
+        startTime = DateTime.Now;
     }
 
     /// <summary>
@@ -163,6 +167,8 @@ public class TTSAPI : MonoBehaviour
 
         if (stopTTS)
         {
+            elapsedTime = DateTime.Now - startTime;
+            DataCollection.sessionDuration = elapsedTime;
             DataCollection.LogGameData();
             SceneManager.LoadScene(0);
         }

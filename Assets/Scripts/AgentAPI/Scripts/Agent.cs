@@ -13,7 +13,7 @@ public class Agent : MonoBehaviour
 
     public AgentState State = AgentState.Start;
     public bool startAutomatically = false;
-    public int sessionDuration = 60;
+    private int sessionDuration = 180;
 
     private int NumberOfAPICalls = 0;
 
