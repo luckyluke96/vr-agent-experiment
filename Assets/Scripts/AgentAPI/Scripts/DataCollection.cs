@@ -29,7 +29,7 @@ public class DataCollection : MonoBehaviour
     void OnApplicationQuit()
     {
         Debug.Log("Quitting");
-        LogGameData();
+        // LogGameData();
     }
 
     public void SetUpPaths()
