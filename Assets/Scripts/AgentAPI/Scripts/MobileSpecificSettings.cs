@@ -45,7 +45,7 @@ public class MobileSpecificSettings : UnitySingleton<MobileSpecificSettings>
 
     public void RestartApp()
     {
-        DataCollection.LogGameData();
+        // DataCollection.LogGameData();
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
