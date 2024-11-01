@@ -29,16 +29,20 @@ public class DataCollection : MonoBehaviour
     void OnApplicationQuit()
     {
         Debug.Log("Quitting");
-        // LogGameData();
+        LogGameData();
     }
 
     public void SetUpPaths()
     {
+        System.Random random = new System.Random();
+        int seed = random.Next(1000, 10000);
+
         path = @"" + Application.persistentDataPath + "/logs/";
         Debug.Log(path);
         Directory.CreateDirectory(path);
+        string name = $"conversation_logs_{DateTime.Now:yyyyMMdd_HHmm}.csv";
 
-        path = Path.Combine(path, "conversation_" + "logs" + ".csv");
+        path = Path.Combine(path, name);
     }
 
     public static void LogGameData()
@@ -80,7 +84,7 @@ public class DataCollection : MonoBehaviour
         }
 
         // Replace the username with "AnonymousUserName" and append the data as a new line
-        logString = logString.Replace(SceneManagerScript.username, "AnonymousUserName");
+        logString = logString.Replace(ChatExample.username, "AnonymousUserName");
 
         // Append the log string as a new line in the file using UTF-8 encoding
         using (StreamWriter sw = new StreamWriter(path, true, new UTF8Encoding(true)))

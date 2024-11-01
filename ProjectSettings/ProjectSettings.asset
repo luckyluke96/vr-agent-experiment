@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: HCI
-  productName: VR-ent-experiment-11-01-1313
+  productName: VR-nt-experiment-11-01-1608
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -156,7 +156,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.HCI.VRentexperiment11011313
+    Android: com.HCI.VRntexperiment11011608
     Standalone: com.HCI.VR-agent-experiment-1002-1825
   buildNumber:
     Standalone: 0

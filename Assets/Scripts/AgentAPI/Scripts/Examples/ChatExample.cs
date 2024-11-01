@@ -15,7 +15,7 @@ public class ChatExample : MonoBehaviour
 
     public static bool timeIsUp = false;
     public static bool endConv = false;
-    private static string username = "";
+    public static string username = "";
     private int exerciseNo = 4;
 
     //private static string task = "test";
