@@ -84,6 +84,11 @@ public class ChatExample : MonoBehaviour
 
     public void StartChatExample(string un, bool german = true, int exerciseNo = 6)
     {
+        timeIsUp = false;
+        task = "";
+        startTime = 0;
+        endConv = false;
+
         exerciseIndex = new System.Random().Next(SceneManagerScript.exercises.Count);
         task = SceneManagerScript.exercises[exerciseIndex];
 

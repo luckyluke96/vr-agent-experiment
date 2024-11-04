@@ -12,12 +12,12 @@ public class DataCollection : MonoBehaviour
     public string conversationTranscription =
         "DateTime: " + DateTime.Now.ToString() + ". Conversation: ";
 
-    public static TimeSpan speakingDuration;
+    public TimeSpan speakingDuration;
     private string content;
     private string fileName;
     private bool columnNames;
-    private static string path;
-    private static string condition;
+    private string path;
+    private string condition;
 
     public TimeSpan sessionDuration;
 
@@ -40,7 +40,7 @@ public class DataCollection : MonoBehaviour
         path = @"" + Application.persistentDataPath + "/logs/";
         Debug.Log(path);
         Directory.CreateDirectory(path);
-        string name = $"conversation_logs_{DateTime.Now:yyyyMMdd_HHmm}.csv";
+        string name = $"conversation_logs_{DateTime.Now:yyyyMMdd_HHmmss}.csv";
 
         path = Path.Combine(path, name);
     }
@@ -93,7 +93,7 @@ public class DataCollection : MonoBehaviour
         }
     }
 
-    public static void checkCondition()
+    public void checkCondition()
     {
         if (SceneManagerScript.humanVisual)
         {

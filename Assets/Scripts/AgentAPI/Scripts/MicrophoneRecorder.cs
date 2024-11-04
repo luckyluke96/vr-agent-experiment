@@ -53,6 +53,8 @@ public class MicrophoneRecorder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        endOfConversation = false;
+
         api = GetComponent<AudioAPI>();
         api.StartSpeechToTextAPI(
             () =>

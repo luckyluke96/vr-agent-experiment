@@ -14,7 +14,7 @@ public class TTSAPI : MonoBehaviour
 
     public DataCollection dataCollection;
 
-    private static DateTime startTime;
+    private DateTime startTime;
     private TimeSpan elapsedTime;
 
     public enum GenderVoice
@@ -41,6 +41,7 @@ public class TTSAPI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stopTTS = false;
         if (sourceAudioOut == null)
             sourceAudioOut = GetComponent<AudioSource>();
         //TextToSpeechAndPlay("Hello");

@@ -13,7 +13,7 @@ public class vrUserInterface : MonoBehaviour
     public Button quitButton;
     public GameObject robot;
     public GameObject hannah;
-    public static bool hannahActive = true;
+    private bool hannahActive = true;
 
     void Start()
     {
@@ -23,11 +23,6 @@ public class vrUserInterface : MonoBehaviour
             // Add a listener to the button to call the MoveObject method when clicked
             switchAgentButton.onClick.AddListener(SwapAgents);
             logText.text = "Switch agent button pressed.";
-        }
-
-        if (quitButton != null)
-        {
-            quitButton.onClick.AddListener(Application.Quit);
         }
 
         logText.text = "hallo";
