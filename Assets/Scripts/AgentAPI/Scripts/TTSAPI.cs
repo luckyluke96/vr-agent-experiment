@@ -12,6 +12,8 @@ public class TTSAPI : MonoBehaviour
     public AudioSource sourceLipSync;
     public bool stopTTS = false;
 
+    public DataCollection dataCollection;
+
     private static DateTime startTime;
     private TimeSpan elapsedTime;
 
@@ -84,8 +86,8 @@ public class TTSAPI : MonoBehaviour
         text = string.Join("\n", t);
 
         //Debug.LogFormat("StartAudioStream: {0}", text);
-        DataCollection.conversationTranscription =
-            DataCollection.conversationTranscription
+        dataCollection.conversationTranscription =
+            dataCollection.conversationTranscription
             + "AI ("
             + DateTime.Now.ToString()
             + "): "
@@ -168,8 +170,8 @@ public class TTSAPI : MonoBehaviour
         if (stopTTS)
         {
             elapsedTime = DateTime.Now - startTime;
-            DataCollection.sessionDuration = elapsedTime;
-            DataCollection.LogGameData();
+            dataCollection.sessionDuration = elapsedTime;
+            dataCollection.LogGameData();
             SceneManager.LoadScene(0);
         }
 

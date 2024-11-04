@@ -11,6 +11,8 @@ public class TaskUIScript : MonoBehaviour
     public Button quitButton;
     public Button restartButton;
 
+    public DataCollection dataCollection;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,7 @@ public class TaskUIScript : MonoBehaviour
 
     void quitButtonPressed()
     {
-        DataCollection.LogGameData();
+        dataCollection.LogGameData();
         SceneManager.LoadScene(0);
     }
 

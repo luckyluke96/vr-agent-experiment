@@ -21,6 +21,8 @@ public class MicrophoneRecorder : MonoBehaviour
     public GameObject MicOff;
     public TMP_Text logText;
 
+    public DataCollection DataCollection;
+
     [Header("For Mobile")]
     public bool AutoselectMicrophone;
 

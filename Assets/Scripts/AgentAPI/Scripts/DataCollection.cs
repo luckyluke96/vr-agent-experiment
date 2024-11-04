@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class DataCollection : MonoBehaviour
 {
-    public static string conversationTranscription =
+    public string conversationTranscription =
         "DateTime: " + DateTime.Now.ToString() + ". Conversation: ";
 
     public static TimeSpan speakingDuration;
@@ -19,7 +19,7 @@ public class DataCollection : MonoBehaviour
     private static string path;
     private static string condition;
 
-    public static TimeSpan sessionDuration;
+    public TimeSpan sessionDuration;
 
     void Start()
     {
@@ -45,7 +45,7 @@ public class DataCollection : MonoBehaviour
         path = Path.Combine(path, name);
     }
 
-    public static void LogGameData()
+    public void LogGameData()
     {
         checkCondition();
 

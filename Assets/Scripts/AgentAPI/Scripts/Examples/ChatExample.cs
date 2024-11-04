@@ -214,7 +214,7 @@ public class ChatExample : MonoBehaviour
                     break;
                 default:
                     Debug.Log("machineTextStarken");
-                    GPTPrompt.Add(machineTextStaerken);
+                    GPTPrompt.Add(positiveRückmeldung);
                     break;
             }
             if (humanChat)

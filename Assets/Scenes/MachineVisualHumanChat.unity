@@ -2000,6 +2000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab3852a0f2aa4fb69a43a7fadf7f8e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conversationTranscription: 'DateTime: 11/4/2024 10:45:58 AM. Conversation: '
 --- !u!4 &436930798
 Transform:
   m_ObjectHideFlags: 0
@@ -5839,7 +5840,6 @@ MonoBehaviour:
   SpeechToText: {fileID: 885818945}
   State: 0
   startAutomatically: 1
-  sessionDuration: 30
   ChatExample_Script: {fileID: 885818939}
   UsernameInputField: {fileID: 5775024481284512549}
   Username: torsten
@@ -5858,6 +5858,7 @@ MonoBehaviour:
   endWaitTime: 0
   sourceLipSync: {fileID: 1146959483}
   stopTTS: 0
+  dataCollection: {fileID: 436930797}
   genderVoice: 2
   AddDelayToAudio: 0
   delayForSyncing: 0
@@ -5987,6 +5988,7 @@ MonoBehaviour:
   MicOn: {fileID: 1966420275243368840}
   MicOff: {fileID: 6035272702005612546}
   logText: {fileID: 2736394495246941186}
+  DataCollection: {fileID: 436930797}
   AutoselectMicrophone: 1
   endOfConversation: 0
 --- !u!114 &885818946
@@ -12296,6 +12298,10 @@ PrefabInstance:
       propertyPath: agentScript
       value: 
       objectReference: {fileID: 885818941}
+    - target: {fileID: 3674413944067878644, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
+      propertyPath: dataCollection
+      value: 
+      objectReference: {fileID: 436930797}
     - target: {fileID: 6641300916453017797, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
