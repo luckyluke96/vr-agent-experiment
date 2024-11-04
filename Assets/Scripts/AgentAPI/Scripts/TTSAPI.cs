@@ -32,6 +32,8 @@ public class TTSAPI : MonoBehaviour
 
     [Range(0f, 5f)]
     public float delayForSyncing;
+
+    private int maxSessionDuration = 260;
     private AudioSource sourceAudioOut;
 
     private float audioPlayingUntil = 0.0f;
@@ -43,6 +45,18 @@ public class TTSAPI : MonoBehaviour
             sourceAudioOut = GetComponent<AudioSource>();
         //TextToSpeechAndPlay("Hello");
         startTime = DateTime.Now;
+
+        StartCoroutine(MaxDurationCountDown());
+    }
+
+    IEnumerator MaxDurationCountDown()
+    {
+        yield return new WaitForSeconds(maxSessionDuration);
+        Debug.Log("Max Session Duration of " + maxSessionDuration + " seconds reached.");
+        elapsedTime = DateTime.Now - startTime;
+        dataCollection.sessionDuration = elapsedTime;
+        dataCollection.LogGameData();
+        SceneManager.LoadScene(0);
     }
 
     /// <summary>

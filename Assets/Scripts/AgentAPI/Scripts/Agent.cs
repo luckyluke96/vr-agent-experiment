@@ -77,6 +77,7 @@ public class Agent : MonoBehaviour
         }
 
         StartCoroutine(CountDown());
+
         //ChatExample_Script.StartChatExample(Username, true);
     }
 
