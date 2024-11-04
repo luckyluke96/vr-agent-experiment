@@ -1,5 +1,5 @@
 # ninja log v5
-6147	9542	1730716747894924525	/Users/lukasoberfrank/Workspace/vr-agent-experiment/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/68y2x059/obj/arm64-v8a/libswappywrapper.so	e3fb8b6e70a1fc79
-0	6147	1730716744516979130	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	a4b8300a1b3c0c35
-0	6311	1730718745668861715	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	a4b8300a1b3c0c35
-6311	9774	1730718749115040404	/Users/lukasoberfrank/Workspace/vr-agent-experiment/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/68y2x059/obj/arm64-v8a/libswappywrapper.so	e3fb8b6e70a1fc79
+6827	11636	1730738170804886125	/Users/lukasoberfrank/Workspace/vr-agent-experiment/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/68y2x059/obj/arm64-v8a/libswappywrapper.so	e3fb8b6e70a1fc79
+0	6827	1730738166829986309	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	a4b8300a1b3c0c35
+0	6376	1730738416876406274	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	a4b8300a1b3c0c35
+6376	9891	1730738420370463282	/Users/lukasoberfrank/Workspace/vr-agent-experiment/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/68y2x059/obj/arm64-v8a/libswappywrapper.so	e3fb8b6e70a1fc79

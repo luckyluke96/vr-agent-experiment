@@ -35,7 +35,7 @@ public class TaskSceneManagerScript : MonoBehaviour
         // position agents
         if (SceneManagerScript.humanVisual)
         {
-            hannah.transform.position = new Vector3(0, 0.1f, 0.5f);
+            hannah.transform.position = new Vector3(0, 0.118f, 0.955769f);
             robot.transform.position = new Vector3(1000, 1000, 1000);
         }
         else
