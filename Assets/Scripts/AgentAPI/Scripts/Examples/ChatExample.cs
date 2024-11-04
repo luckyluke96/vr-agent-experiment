@@ -89,8 +89,37 @@ public class ChatExample : MonoBehaviour
         startTime = 0;
         endConv = false;
 
-        exerciseIndex = new System.Random().Next(SceneManagerScript.exercises.Count);
-        task = SceneManagerScript.exercises[exerciseIndex];
+        // exerciseIndex = new System.Random().Next(SceneManagerScript.exercises.Count);
+        // task = SceneManagerScript.exercises[exerciseIndex];
+
+        // Retrieve the current condition
+        string currentCondition = "";
+        if (SceneManagerScript.humanChat && SceneManagerScript.humanVisual)
+        {
+            currentCondition = "humanVisualHumanChat";
+        }
+        else if (SceneManagerScript.humanChat && !SceneManagerScript.humanVisual)
+        {
+            currentCondition = "machineVisualHumanChat";
+        }
+        else if (!SceneManagerScript.humanChat && SceneManagerScript.humanVisual)
+        {
+            currentCondition = "humanVisualMachineChat";
+        }
+        else if (!SceneManagerScript.humanChat && !SceneManagerScript.humanVisual)
+        {
+            currentCondition = "machineVisualMachineChat";
+        }
+
+        // Set task based on the current condition's exercise
+        if (SceneManagerScript.conditionExerciseMapping.ContainsKey(currentCondition))
+        {
+            task = SceneManagerScript.conditionExerciseMapping[currentCondition];
+        }
+        else
+        {
+            Debug.LogError("Current condition not found in exercise mapping.");
+        }
 
         humanChat = SceneManagerScript.humanChat;
         humanVisual = SceneManagerScript.humanVisual;
@@ -98,7 +127,7 @@ public class ChatExample : MonoBehaviour
 
         username = un;
         this.german = german;
-        this.exerciseNo = exerciseNo;
+        // this.exerciseNo = exerciseNo;
         if (german)
         {
             //GPTPrompt.Add(personaMaschineIntro);
@@ -126,7 +155,7 @@ public class ChatExample : MonoBehaviour
                     GPTPrompt.Add(alleFarben);
                     break;
                 default:
-                    Debug.Log("machineTextStarken");
+                    Debug.LogWarning("Unknown task, defaulting to positiveRückmeldung");
                     GPTPrompt.Add(positiveRückmeldung);
                     break;
             }
@@ -315,7 +344,7 @@ public class ChatExample : MonoBehaviour
                 setConditionDone();
 
                 //remove Exercise
-                SceneManagerScript.exercises.RemoveAt(exerciseIndex);
+                //SceneManagerScript.exercises.RemoveAt(exerciseIndex);
 
                 //SceneManager.LoadScene(0);
                 TTSAPI.stopTTS = true;
