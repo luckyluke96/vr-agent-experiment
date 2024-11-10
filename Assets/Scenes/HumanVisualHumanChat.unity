@@ -12311,7 +12311,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 311497980477985216, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
       propertyPath: m_text
-      value: 
+      value: hi
       objectReference: {fileID: 0}
     - target: {fileID: 2358992018961790295, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
       propertyPath: m_IsActive
@@ -12329,6 +12329,10 @@ PrefabInstance:
       propertyPath: agentScript
       value: 
       objectReference: {fileID: 885818941}
+    - target: {fileID: 3674413944067878644, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
+      propertyPath: logText
+      value: 
+      objectReference: {fileID: 59893122}
     - target: {fileID: 3674413944067878644, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
       propertyPath: dataCollection
       value: 
@@ -12540,7 +12544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6210344767802800581, guid: d0f6922ceb2df415ebb1f6d857765a7a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 0.119
       objectReference: {fileID: 0}
     - target: {fileID: 6210344767802800581, guid: d0f6922ceb2df415ebb1f6d857765a7a, type: 3}
       propertyPath: m_LocalPosition.z

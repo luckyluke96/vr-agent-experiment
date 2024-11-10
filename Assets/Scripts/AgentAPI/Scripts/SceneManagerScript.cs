@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneManagerScript : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class SceneManagerScript : MonoBehaviour
     public static bool machineVisualMachineChatDone = false;
     public static bool machineVisualHumanChatDone = false;
     public static bool startingScene = true;
+
+    public static string exerciseString = "exercise string";
 
     // public static int taskDuration = 30;
 
@@ -24,30 +27,24 @@ public class SceneManagerScript : MonoBehaviour
         "alleFarben"
     };
 
+    public static List<string> shuffledExercises = new List<string>(exercises);
+
     public static Dictionary<string, string> conditionExerciseMapping =
         new Dictionary<string, string>();
 
     // Start is called before the first frame update
     void Start()
     {
-        // List of conditions
-        List<string> conditions = new List<string>
-        {
-            "humanVisualHumanChat",
-            "humanVisualMachineChat",
-            "machineVisualMachineChat",
-            "machineVisualHumanChat"
-        };
-
         // Shuffle the exercises list
-        List<string> shuffledExercises = new List<string>(exercises);
-        ShuffleList(shuffledExercises);
-
-        // Map each condition to a shuffled exercise
-        for (int i = 0; i < conditions.Count; i++)
+        if (startingScene)
         {
-            conditionExerciseMapping[conditions[i]] = shuffledExercises[i];
+            ShuffleList(shuffledExercises);
         }
+
+        Debug.Log("List contents: " + string.Join(", ", shuffledExercises));
+        exerciseString = "List contents: " + string.Join(", ", shuffledExercises);
+
+        // SceneManager.LoadScene(3);
     }
 
     // Update is called once per frame

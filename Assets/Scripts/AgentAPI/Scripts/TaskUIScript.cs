@@ -11,11 +11,18 @@ public class TaskUIScript : MonoBehaviour
     public Button quitButton;
     public Button restartButton;
 
+    public TMP_Text logText;
+
     public DataCollection dataCollection;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (logText != null)
+        {
+            logText.text = SceneManagerScript.exerciseString;
+        }
+
         if (quitButton != null)
         {
             quitButton.onClick.AddListener(quitButtonPressed);

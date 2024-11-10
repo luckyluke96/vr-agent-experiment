@@ -33,7 +33,7 @@ public class TTSAPI : MonoBehaviour
     [Range(0f, 5f)]
     public float delayForSyncing;
 
-    private int maxSessionDuration = 260;
+    private int maxSessionDuration = 220;
     private AudioSource sourceAudioOut;
 
     private float audioPlayingUntil = 0.0f;

@@ -12299,6 +12299,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 885818941}
     - target: {fileID: 3674413944067878644, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
+      propertyPath: logText
+      value: 
+      objectReference: {fileID: 2736394495246941186}
+    - target: {fileID: 3674413944067878644, guid: 6871811c402fe43b0a96f014accd08db, type: 3}
       propertyPath: dataCollection
       value: 
       objectReference: {fileID: 436930797}

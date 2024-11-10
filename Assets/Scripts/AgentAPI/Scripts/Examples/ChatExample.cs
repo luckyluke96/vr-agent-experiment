@@ -92,34 +92,26 @@ public class ChatExample : MonoBehaviour
         // exerciseIndex = new System.Random().Next(SceneManagerScript.exercises.Count);
         // task = SceneManagerScript.exercises[exerciseIndex];
 
-        // Retrieve the current condition
-        string currentCondition = "";
-        if (SceneManagerScript.humanChat && SceneManagerScript.humanVisual)
+        switch (SceneManager.GetActiveScene().name)
         {
-            currentCondition = "humanVisualHumanChat";
-        }
-        else if (SceneManagerScript.humanChat && !SceneManagerScript.humanVisual)
-        {
-            currentCondition = "machineVisualHumanChat";
-        }
-        else if (!SceneManagerScript.humanChat && SceneManagerScript.humanVisual)
-        {
-            currentCondition = "humanVisualMachineChat";
-        }
-        else if (!SceneManagerScript.humanChat && !SceneManagerScript.humanVisual)
-        {
-            currentCondition = "machineVisualMachineChat";
+            case "HumanVisualHumanChat":
+                task = SceneManagerScript.shuffledExercises[0];
+                break;
+            case "MachineVisualMachineChat":
+                task = SceneManagerScript.shuffledExercises[1];
+                break;
+            case "HumanVisualMachineChat":
+                task = SceneManagerScript.shuffledExercises[2];
+                break;
+            case "MachineVisualHumanChat":
+                task = SceneManagerScript.shuffledExercises[3];
+                break;
         }
 
-        // Set task based on the current condition's exercise
-        if (SceneManagerScript.conditionExerciseMapping.ContainsKey(currentCondition))
-        {
-            task = SceneManagerScript.conditionExerciseMapping[currentCondition];
-        }
-        else
-        {
-            Debug.LogError("Current condition not found in exercise mapping.");
-        }
+        Debug.Log("Exercise: " + task);
+        Debug.Log(
+            "Scenemanager exercises " + string.Join(", ", SceneManagerScript.shuffledExercises)
+        );
 
         humanChat = SceneManagerScript.humanChat;
         humanVisual = SceneManagerScript.humanVisual;
@@ -333,15 +325,14 @@ public class ChatExample : MonoBehaviour
                 MicRecorder.endOfConversation = true;
                 MicRecorder.StopSTT();
                 MicRecorder.StopAllCoroutines();
+                setConditionDone();
 
                 float waitTime = GetComponent<TTSAPI>().endWaitTime;
                 Debug.Log("Wait for " + waitTime + "Seconds until Welcome Scene is loaded.");
 
-                yield return new WaitForSeconds(waitTime + 0.5f);
+                yield return new WaitForSeconds(waitTime + 1f);
                 endConv = false;
                 timeIsUp = false;
-
-                setConditionDone();
 
                 //remove Exercise
                 //SceneManagerScript.exercises.RemoveAt(exerciseIndex);
