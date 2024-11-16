@@ -161,7 +161,7 @@ public class MicrophoneRecorder : MonoBehaviour
             yield return new WaitUntil(() => enable_audio_task.IsCompleted);
         }
 
-        String res = "EndOfConversation";
+        string res = "EndOfConversation";
 
         bool final = false;
         if (intermediate_result != null || final_result != null)
@@ -192,9 +192,25 @@ public class MicrophoneRecorder : MonoBehaviour
             {
                 final = true;
             }
+            else
+            {
+                StartCoroutine(Timer());
+            }
             yield return new WaitUntil(() => final);
             transcriptionDelegate -= test;
+            StopSTT();
             Debug.Log("Stopped   SST");
+        }
+
+        IEnumerator Timer()
+        {
+            yield return new WaitForSeconds(20);
+
+            if (!final) // Check if final is still false after 20 seconds
+            {
+                final = true;
+                Debug.Log("Timer finished. Set final to true.");
+            }
         }
 
         recordingDuration += DateTime.Now - recordingStartTime;
