@@ -194,7 +194,7 @@ public class MicrophoneRecorder : MonoBehaviour
             }
             else
             {
-                StartCoroutine(Timer());
+                StartCoroutine(Timer(recording));
             }
             yield return new WaitUntil(() => final);
             transcriptionDelegate -= test;
@@ -202,14 +202,34 @@ public class MicrophoneRecorder : MonoBehaviour
             Debug.Log("Stopped   SST");
         }
 
-        IEnumerator Timer()
+        IEnumerator Timer(AudioClip recordingClip)
         {
-            yield return new WaitForSeconds(20);
+            Debug.Log("Timer started. Waiting for 10 seconds of silence...");
+            float elapsed = 0f;
 
-            if (!final) // Check if final is still false after 20 seconds
+            while (elapsed < 10f)
+            {
+                if (IsMicrophoneActive(recordingClip))
+                {
+                    Debug.Log(elapsed);
+                    Debug.Log("Speaking detected. Pausing silence timer.");
+                    elapsed = 0f;
+                    yield return new WaitWhile(() => IsMicrophoneActive(recordingClip));
+                    Debug.Log("Speaking ended. Resuming silence timer.");
+                }
+                else
+                {
+                    elapsed += Time.deltaTime;
+                    //Debug.Log("Elapsed silence time: " + elapsed + " seconds");
+                }
+
+                yield return null; // Continue checking each frame
+            }
+
+            if (!final)
             {
                 final = true;
-                Debug.Log("Timer finished. Set final to true.");
+                Debug.Log("Timer finished. 20 seconds of silence detected.");
             }
         }
 
@@ -226,6 +246,37 @@ public class MicrophoneRecorder : MonoBehaviour
             + "): "
             + res
             + ". ";
+    }
+
+    private bool IsMicrophoneActive(AudioClip recordingClip)
+    {
+        if (recordingClip == null)
+        {
+            Debug.Log("recordingClip==null");
+            return false;
+        }
+
+        const int sampleSize = 256; // Adjust sample size as needed
+        float[] samples = new float[sampleSize];
+        int micPosition = Microphone.GetPosition(SelectedMicrophoneDevice);
+
+        // Ensure we are not trying to read beyond the recorded audio
+        if (micPosition < sampleSize)
+            return false;
+
+        recordingClip.GetData(samples, micPosition - sampleSize);
+
+        foreach (float sample in samples)
+        {
+            //Debug.Log("Ton lautstärke: " + Mathf.Abs(sample));
+            logText.text = "vol: " + Mathf.Abs(sample);
+            if (Mathf.Abs(sample) > 0.05)
+            {
+                return true; // Activity detected
+            }
+        }
+
+        return false; // No significant activity
     }
 
     /// <summary>
