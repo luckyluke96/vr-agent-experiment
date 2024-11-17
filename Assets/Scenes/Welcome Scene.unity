@@ -8622,7 +8622,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u2022 Klicken Sie auf die Farbe, die Sie in dieser Runde Laut Fragebogen
+  m_text: "\u2022 Klicken Sie auf die Farbe, die Sie in dieser Runde laut Fragebogen
     w\xE4hlen sollen.\n\u2022 Sprechen Sie laut und deutlich mit dem Agenten.\n\u2022
     Bei gr\xFCnem Mikrofon-Symbol wird Ihre Stimme aufgezeichnet.\n\u2022 Bei rotem
     Mikrofon-Symbol spricht der Agent."

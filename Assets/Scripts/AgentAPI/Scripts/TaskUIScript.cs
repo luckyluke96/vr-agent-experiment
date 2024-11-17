@@ -27,6 +27,11 @@ public class TaskUIScript : MonoBehaviour
         {
             quitButton.onClick.AddListener(quitButtonPressed);
         }
+
+        if (restartButton != null)
+        {
+            restartButton.onClick.AddListener(restartButtonPressed);
+        }
     }
 
     // Update is called once per frame
